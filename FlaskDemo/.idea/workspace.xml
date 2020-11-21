@@ -32,10 +32,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
+  <component name="ProjectId" id="1kcVWLWLsOyKZQHJJ4jWfUhbmxx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2548c2af-ab43-4ff1-97d6-4d3b641f433a" name="Default Changelist" comment="" />
+      <created>1605999897100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605999897100</updated>
+      <workItem from="1605999898131" duration="52000" />
+    </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
