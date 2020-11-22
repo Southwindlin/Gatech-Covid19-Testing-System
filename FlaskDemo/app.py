@@ -25,8 +25,9 @@ def form():
     return render_template('form.html')
 
 
-@app.route('/regform')
-def regform():
+#change this name to regist for better understanding
+@app.route('/regist')
+def regist():
     return render_template('regform.html')
 
 
