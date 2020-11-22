@@ -83,12 +83,12 @@ def getRegistRequest():
         #see if the password match
         if confirmPass != passWord:
             return "Sorry, your passwords don't match"
-        else:
-
-
-            #transform the password into hash type
-            #passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
-            passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
+        # else:
+        #
+        #
+        #     #transform the password into hash type
+        #     #passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
+        #     passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
 
 
 
@@ -104,6 +104,7 @@ def getRegistRequest():
             except pymysql.IntegrityError or KeyError as e:
                 return "unable to register"+str(e)
             else:
+                mysql.connection.commit()
                 return "You have successfully registered"
         elif userType == 'employee':
             employee = request.form.getlist('employType')
@@ -116,6 +117,7 @@ def getRegistRequest():
                 except pymysql.IntegrityError or KeyError as e:
                     return "unable to register" + str(e)
                 else:
+                    mysql.connection.commit()
                     return "You have successfully registered"
             elif len(employee) == 1:
                 job = employee[0]
@@ -126,6 +128,7 @@ def getRegistRequest():
                     except pymysql.IntegrityError or KeyError as e:
                         return "unable to register" + str(e)
                     else:
+                        mysql.connection.commit()
                         return "You have successfully registered"
                 elif job == "siteTester":
                     try:
@@ -134,6 +137,7 @@ def getRegistRequest():
                     except pymysql.IntegrityError or KeyError as e:
                         return "unable to register" + str(e)
                     else:
+                        mysql.connection.commit()
                         return "You have successfully registered"
 
 
