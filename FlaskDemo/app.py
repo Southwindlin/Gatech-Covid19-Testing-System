@@ -83,14 +83,8 @@ def getRegistRequest():
         #see if the password match
         if confirmPass != passWord:
             return "Sorry, your passwords don't match"
-        # else:
-        #
-        #
-        #     #transform the password into hash type
-        #     #passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
-        #     passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
 
-
+        #no need to change the password to hashcode here since it's done in the mysql procedure
 
         #treatment according to the usertype
         if userType == 'admin':
@@ -139,6 +133,48 @@ def getRegistRequest():
                     else:
                         mysql.connection.commit()
                         return "You have successfully registered"
+
+
+@app.route('/studentView',methods=['GET','POST'])
+def studentView():
+    if request.method == 'GET':
+        return render_template('studentView.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+
+        #Will change the way of getting username after the front end is done
+        userName = request.form.get('Username')
+        status = request.form.get('Status')
+        startDate = request.form.get('TimeStart')
+        endDate = request.form.get('TimeEnd')
+
+        try:
+            result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            #print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from student_view_results_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            # get the field name
+            sql = "SHOW FIELDS FROM student_view_results_result"
+            cursor.execute(sql)
+            labels = cursor.fetchall()
+            mysql.connection.commit()
+            labels = [l[0] for l in labels]
+
+            return render_template('studentView.html', labels=labels, content=content)
+
+
+
+
+
+    
 
 
 
