@@ -2,6 +2,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
+from hashlib import *
 
 
 app = Flask(__name__)
@@ -91,7 +92,32 @@ def getRegistRequest():
             except pymysql.IntegrityError or KeyError as e:
                 return "unable to register"+str(e)
         elif userType == 'employee':
-            pass
+            employee = request.form.getlist('employee')
+            phone = request.form.get('Phone')
+            if len(employee) == 2:
+                lab = True
+                tester = True
+                try:
+                    cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to register" + str(e)
+            elif len(employee) == 1:
+                job = employee[0]
+                if job == "labtech":
+                    try:
+                        cursor.callproc("register_employee",
+                                        [userName, email, fName, lName, phone, True, False, passWord])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to register" + str(e)
+                elif job == "sitetester":
+                    try:
+                        cursor.callproc("register_employee",
+                                        [userName, email, fName, lName, phone, False, True, passWord])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to register" + str(e)
+
+
+
 
 
 
