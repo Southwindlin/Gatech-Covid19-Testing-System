@@ -85,6 +85,7 @@ def getRegistRequest():
             return "Sorry, your passwords don't match"
         else:
 
+
             #transform the password into hash type
             #passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
             passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
