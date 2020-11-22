@@ -2,6 +2,9 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
+import numpy as np
+import hashlib
+
 
 app = Flask(__name__)
 
@@ -25,8 +28,9 @@ def form():
     return render_template('form.html')
 
 
-@app.route('/regform')
-def regform():
+#change this name to registForm for better understanding
+@app.route('/registForm')
+def registForm():
     return render_template('regform.html')
 
 
@@ -51,6 +55,88 @@ def login():
             if result:
                 return "Login Successful"
             return "Login Failed"
+
+
+@app.route('/registuser',methods=['GET','POST'])
+def getRegistRequest():
+    if request.method == 'GET':
+        return "Please register through the register form"
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        #SQL command
+
+
+        userType = request.form.get('Type')
+        userName = request.form.get('Username')
+        email = request.form.get('Email')
+        fName = request.form.get('FName')
+        lName = request.form.get('LName')
+        passWord = request.form.get('Password')
+        confirmPass = request.form.get('ConfirmPwd')
+
+
+
+        #see if the password match
+        if confirmPass == passWord:
+            return "Sorry, your passwords don't match"
+        else:
+
+            #transform the password into hash type
+            passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
+            passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
+
+
+
+        #treatment according to the usertype
+        if userType == 'admin':
+            return 'erro: Sorry, Admin cannot register through here'
+        elif userType == 'student':
+            houseType = request.form.get('HouseType')
+            location = request.form.get('Location')
+
+            try:
+                cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to register"+str(e)
+        elif userType == 'employee':
+            employee = request.form.getlist('employee')
+            phone = request.form.get('Phone')
+            if len(employee) == 2:
+                lab = True
+                tester = True
+                try:
+                    cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to register" + str(e)
+            elif len(employee) == 1:
+                job = employee[0]
+                if job == "labtech":
+                    try:
+                        cursor.callproc("register_employee",
+                                        [userName, email, fName, lName, phone, True, False, passWord])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to register" + str(e)
+                elif job == "sitetester":
+                    try:
+                        cursor.callproc("register_employee",
+                                        [userName, email, fName, lName, phone, False, True, passWord])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to register" + str(e)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
