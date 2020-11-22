@@ -2,7 +2,8 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
-from hashlib import *
+import numpy as np
+import hashlib
 
 
 app = Flask(__name__)
@@ -78,6 +79,12 @@ def getRegistRequest():
         #see if the password match
         if confirmPass == passWord:
             return "Sorry, your passwords don't match"
+        else:
+
+            #transform the password into hash type
+            passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
+            passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
+
 
 
         #treatment according to the usertype
