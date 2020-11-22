@@ -5,6 +5,10 @@ from flask_mysqldb import MySQL
 import numpy as np
 import hashlib
 
+#when cannot instal flask_mysqldb:
+#export PATH=$PATH:/usr/local/mysql/bin
+#pip3 install flask-mysqldb
+
 
 app = Flask(__name__)
 
@@ -77,12 +81,12 @@ def getRegistRequest():
 
 
         #see if the password match
-        if confirmPass == passWord:
+        if confirmPass != passWord:
             return "Sorry, your passwords don't match"
         else:
 
             #transform the password into hash type
-            passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
+            #passWord = bytes(passWord, encoding='UTF-8')#first need to change into bytes
             passWord = hashlib.md5(passWord.encode("utf-8"))#then change into hash type
 
 
@@ -98,8 +102,10 @@ def getRegistRequest():
                 cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
             except pymysql.IntegrityError or KeyError as e:
                 return "unable to register"+str(e)
+            else:
+                return "You have successfully registered"
         elif userType == 'employee':
-            employee = request.form.getlist('employee')
+            employee = request.form.getlist('employType')
             phone = request.form.get('Phone')
             if len(employee) == 2:
                 lab = True
@@ -108,20 +114,26 @@ def getRegistRequest():
                     cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
                 except pymysql.IntegrityError or KeyError as e:
                     return "unable to register" + str(e)
+                else:
+                    return "You have successfully registered"
             elif len(employee) == 1:
                 job = employee[0]
-                if job == "labtech":
+                if job == "labTech":
                     try:
                         cursor.callproc("register_employee",
                                         [userName, email, fName, lName, phone, True, False, passWord])
                     except pymysql.IntegrityError or KeyError as e:
                         return "unable to register" + str(e)
-                elif job == "sitetester":
+                    else:
+                        return "You have successfully registered"
+                elif job == "siteTester":
                     try:
                         cursor.callproc("register_employee",
                                         [userName, email, fName, lName, phone, False, True, passWord])
                     except pymysql.IntegrityError or KeyError as e:
                         return "unable to register" + str(e)
+                    else:
+                        return "You have successfully registered"
 
 
 
