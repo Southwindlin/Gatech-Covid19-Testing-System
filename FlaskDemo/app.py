@@ -166,7 +166,7 @@ def studentView():
             cursor.execute(sql)
             labels = cursor.fetchall()
             mysql.connection.commit()
-            labels = [l[0] for l in labels]
+            labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
 
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
