@@ -145,8 +145,8 @@ def studentView():
         #Will change the way of getting username after the front end is done
         userName = request.form.get('Username')
         status = request.form.get('Status')
-        startDate = request.form.get('TimeStart')
-        endDate = request.form.get('TimeEnd')
+        startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
+        endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
 
         try:
             result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
