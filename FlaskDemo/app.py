@@ -33,13 +33,17 @@ def dashboard():
             #This is what I was kinda thinking, since the overall screen seemed a bit different from homeScreenStudent. 
             #We can talk about this later
             #return render_template('studentdashboard.html')
-            return "You are a student"
+            return render_template('basicDashboard.html')
         elif session['userPerms'] == 'Tester':
             return "You are a tester"
         return None
     else:
         return render_template('loginprompt.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
