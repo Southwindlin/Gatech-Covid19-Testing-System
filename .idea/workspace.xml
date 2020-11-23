@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/createTestSite.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/poolResult.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/viewPools.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/viewTester.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentView.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,41 +145,41 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606075928440" />
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom" timestamp="1606103795982">
+    <state width="1878" height="376" key="GridCell.Tab.0.bottom" timestamp="1606106216807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795982" />
-    <state width="1878" height="305" key="GridCell.Tab.0.center" timestamp="1606103795981">
+    <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216807" />
+    <state width="1878" height="376" key="GridCell.Tab.0.center" timestamp="1606106216806">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795981" />
-    <state width="1878" height="305" key="GridCell.Tab.0.left" timestamp="1606103795980">
+    <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216806" />
+    <state width="1878" height="376" key="GridCell.Tab.0.left" timestamp="1606106216806">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795980" />
-    <state width="1878" height="305" key="GridCell.Tab.0.right" timestamp="1606103795982">
+    <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216806" />
+    <state width="1878" height="376" key="GridCell.Tab.0.right" timestamp="1606106216807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795982" />
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606096595682">
+    <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216807" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606106216809">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595682" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216809" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540598" />
-    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606096595681">
+    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606106216808">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595681" />
+    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216808" />
     <state width="1878" height="376" key="GridCell.Tab.1.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
-    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606096595680">
+    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606106216808">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595680" />
+    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216808" />
     <state width="1878" height="376" key="GridCell.Tab.1.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540596" />
-    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606096595681">
+    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606106216809">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595681" />
+    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606106216809" />
     <state width="1878" height="376" key="GridCell.Tab.1.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
     <state width="221" height="457" key="HiddenNamespacesPopup" timestamp="1606081553043">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -210,7 +203,7 @@
     <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606076830658" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606103795972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
+    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606104781065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
     <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606070584572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
