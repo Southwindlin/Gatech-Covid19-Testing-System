@@ -1,6 +1,6 @@
 import pymysql
 pymysql.install_as_MySQLdb()
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import numpy as np
 import hashlib
@@ -11,26 +11,43 @@ import hashlib
 
 
 app = Flask(__name__)
+app.secret_key = 'team 84 is the best team'
 
 # Random login values for mySQL, this will need to be changed for your own machine
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = 'chy190354890'
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
 mysql = MySQL(app)
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user' in session:
+        if session['userPerms'] == 'Admin':
+            return render_template('adminDashboard.html')
+        elif session['userPerms'] == 'Student':
+            #This is what I was kinda thinking, since the overall screen seemed a bit different from homeScreenStudent. 
+            #We can talk about this later
+            #return render_template('studentdashboard.html')
+            return "You are a student"
+        elif session['userPerms'] == 'Tester':
+            return "You are a tester"
+        return None
+    else:
+        return render_template('loginprompt.html')
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 @app.route('/form')
 def form():
     return render_template('form.html')
-
 
 #change this name to registForm for better understanding
 @app.route('/registForm')
@@ -47,19 +64,43 @@ def login():
         cursor = mysql.connection.cursor()
         username = request.form['Username']
         password = request.form['Password']
-        try:
-            fname = request.form['FName']
-            # cursor.execute(''' INSERT INTO info_table VALUES(%s,%s)''',(name,age))
-            # mysql.connection.commit()
+        select_statement = "SELECT * FROM USER WHERE username = %s AND MD5(%s) = user_password"
+        result = cursor.execute(select_statement, (username, password))
+        if result:
+            session['user'] = username
+            checkForPermissions()
             cursor.close()
-            return f"Done!!"
-        except:
-            select_statement = "SELECT * FROM USER WHERE username = %s AND MD5(%s) = user_password"
-            result = cursor.execute(select_statement, (username, password))
-            if result:
-                return "Login Successful"
-            return "Login Failed"
+            return redirect(url_for('dashboard'))
+        cursor.close()
+        return "Login Failed"
 
+def checkForPermissions():
+    cursor = mysql.connection.cursor()
+    select_statement = "SELECT * FROM ADMINISTRATOR WHERE admin_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Admin'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM STUDENT WHERE student_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Student'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM LABTECH WHERE labtech_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'LabTech'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM SITETESTER WHERE sitetester_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Tester'
+        cursor.close()
+        return
+    return
 
 @app.route('/registuser',methods=['GET','POST'])
 def getRegistRequest():
