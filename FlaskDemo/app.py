@@ -1,6 +1,6 @@
 import pymysql
 pymysql.install_as_MySQLdb()
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import numpy as np
 import hashlib
@@ -11,26 +11,55 @@ import hashlib
 
 
 app = Flask(__name__)
+app.secret_key = 'team 84 is the best team'
 
-# Random login values for mySQL, this will need to be changed for your own machine
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+
+#Hongyu's configs, comment these back in lol
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = 'chy190354890'
+
+#zilong's configs, comment these out
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
 mysql = MySQL(app)
 
+# -------------------------- Platform Functions -------------------------
+
+@app.route('/dashboard')
+def dashboard():
+    #First checks to see if there's someone logged in
+    if 'user' in session:
+        #Depending on their permissions, they get a different screen
+        if session['userPerms'] == 'Admin':
+            return render_template('adminDashboard.html')
+        elif session['userPerms'] == 'Student':
+            #Not sure if this should be homeScreenStudent, left this here as a default
+            return render_template('basicDashboard.html')
+        elif session['userPerms'] == 'Tester':
+            return "You are a tester"
+        return None
+    #If not logged in, pushes the user to the index page
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/logout')
+def logout():
+    #All this does is clear the session information, meaning that the app no longer knows user or user-perms
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
+#This is poorly named, but this is the login form
 @app.route('/form')
 def form():
     return render_template('form.html')
-
 
 #change this name to registForm for better understanding
 @app.route('/registForm')
@@ -47,25 +76,51 @@ def eachScreen():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return "Login via the login Form"
+        return redirect(url_for('form'))
 
     if request.method == 'POST':
         cursor = mysql.connection.cursor()
         username = request.form['Username']
         password = request.form['Password']
-        try:
-            fname = request.form['FName']
-            # cursor.execute(''' INSERT INTO info_table VALUES(%s,%s)''',(name,age))
-            # mysql.connection.commit()
+        select_statement = "SELECT * FROM USER WHERE username = %s AND MD5(%s) = user_password"
+        result = cursor.execute(select_statement, (username, password))
+        #If it finds the user credentials in the DB, it then seeks to update the session accordingly
+        if result:
+            session['user'] = username
+            checkForPermissions()
             cursor.close()
-            return f"Done!!"
-        except:
-            select_statement = "SELECT * FROM USER WHERE username = %s AND MD5(%s) = user_password"
-            result = cursor.execute(select_statement, (username, password))
-            if result:
-                return "Login Successful"
-            return "Login Failed"
+            return redirect(url_for('dashboard'))
+        cursor.close()
+        return "Login Failed"
 
+def checkForPermissions():
+    #These SQL statements check to see which class of user is logged in, and updates the session information accordingly
+    cursor = mysql.connection.cursor()
+    select_statement = "SELECT * FROM ADMINISTRATOR WHERE admin_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Admin'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM STUDENT WHERE student_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Student'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM LABTECH WHERE labtech_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'LabTech'
+        cursor.close()
+        return
+    select_statement = "SELECT * FROM SITETESTER WHERE sitetester_username = %s"
+    result = cursor.execute(select_statement, (session['user']))
+    if result:
+        session['userPerms'] = 'Tester'
+        cursor.close()
+        return
+    return
 
 @app.route('/registuser',methods=['GET','POST'])
 def getRegistRequest():
@@ -140,6 +195,32 @@ def getRegistRequest():
                         mysql.connection.commit()
                         return "You have successfully registered"
 
+# -------------------------- All Users Experience -----------------------
+
+@app.route('/dailyresults')
+def dailyresults():
+    cursor = mysql.connection.cursor()
+    try:
+        result = cursor.callproc("daily_results")
+    except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+    else:
+        sql = "select * from daily_results_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+
+        # get the field name
+        sql = "SHOW FIELDS FROM daily_results_result"
+        cursor.execute(sql)
+        labels = cursor.fetchall()
+        mysql.connection.commit()
+        labels = [l[0] for l in labels]
+
+        return render_template('dailyresults.html', labels=labels, content=content)
+
+
+# -------------------------- Student Specific Experience ----------------
 
 @app.route('/studentView',methods=['GET','POST'])
 def studentView():
@@ -153,6 +234,7 @@ def studentView():
         status = request.form.get('Status')
         startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+
 
         try:
             result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
@@ -179,11 +261,18 @@ def studentView():
 
             return render_template('studentView.html', labels=labels, content=content)
 
+# -------------------------- Tester Experience -------------------------- 
 
+# -------------------------- LabTech Experience -------------------------
 
+# -------------------------- Admin User Experience ----------------------
 
-
+@app.route('/resassigntester')
+def reassigntester():
+    if 'user' not in session or session['userPerms'] != 'Admin':
+        redirect(url_for('index'))
     
+
 @app.route('/createAppointment',methods=['GET','POST'])
 def createAppointment():
     if request.method == 'GET':
@@ -262,6 +351,7 @@ def viewTester():
         return "unable to view because " + str(e)
     else:
         #print the view to the html
+
 
         # select from the student_view_results_result
         sql = "select * from view_testers_result"
@@ -369,6 +459,7 @@ def poolMetaDate():
         #https://blog.csdn.net/a19990412/article/details/84955802
 
         return render_template('poolResult.html', labels=labels, content=content)
+
 
 
 
