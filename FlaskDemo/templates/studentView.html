@@ -12,8 +12,11 @@
     <title>StudentView</title>
 </head>
 <body>
+<div class="container">
+<h1>Student View</h1>
+  <p> </p>
 <form action="/studentView" method = "POST">
-<p>This should be a student view</p>
+<p></p>
 <div>
     <p>Username <input type = "text" name = "Username" /></p>
     <label >Test Status</label>
@@ -32,9 +35,14 @@
     <input type="date" id="end" name="TimeEnd"
        min="2020-01-01" max="2020-12-31">
 </div>
-    <p><input type = "submit" value = "View" /></p>
+    <p></p>
+    <input class = "btn btn-primary" type = "submit" value = "View" />
+    <input class = "btn btn-primary" type = "submit" value = "Reset" />
+    <p></p>
+    
 
     <!-- copy some template online just for testing -->
+    <!-- 
     <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
@@ -64,9 +72,56 @@
                 </div>
             </div>
         </div>
-
+    
     </div>
+    -->
+    <div class="table-responsive">
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Test ID#</th>
+      <th scope="col">Timeslot Date</th>
+      <th scope="col">Date Processed</th>
+      <th scope="col">Pool Status</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><a href="/">Back</a></p>
+</div>
 
+    
 </div>
 </form>
 </body>
