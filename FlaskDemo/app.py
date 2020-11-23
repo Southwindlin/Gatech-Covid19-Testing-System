@@ -178,6 +178,24 @@ def studentView():
 
 
     
+@app.route('/createAppointment',methods=['GET','POST'])
+def createAppointment():
+    if request.method == 'GET':
+        return render_template('createAppointment.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        siteName = request.form.get('siteName')
+        date = request.form.get('date')
+        time = request.form.get('time')
+
+
+        try:
+            cursor.callproc("create_appointment",[siteName,date,time])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            return "create appointment succesfully"
 
 
 
