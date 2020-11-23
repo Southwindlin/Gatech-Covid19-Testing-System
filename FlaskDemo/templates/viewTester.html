@@ -8,33 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>StudentView</title>
+    <title>Show the Screen of the reassigned tester</title>
 </head>
 <body>
-<form action="/studentView" method = "POST">
-<p>This should be a student view</p>
-<div>
-    <p>Username <input type = "text" name = "Username" /></p>
-    <label >Test Status</label>
-         <label class="form-control">
-         <input type="radio" name="Status" value="Negative" id="Neg"><label for="Neg">Negative</label>
-         <input type="radio" name="Status" value="Positive" id="Pos"><label for="Pos">Positive</label>
-         <input type="radio" name="Status" value="Pending" id="Pen"><label for="Pen">Pending</label>
-    </label>
-
-    <label for="start">Start date:</label>
-    <input type="date" id="start" name="TimeStart"
-       min="2020-01-01" max="2020-12-31">
-
-    <label for="end">End date:</label>
-
-    <input type="date" id="end" name="TimeEnd"
-       min="2020-01-01" max="2020-12-31">
-</div>
-    <p><input type = "submit" value = "View" /></p>
-
-    <!-- copy some template online just for testing -->
+<form action="/viewTester" method = "GET">
+        <!-- copy some template online just for testing -->
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
@@ -55,7 +33,7 @@
                         {% for i in content %}
                             <tr>
                                 {% for j in i %}
-                                    <td><a href="/test ID">{{ j[0] }}</a>{{ j }}</td>
+                                    <td>{{ j }}</td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
@@ -68,7 +46,17 @@
     </div>
 
 </div>
-</form>
+    <form action="/reassignTester" method = "POST">
+        <p>Username <input type = "text" name = "Username" /></p>
+        <select name="siteName" id="siteName">
+        <option value="West Village">West Village</option>
+        <option value="Bobby Dodd Stadium">Bobby Dobb</option>
+        <option value="Site1">Site1</option>
+        <option value="Site2">Site2</option>
+    </select>
+        <p><input type = "submit" value = "update" /></p>
+    </form>>
 
+</form>
 </body>
 </html>
