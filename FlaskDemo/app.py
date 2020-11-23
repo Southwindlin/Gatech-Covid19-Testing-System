@@ -15,14 +15,20 @@ app.secret_key = 'team 84 is the best team'
 
 # Random login values for mySQL, this will need to be changed for your own machine
 app.config['MYSQL_HOST'] = 'localhost'
+
+#Hongyu's configs, comment these back in lol
 #app.config['MYSQL_USER'] = 'root'
 #app.config['MYSQL_PASSWORD'] = 'chy190354890'
+
+#zilong's configs, comment these out
 app.config['MYSQL_USER'] = 'newuser'
 app.config['MYSQL_PASSWORD'] = '123123123'
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
 mysql = MySQL(app)
+
+# -------------------------- Overall User Experience --------------------
 
 @app.route('/dashboard')
 def dashboard():
@@ -183,6 +189,7 @@ def getRegistRequest():
                         mysql.connection.commit()
                         return "You have successfully registered"
 
+# -------------------------- Student Specific Experience ----------------
 
 @app.route('/studentView',methods=['GET','POST'])
 def studentView():
@@ -219,31 +226,13 @@ def studentView():
 
             return render_template('studentView.html', labels=labels, content=content)
 
+# -------------------------- Tester Experience -------------------------- 
 
+# -------------------------- LabTech Experience -------------------------
 
+# -------------------------- Admin User Experience ----------------------
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#def reassigntester():
 
 if __name__ == '__main__':
     app.run()
