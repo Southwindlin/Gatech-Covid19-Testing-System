@@ -168,6 +168,9 @@ def studentView():
             mysql.connection.commit()
             labels = [l[0] for l in labels]
 
+            #visualization template source:
+            #https://blog.csdn.net/a19990412/article/details/84955802
+
             return render_template('studentView.html', labels=labels, content=content)
 
 
