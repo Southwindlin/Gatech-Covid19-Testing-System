@@ -13,7 +13,6 @@ import hashlib
 app = Flask(__name__)
 app.secret_key = 'team 84 is the best team'
 
-# Random login values for mySQL, this will need to be changed for your own machine
 app.config['MYSQL_HOST'] = 'localhost'
 
 #Hongyu's configs, comment these back in lol
@@ -57,6 +56,7 @@ def logout():
 def index():
     return render_template('index.html')
 
+#This is poorly named, but this is the login form
 @app.route('/form')
 def form():
     return render_template('form.html')
@@ -188,6 +188,7 @@ def getRegistRequest():
                     else:
                         mysql.connection.commit()
                         return "You have successfully registered"
+
 # -------------------------- All Users Experience -----------------------
 
 @app.route('/dailyresults')
@@ -225,6 +226,8 @@ def studentView():
         #Will change the way of getting username after the front end is done
         userName = request.form.get('Username')
         status = request.form.get('Status')
+        #I believe this errors out without any default values, since it receives '' and doesn't know how to handle it
+        #If you've fixed this already, disregard
         startDate = request.form.get('TimeStart')
         endDate = request.form.get('TimeEnd')
 
@@ -256,7 +259,19 @@ def studentView():
 
 # -------------------------- Admin User Experience ----------------------
 
-#def reassigntester():
+@app.route('/resassigntester')
+def reassigntester():
+    if 'user' not in session or session['userPerms'] != 'Admin':
+        redirect(url_for('index'))
+    
+    if request.method == 'GET':
+        return render_template('reassignTester.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+    
+    #Placeholder
+    redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run()
