@@ -37,6 +37,12 @@ def form():
 def registForm():
     return render_template('regform.html')
 
+#a very basic screen collection for test
+@app.route('/EachScreen')
+def eachScreen():
+    return render_template('EachScreen.html')
+
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -196,6 +202,51 @@ def createAppointment():
         else:
             mysql.connection.commit()
             return "create appointment succesfully"
+
+
+@app.route('/viewAppointment',methods=['GET','POST'])
+def viewAppointment():
+    if request.method =='GET':
+        return render_template('viewAppointment.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        siteName = request.form.get('siteName')
+        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
+        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+        startTime = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
+        endTime = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        avail = request.form.get('Availability')
+
+        if avail == 'booked':
+            avail = 0
+        elif avail == 'available':
+            avail = 1
+        elif avail == 'all':
+            avail = None
+
+        try:
+            cursor.callproc("view_appointments",[siteName,startDate,endDate,startTime,endTime,avail])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            #print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from view_appointments_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            # get the field name
+            sql = "SHOW FIELDS FROM view_appointments_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            labels = ['Date','Time','test Site','Location','User']
+
+            #visualization template source:
+            #https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('viewAppointment.html', labels=labels, content=content)
 
 
 
