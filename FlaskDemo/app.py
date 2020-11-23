@@ -26,22 +26,24 @@ mysql = MySQL(app)
 
 @app.route('/dashboard')
 def dashboard():
+    #First checks to see if there's someone logged in
     if 'user' in session:
+        #Depending on their permissions, they get a different screen
         if session['userPerms'] == 'Admin':
             return render_template('adminDashboard.html')
         elif session['userPerms'] == 'Student':
-            #This is what I was kinda thinking, since the overall screen seemed a bit different from homeScreenStudent. 
-            #We can talk about this later
-            #return render_template('studentdashboard.html')
+            #Not sure if this should be homeScreenStudent, left this here as a default
             return render_template('basicDashboard.html')
         elif session['userPerms'] == 'Tester':
             return "You are a tester"
         return None
+    #If not logged in, pushes the user to the index page
     else:
-        return render_template('loginprompt.html')
+        return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
+    #All this does is clear the session information, meaning that the app no longer knows user or user-perms
     session.clear()
     return redirect(url_for('index'))
 
@@ -62,7 +64,7 @@ def registForm():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return "Login via the login Form"
+        return redirect(url_for('form'))
 
     if request.method == 'POST':
         cursor = mysql.connection.cursor()
@@ -70,6 +72,7 @@ def login():
         password = request.form['Password']
         select_statement = "SELECT * FROM USER WHERE username = %s AND MD5(%s) = user_password"
         result = cursor.execute(select_statement, (username, password))
+        #If it finds the user credentials in the DB, it then seeks to update the session accordingly
         if result:
             session['user'] = username
             checkForPermissions()
@@ -79,6 +82,7 @@ def login():
         return "Login Failed"
 
 def checkForPermissions():
+    #These SQL statements check to see which class of user is logged in, and updates the session information accordingly
     cursor = mysql.connection.cursor()
     select_statement = "SELECT * FROM ADMINISTRATOR WHERE admin_username = %s"
     result = cursor.execute(select_statement, (session['user']))
