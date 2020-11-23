@@ -28,7 +28,7 @@ app.config['MYSQL_DB'] = 'covidtest_fall2020'
 
 mysql = MySQL(app)
 
-# -------------------------- Overall User Experience --------------------
+# -------------------------- Platform Functions -------------------------
 
 @app.route('/dashboard')
 def dashboard():
@@ -188,6 +188,30 @@ def getRegistRequest():
                     else:
                         mysql.connection.commit()
                         return "You have successfully registered"
+# -------------------------- All Users Experience -----------------------
+
+@app.route('/dailyresults')
+def dailyresults():
+    cursor = mysql.connection.cursor()
+    try:
+        result = cursor.callproc("daily_results")
+    except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+    else:
+        sql = "select * from daily_results_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+
+        # get the field name
+        sql = "SHOW FIELDS FROM daily_results_result"
+        cursor.execute(sql)
+        labels = cursor.fetchall()
+        mysql.connection.commit()
+        labels = [l[0] for l in labels]
+
+        return render_template('dailyresults.html', labels=labels, content=content)
+
 
 # -------------------------- Student Specific Experience ----------------
 
