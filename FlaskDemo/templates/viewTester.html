@@ -8,44 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>StudentView</title>
+    <title>Show the Screen of the reassigned tester</title>
 </head>
 <body>
-<div class="container">
-<h1>Student View</h1>
-  <p> </p>
-<form action="/studentView" method = "POST">
-<p></p>
-<div>
-    <p>Username <input type = "text" name = "Username" /></p>
-    <label >Test Status</label>
-         <label class="form-control">
-         <input type="radio" name="Status" value="Negative" id="Neg"><label for="Neg">Negative</label>
-         <input type="radio" name="Status" value="Positive" id="Pos"><label for="Pos">Positive</label>
-         <input type="radio" name="Status" value="Pending" id="Pen"><label for="Pen">Pending</label>
-    </label>
-
-    <label for="start">Start date:</label>
-    <input type="date" id="start" name="TimeStart"
-       min="2020-01-01" max="2020-12-31">
-
-    <label for="end">End date:</label>
-
-    <input type="date" id="end" name="TimeEnd"
-       min="2020-01-01" max="2020-12-31">
-</div>
-    <p></p>
-    <input class = "btn btn-primary" type = "submit" value = "View" />
-    <input class = "btn btn-primary" type = "submit" value = "Reset" />
-    <p></p>
-    
-
-    <!-- copy some template online just for testing -->
-
-    
-    <div class="row">
-
+<form action="/viewTester" method = "GET">
+        <!-- copy some template online just for testing -->
+<div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -65,7 +33,7 @@
                         {% for i in content %}
                             <tr>
                                 {% for j in i %}
-                                    <td><a href="/test ID">{{ j[0] }}</a>{{ j }}</td>
+                                    <td>{{ j }}</td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
@@ -74,17 +42,21 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
-    
-</div>
 
-<p><a href="/">Back</a></p>
 </div>
+    <form action="/reassignTester" method = "POST">
+        <p>Username <input type = "text" name = "Username" /></p>
+        <select name="siteName" id="siteName">
+        <option value="West Village">West Village</option>
+        <option value="Bobby Dodd Stadium">Bobby Dobb</option>
+        <option value="Site1">Site1</option>
+        <option value="Site2">Site2</option>
+    </select>
+        <p><input type = "submit" value = "update" /></p>
+    </form>>
 
-    
-</div>
 </form>
-
 </body>
 </html>
