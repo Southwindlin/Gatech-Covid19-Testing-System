@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Show the Screen of the reassigned tester</title>
+</head>
+<body>
+<form action="/viewTester" method = "GET">
+        <!-- copy some template online just for testing -->
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Students</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in content %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+    <form action="/reassignTester" method = "POST">
+        <p>Username <input type = "text" name = "Username" /></p>
+        <select name="siteName" id="siteName">
+        <option value="West Village">West Village</option>
+        <option value="Bobby Dodd Stadium">Bobby Dobb</option>
+        <option value="Site1">Site1</option>
+        <option value="Site2">Site2</option>
+    </select>
+        <p><input type = "submit" value = "update" /></p>
+    </form>>
+
+</form>
+</body>
+</html>
