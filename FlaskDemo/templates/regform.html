@@ -4,9 +4,7 @@
     <title>GT Covid Testing</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -30,11 +28,18 @@
         <div class="form-check">
             <p><input type="radio" name="Location" value="east" > EastCampus </p>
             <p><input type="radio" name="Location" value="west" > WestCampus </p>
-            <p>HouseType<input type="text" name="HouseType" > </p>
+            <label for="HouseType">Housing Type</label>
+            <select type="text" name="HouseType" id="HouseType">
+              <option value="Student Housing">Student Housing</option>
+              <option value="Greek Housing">Greek Housing</option>
+              <option value="Off-Campus House">Off-Campus House</option>
+              <option value="Off-Campus Apartments">Off-Campus Apartments</option>
+            </select>
 
-            <input type="checkbox" name="employType" value="labTech" > Lab-Technician
-            <input type="checkbox" name="employType" value="siteTester" > Site Tester
         </div>
+        <br>
+        <input type="checkbox" name="employType" value="labTech" > Lab-Technician
+        <input type="checkbox" name="employType" value="siteTester" > Site Tester
 
     </div>
 
