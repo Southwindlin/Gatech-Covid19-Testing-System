@@ -24,13 +24,13 @@ mysql = MySQL(app)
 current_user = None
 
 
-# 主页
+# Login Page
 @app.route('/')
 def index():
     return render_template('Login_Screen1.html')
 
 
-# 暂时不需要了
+# No need for now
 @app.route('/form')
 def form():
     return render_template('form.html')

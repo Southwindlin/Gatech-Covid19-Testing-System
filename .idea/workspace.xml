@@ -20,40 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/Login_Screen1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/allScreen.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/exploreTestResult.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUp.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/loginSuccessfully.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentView.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/flask/helpers 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/flask/helpers 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/flask/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/flask/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/jinja2/loaders 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/jinja2/loaders 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/jinja2/loaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/jinja2/loaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/nltk/app/wordnet_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/nltk/app/wordnet_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/numpy/lib/_datasource.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/numpy/lib/_datasource.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/numpy/lib/tests/test__datasource.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/numpy/lib/tests/test__datasource.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_internal/index/collector 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_internal/index/collector 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_internal/index/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_internal/index/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/index 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/index 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/locators 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/locators 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/locators.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/pip/_vendor/distlib/locators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/setuptools/package_index 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/setuptools/package_index 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/setuptools/package_index.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/venv/lib/python3.8/site-packages/setuptools/package_index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +50,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="hongyu" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -165,7 +133,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
@@ -286,10 +253,10 @@
     </state>
     <state x="500" y="184" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1606255581931" />
     <state x="469" y="179" key="SettingsEditor/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606013030218" />
-    <state x="517" y="228" key="Vcs.Push.Dialog.v2" timestamp="1606256501429">
+    <state x="517" y="228" key="Vcs.Push.Dialog.v2" timestamp="1606261777516">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="517" y="228" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606256501429" />
+    <state x="517" y="228" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606261777516" />
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -314,6 +281,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606076830658" />
+    <state x="733" y="319" key="git4idea.merge.GitMergeDialog" timestamp="1606261815558">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="733" y="319" key="git4idea.merge.GitMergeDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606261815558" />
     <state x="603" y="77" width="840" height="1034" key="search.everywhere.popup" timestamp="1606163416240">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
