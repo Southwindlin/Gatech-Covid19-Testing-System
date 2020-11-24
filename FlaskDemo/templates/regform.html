@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GT Covid Testing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h1>Register</h1>
+  <p> </p>
+<form action="/registuser" method = "POST">
+    <p>Username <input type = "text" name = "Username" /></p>
+    <p>Password <input type = "text" name = "Password" /></p>
+    <p>Confirm Password <input type = "text" name = "ConfirmPwd" /></p>
+    <p>First Name <input type = "text" name = "FName" /></p>
+    <p>Last Name <input type = "text" name = "LName" /></p>
+    <p>Email <input type = "text" name = "Email" /></p>
+    <p>Phone(for test) :</label><input type="number" name="Phone" size="10"/> </p>
+    <div>
+         <label >UserType</label>
+         <label class="form-control">
+         <input type="radio" name="Type" value="student" id="student"><label for="student"> Student </label>
+         <input type="radio" name="Type" value="employee" id="employee"><label for="employee"> Employee </label>
+
+    </label>
+        <div class="form-check">
+            <p><input type="radio" name="Location" value="east" > EastCampus </p>
+            <p><input type="radio" name="Location" value="west" > WestCampus </p>
+            <p>HouseType<input type="text" name="HouseType" > </p>
+
+            <input type="checkbox" name="employType" value="labTech" > Lab-Technician
+            <input type="checkbox" name="employType" value="siteTester" > Site Tester
+        </div>
+
+    </div>
+
+    <p><input type = "submit" value = "Register" /></p>
+ </form>
+ <p><a href="/">Back</a></p>
+ </div>
+</body>
+</html>
