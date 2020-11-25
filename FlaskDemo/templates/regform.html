@@ -26,20 +26,20 @@
       <label class="form-control">
 
         <!--Toggle the display of student and employee-->
-        <input type="button" onclick="student_display()" name="Type" value="student" id="student">
-        <input type="button" onclick="employee_display()" name="Type" value="employee" id="employee">
+        <input type="button" onclick="student_display()" name="Type"  id="student" value="student">
+        <input type="button" onclick="employee_display()" name="Type"  id="employee" value="employee">
 
       </label>
       <div class="studentInfo" style="visibility: hidden">
         <p><input type="radio" name="Location" value="east" > EastCampus </p>
         <p><input type="radio" name="Location" value="west" > WestCampus </p>
-        <p>HouseType<input type="text" name="HouseType" > </p>
+        <p>HouseType<input type="text" name="HouseType" id = "HouseType"> </p>
       </div>
 
       <div class="employeeInfo" style="visibility: hidden">
         <input type="checkbox" name="employType" value="labTech" > Lab-Technician
         <input type="checkbox" name="employType" value="siteTester" > Site Tester
-        <p>Phone(for test) :</label><input type="number" name="Phone" size="10"/> </p>
+        <p>Phone(for test) :</label><input type="number" name = "Phone" id="Phone" size="10"/> </p>
       </div>
 
     </div>
@@ -48,8 +48,19 @@
   </form>
   <p><a href="/">Back</a></p>
 </div>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
+
   function student_display(){
+    //toggle with the visibility
      var stuList = document.querySelectorAll('.studentInfo');
      var empList = document.querySelectorAll('.employeeInfo');
      for (var x = 0; x < stuList.length; x++ ) {
@@ -59,6 +70,19 @@
     for (var y = 0; y < empList.length; y++ ) {
       empList[y].style.visibility="hidden";
     }
+
+    //set the input value
+    document.getElementsByName("Type").values()[0] = "student" ;
+    //clear the employee value
+    var jobs = document.getElementsByName("employType")
+    for (var i=0;i<jobs.length;i++) {
+      jobs[i].checked = false;
+
+    }
+    document.getElementById("Phone").value = "";
+
+
+
 
 
   }
@@ -73,6 +97,19 @@
     for (var x = 0; x < empList.length; x++ ) {
       empList[x].style.visibility="visible";
     }
+
+    document.getElementsByName("Type").values()[0] = "employee" ;
+
+    //clear the student value:
+    var locs = document.getElementsByName("Location")
+    for (var i=0;i<locs.length;i++) {
+      locs[i].checked = false;
+
+    }
+    document.getElementById("HouseType").value = "";
+
+
+
 
 
   }
