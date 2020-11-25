@@ -79,7 +79,6 @@ def login():
 # Register part for Screen 2
 # 1. at beginning one should not see selection until he chooses the employee
 # 2. email form is not restricted
-# 3. Code is a little bit wordy
 @app.route('/registuser', methods=['GET', 'POST'])
 def getRegistRequest():
     if request.method == 'GET':
