@@ -56,7 +56,7 @@
           <input type="checkbox" name="employType" value="siteTester" > Site Tester
         </div>
 
-        <p>Phone(for test) :</label><input type="number" name = "Phone" id="Phone" size="10" required = "false"/> </p>
+        <p>Phone(for test) :<input type="number" name = "Phone" id="Phone" size="10"/> </p>
       </div>
 
     </div>
@@ -78,6 +78,7 @@
   //toggle with the visibility
   var stuList = document.querySelectorAll('.studentInfo');
   var empList = document.querySelectorAll('.employeeInfo');
+
   for (var x = 0; x < stuList.length; x++ ) {
     stuList[x].style.visibility="visible";
   }
@@ -87,10 +88,9 @@
   }
 
   //set the input value
-  document.getElementsByName("Type").values()[0] = "student" ;
+   document.getElementById("student").value = "student" ;
 
-  $('#Location').required = "true";
-  $('#HouseType').required = "true";
+
 
 
 
@@ -101,8 +101,7 @@
     jobs[i].checked = false;
   }
   document.getElementById("Phone").value = "";
-  $('#Role').required = "false";
-  $('#Phone').required = "false";
+
 
 
 
@@ -119,11 +118,8 @@ function employee_display(){
     empList[x].style.visibility="visible";
   }
 
-  document.getElementsByName("Type").values()[0] = "employee" ;
-  $('#Role').required = "true";
-  $('#Phone').required = "true";
-  $('#Location').required = "false";
-  $('#HouseType').required = "false";
+  document.getElementById("employee").value = "employee" ;
+
 
   //clear the student value:
   document.getElementById("Location").value = "";

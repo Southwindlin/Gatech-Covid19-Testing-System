@@ -140,7 +140,7 @@ def getRegistRequest():
         cursor = mysql.connection.cursor()
         #SQL command
         #1212
-        userType = request.form.get('Type')[0]
+        userType = request.form.get('Type')
         userName = request.form.get('Username')
         email = request.form.get('Email')
         fName = request.form.get('FName')
