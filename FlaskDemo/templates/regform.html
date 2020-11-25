@@ -30,15 +30,32 @@
         <input type="button" onclick="employee_display()" name="Type"  id="employee" value="employee">
 
       </label>
-      <div class="studentInfo" style="visibility: hidden">
-        <p><input type="radio" name="Location" value="east" > EastCampus </p>
-        <p><input type="radio" name="Location" value="west" > WestCampus </p>
-        <p>HouseType<input type="text" name="HouseType" id = "HouseType"> </p>
+      <div class="studentInfo" style="visibility: hidden" >
+
+        <label for="Location">Location:</label>
+        <select name="Location" id="Location">
+          <option value="">--Select A Location--</option>
+          <option value="East Campus">East Campus</option>
+          <option value="West Campus">West Campus</option>
+        </select>
+
+        <label for="HouseType">Housing Typle:</label>
+        <select name="HouseType" id="HouseType">
+          <option value="">--Select A Housing Type--</option>
+          <option value="Student Housing">Student Housing</option>
+          <option value="Greek Housing">Greek Housing</option>
+          <option value="Off-Campus House">Off-Campus House</option>
+          <option value="Off-Campus Apartments">Off-Campus Apartments</option>
+        </select>
+
       </div>
 
-      <div class="employeeInfo" style="visibility: hidden">
-        <input type="checkbox" name="employType" value="labTech" > Lab-Technician
-        <input type="checkbox" name="employType" value="siteTester" > Site Tester
+      <div class="employeeInfo" style="visibility: hidden" >
+        <div id = "Role">
+          <input type="checkbox" name="employType" value="labTech" > Lab-Technician
+          <input type="checkbox" name="employType" value="siteTester" > Site Tester
+        </div>
+
         <p>Phone(for test) :</label><input type="number" name = "Phone" id="Phone" size="10"/> </p>
       </div>
 
@@ -57,64 +74,7 @@
 
 
 
-<script type="text/javascript">
-
-  function student_display(){
-    //toggle with the visibility
-     var stuList = document.querySelectorAll('.studentInfo');
-     var empList = document.querySelectorAll('.employeeInfo');
-     for (var x = 0; x < stuList.length; x++ ) {
-       stuList[x].style.visibility="visible";
-       stuList[x].setAttribute("required","true");
-     }
-
-    for (var y = 0; y < empList.length; y++ ) {
-      empList[y].style.visibility="hidden";
-    }
-
-    //set the input value
-    document.getElementsByName("Type").values()[0] = "student" ;
-    //clear the employee value
-    var jobs = document.getElementsByName("employType")
-    for (var i=0;i<jobs.length;i++) {
-      jobs[i].checked = false;
-
-    }
-    document.getElementById("Phone").value = "";
-
-
-
-
-
-  }
-
-  function employee_display(){
-    var stuList = document.querySelectorAll('.studentInfo');
-    var empList = document.querySelectorAll('.employeeInfo');
-    for (var x = 0; x < stuList.length; x++ ) {
-      stuList[x].style.visibility="hidden";
-    }
-
-    for (var x = 0; x < empList.length; x++ ) {
-      empList[x].style.visibility="visible";
-      empList[x].setAttribute("required","true");
-    }
-
-    document.getElementsByName("Type").values()[0] = "employee" ;
-
-    //clear the student value:
-    var locs = document.getElementsByName("Location")
-    for (var i=0;i<locs.length;i++) {
-      locs[i].checked = false;
-    }
-    document.getElementById("HouseType").value = "";
-
-
-
-
-
-  }
-</script>
+<script type="text/javascript" src="regform.js"></script>
 
 
 

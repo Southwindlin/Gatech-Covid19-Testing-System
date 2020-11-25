@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" afterDir="false" />
     </list>
@@ -140,6 +141,7 @@
       <workItem from="1606271264811" duration="5391000" />
       <workItem from="1606284134945" duration="5000" />
       <workItem from="1606322638397" duration="388000" />
+      <workItem from="1606330860014" duration="47000" />
     </task>
     <servers />
   </component>
@@ -224,14 +226,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/FlaskDemo/templates/regform.html</url>
-          <line>99</line>
-          <properties lambdaOrdinal="-1" />
+          <line>73</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/FlaskDemo/templates/regform.html</url>
-          <line>67</line>
-          <properties lambdaOrdinal="-1" />
+          <line>68</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
