@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.js" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.js" afterDir="false" />
-    </list>
+    <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,10 +109,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Database Script.phase3_shell.sql" />
       <item itemvalue="Database Script.db_init.sql" />
-      <item itemvalue="Flask server.Flask" />
+      <item itemvalue="Database Script.phase3_shell.sql" />
       <item itemvalue="Python.app" />
+      <item itemvalue="Flask server.Flask" />
     </list>
     <recent_temporary>
       <list>
@@ -153,6 +148,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="689" y="371" key="#Notifications" timestamp="1606333643977">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="689" y="371" key="#Notifications/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606333643977" />
     <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606271100967">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
