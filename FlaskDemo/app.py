@@ -5,31 +5,37 @@ from flask_mysqldb import MySQL
 
 
 
-
-import numpy as np
-import hashlib
-
 #when cannot instal flask_mysqldb:
 #export PATH=$PATH:/usr/local/mysql/bin
 #pip3 install flask-mysqldb
 
 
+
+
+
+# -------------------------- App Config (reference:https://github.com/miguelgrinberg/flasky/tree/master/app)-------------------------
+
 app = Flask(__name__)
 app.secret_key = 'team 84 is the best team'
 
+mysql = MySQL(app)
+
+
 app.config['MYSQL_HOST'] = 'localhost'
 
-#Hongyu's configs, comment these back in lol
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# Hongyu's configs, comment these back in lol
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
-#zilong's configs, comment these out
-app.config['MYSQL_USER'] = 'newuser'
-app.config['MYSQL_PASSWORD'] = '123123123'
+# zilong's configs, comment these out
+# app.config['MYSQL_USER'] = 'newuser'
+# app.config['MYSQL_PASSWORD'] = '123123123'
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
-mysql = MySQL(app)
+
+
+
 
 # -------------------------- Platform Functions -------------------------
 
