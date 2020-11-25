@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +137,7 @@
       <workItem from="1606068505618" duration="5540000" />
       <workItem from="1606076262205" duration="2267000" />
       <workItem from="1606265611782" duration="2992000" />
-      <workItem from="1606271264811" duration="4359000" />
+      <workItem from="1606271264811" duration="4842000" />
     </task>
     <servers />
   </component>

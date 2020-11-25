@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GT Covid Testing</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>GT Covid Testing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 <div class="container">
-<h1>Register</h1>
+  <h1>Register</h1>
   <p> </p>
-<form action="/registuser" method = "POST">
+  <form action="/registuser" method = "POST">
     <p>Username <input type = "text" name = "Username" /></p>
     <p>Password <input type = "text" name = "Password" /></p>
     <p>Confirm Password <input type = "text" name = "ConfirmPwd" /></p>
@@ -22,47 +22,48 @@
     <p>Email <input type = "text" name = "Email" /></p>
 
     <div>
-         <label >UserType</label>
-         <label class="form-control">
+      <label >UserType</label>
+      <label class="form-control">
 
-             <!--Toggle the display of student and employee-->
-            <input type="button" onclick="student_display()" name="Type" value="student" id="student">
-             <input type="button" onclick="employee_display()" name="Type" value="employee" id="employee">
+        <!--Toggle the display of student and employee-->
+        <input type="button" onclick="student_display()" name="Type" value="student" id="student">
+        <input type="button" onclick="employee_display()" name="Type" value="employee" id="employee">
 
-    </label>
-        <div class="studentInfo" hidden>
-            <p><input type="radio" name="Location" value="east" > EastCampus </p>
-            <p><input type="radio" name="Location" value="west" > WestCampus </p>
-            <p>HouseType<input type="text" name="HouseType" > </p>
-       </div>
+      </label>
+      <div class="studentInfo" style="visibility: hidden">
+        <p><input type="radio" name="Location" value="east" > EastCampus </p>
+        <p><input type="radio" name="Location" value="west" > WestCampus </p>
+        <p>HouseType<input type="text" name="HouseType" > </p>
+      </div>
 
-        <div class="employeeInfo" hidden>
-            <input type="checkbox" name="employType" value="labTech" > Lab-Technician
-            <input type="checkbox" name="employType" value="siteTester" > Site Tester
-            <p>Phone(for test) :</label><input type="number" name="Phone" size="10"/> </p>
-        </div>
+      <div class="employeeInfo" style="visibility: hidden">
+        <input type="checkbox" name="employType" value="labTech" > Lab-Technician
+        <input type="checkbox" name="employType" value="siteTester" > Site Tester
+        <p>Phone(for test) :</label><input type="number" name="Phone" size="10"/> </p>
+      </div>
 
     </div>
 
     <p><input type = "submit" value = "Register" /></p>
- </form>
- <p><a href="/">Back</a></p>
- </div>
-<script>
-function student_display(){
-    el = document.querySelectorAll('.studentInfo');
-    if(el.hidden = true){
-        el.hidden = false;
+  </form>
+  <p><a href="/">Back</a></p>
+</div>
+<script type="text/javascript">
+  function student_display(){
+    var el = document.querySelectorAll('.studentInfo');
+    if(el.style.visibility="hidden"){
+      el.style.visibility="visible";
 
-    }else{ el.hidden = true;
-    } }
+    }else{ el.style.visibility="hidden"
+    }
+  }
 
-function employee_display(){
-    el = document.querySelectorAll('.employeeInfo');
-    if(el.hidden = true){
-        el.hidden = false;
+  function employee_display(){
+    var el = document.querySelectorAll('.employeeInfo');
+    if(el.style.visibility="hidden"){
+      el.style.visibility="visible";
 
-    }else{ el.hidden = true;
+    }else{ el.style.visibility="hidden"
     } }
 </script>
 
