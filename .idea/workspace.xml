@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -28,12 +29,10 @@
       </map>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="master" />
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
@@ -46,6 +45,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -57,6 +57,11 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FlaskDemo" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.app">
     <configuration name="db_init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
@@ -98,7 +103,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="$USER_HOME$/Documents/GitHub/python/pythonProject/venv/bin/python" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -115,10 +120,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
+        <item itemvalue="Database Script.phase3_shell.sql" />
         <item itemvalue="Database Script.db_init.sql" />
-        <item itemvalue="Database Script.phase3_shell.sql" />
-        <item itemvalue="Python.app" />
-        <item itemvalue="Database Script.phase3_shell.sql" />
       </list>
     </recent_temporary>
   </component>
@@ -133,61 +136,75 @@
       <workItem from="1606000589551" duration="8953000" />
       <workItem from="1606068505618" duration="5540000" />
       <workItem from="1606076262205" duration="2267000" />
+      <workItem from="1606265611782" duration="2992000" />
+      <workItem from="1606271264811" duration="5391000" />
+      <workItem from="1606284134945" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606075928440">
+    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606271100967">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606075928440" />
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom" timestamp="1606082833666">
+    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606271100967" />
+    <state width="1878" height="376" key="GridCell.Tab.0.bottom" timestamp="1606281549293">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082833666" />
-    <state width="1878" height="305" key="GridCell.Tab.0.center" timestamp="1606082833664">
+    <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549293" />
+    <state width="1878" height="376" key="GridCell.Tab.0.center" timestamp="1606281549292">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082833664" />
-    <state width="1878" height="305" key="GridCell.Tab.0.left" timestamp="1606082833664">
+    <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
+    <state width="1878" height="376" key="GridCell.Tab.0.left" timestamp="1606281549291">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082833664" />
-    <state width="1878" height="305" key="GridCell.Tab.0.right" timestamp="1606082833665">
+    <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549291" />
+    <state width="1878" height="376" key="GridCell.Tab.0.right" timestamp="1606281549292">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="305" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082833665" />
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606082161981">
+    <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606281549295">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082161981" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549295" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540598" />
-    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606082161979">
+    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606281549294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082161979" />
+    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549294" />
     <state width="1878" height="376" key="GridCell.Tab.1.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
-    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606082161978">
+    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606281549294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082161978" />
+    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549294" />
     <state width="1878" height="376" key="GridCell.Tab.1.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540596" />
-    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606082161980">
+    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606281549295">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606082161980" />
+    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549295" />
     <state width="1878" height="376" key="GridCell.Tab.1.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
     <state width="221" height="457" key="HiddenNamespacesPopup" timestamp="1606081553043">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="221" height="457" key="HiddenNamespacesPopup/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606081553043" />
+    <state x="192" y="97" key="MergeDialog" timestamp="1606177516987">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="192" y="97" key="MergeDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606177516987" />
     <state x="469" y="179" key="SettingsEditor" timestamp="1606013030218">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="179" key="SettingsEditor/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606013030218" />
+    <state x="560" y="280" key="Vcs.Push.Dialog.v2" timestamp="1606268558421">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="560" y="280" key="Vcs.Push.Dialog.v2/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606268558421" />
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -196,13 +213,13 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="826" y="145" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606009567492" />
-    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606076830658">
+    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606178216076">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606076830658" />
+    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606178216076" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606154407386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
-    <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606070584572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606280638631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
+    <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606273964637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
