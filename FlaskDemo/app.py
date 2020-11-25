@@ -71,10 +71,10 @@ def index():
 def form():
     return render_template('form.html')
 
-#change this name to registForm for better understanding
-@app.route('/registForm')
-def registForm():
-    return render_template('regform.html')
+# #change this name to registForm for better understanding
+# @app.route('/regform')
+# def registForm():
+#     return render_template('regform.html')
 
 #a very basic screen collection for test
 @app.route('/EachScreen')
@@ -135,12 +135,12 @@ def checkForPermissions():
 @app.route('/regform',methods=['GET','POST'])
 def getRegistRequest():
     if request.method == 'GET':
-        return "Please register through the register form"
+        return render_template('regform.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         #SQL command
         #1212
-        userType = request.form.get('Type')
+        userType = request.form.get('Type')[0]
         userName = request.form.get('Username')
         email = request.form.get('Email')
         fName = request.form.get('FName')
@@ -360,7 +360,6 @@ def viewTester():
         return "unable to view because " + str(e)
     else:
         #print the view to the html
-        #123
 
 
         # select from the student_view_results_result
