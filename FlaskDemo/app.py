@@ -360,6 +360,7 @@ def viewTester():
         return "unable to view because " + str(e)
     else:
         #print the view to the html
+        #123
 
 
         # select from the student_view_results_result
