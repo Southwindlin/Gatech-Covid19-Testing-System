@@ -2,6 +2,10 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
+
+
+
+
 import numpy as np
 import hashlib
 
