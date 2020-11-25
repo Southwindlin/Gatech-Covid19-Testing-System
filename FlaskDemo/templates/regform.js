@@ -13,8 +13,8 @@ function student_display(){
   //set the input value
   document.getElementsByName("Type").values()[0] = "student" ;
 
-  $('#Location').addClass('required');
-  $('#HouseType').addClass('required');
+  $('#Location').required = "true";
+  $('#HouseType').required = "true";
 
 
 
@@ -25,6 +25,8 @@ function student_display(){
     jobs[i].checked = false;
   }
   document.getElementById("Phone").value = "";
+  $('#Role').required = "false";
+  $('#Phone').required = "false";
 
 
 
@@ -42,8 +44,10 @@ function employee_display(){
   }
 
   document.getElementsByName("Type").values()[0] = "employee" ;
-  $('#Role').addClass('required');
-  $('#Phone').addClass('required');
+  $('#Role').required = "true";
+  $('#Phone').required = "true";
+  $('#Location').required = "false";
+  $('#HouseType').required = "false";
 
   //clear the student value:
   document.getElementById("Location").value = "";

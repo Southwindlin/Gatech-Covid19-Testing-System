@@ -132,15 +132,14 @@ def checkForPermissions():
         return
     return
 
-@app.route('/registuser',methods=['GET','POST'])
+@app.route('/regform',methods=['GET','POST'])
 def getRegistRequest():
     if request.method == 'GET':
         return "Please register through the register form"
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         #SQL command
-
-
+        #1212
         userType = request.form.get('Type')
         userName = request.form.get('Username')
         email = request.form.get('Email')
