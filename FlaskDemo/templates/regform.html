@@ -14,12 +14,12 @@
   <h1>Register</h1>
   <p> </p>
   <form action="/registuser" method = "POST">
-    <p>Username <input type = "text" name = "Username" /></p>
-    <p>Password <input type = "text" name = "Password" /></p>
-    <p>Confirm Password <input type = "text" name = "ConfirmPwd" /></p>
-    <p>First Name <input type = "text" name = "FName" /></p>
-    <p>Last Name <input type = "text" name = "LName" /></p>
-    <p>Email <input type = "text" name = "Email" /></p>
+    <p>Username <input type = "text" name = "Username" required/></p>
+    <p>Password <input type = "text" name = "Password" required/></p>
+    <p>Confirm Password <input type = "text" name = "ConfirmPwd" required/></p>
+    <p>First Name <input type = "text" name = "FName" required/></p>
+    <p>Last Name <input type = "text" name = "LName" required/></p>
+    <p>Email <input type = "text" name = "Email" required/></p>
 
     <div>
       <label >UserType</label>
@@ -65,6 +65,7 @@
      var empList = document.querySelectorAll('.employeeInfo');
      for (var x = 0; x < stuList.length; x++ ) {
        stuList[x].style.visibility="visible";
+       stuList[x].setAttribute("required","true");
      }
 
     for (var y = 0; y < empList.length; y++ ) {
@@ -96,6 +97,7 @@
 
     for (var x = 0; x < empList.length; x++ ) {
       empList[x].style.visibility="visible";
+      empList[x].setAttribute("required","true");
     }
 
     document.getElementsByName("Type").values()[0] = "employee" ;
@@ -104,7 +106,6 @@
     var locs = document.getElementsByName("Location")
     for (var i=0;i<locs.length;i++) {
       locs[i].checked = false;
-
     }
     document.getElementById("HouseType").value = "";
 
