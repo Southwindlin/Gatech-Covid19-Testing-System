@@ -137,7 +137,7 @@
       <workItem from="1606068505618" duration="5540000" />
       <workItem from="1606076262205" duration="2267000" />
       <workItem from="1606265611782" duration="2992000" />
-      <workItem from="1606271264811" duration="4842000" />
+      <workItem from="1606271264811" duration="5243000" />
     </task>
     <servers />
   </component>
@@ -152,22 +152,22 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606271100967" />
-    <state width="1878" height="376" key="GridCell.Tab.0.bottom" timestamp="1606275777386">
+    <state width="1878" height="305" key="GridCell.Tab.0.bottom" timestamp="1606280638661">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606275777386" />
-    <state width="1878" height="376" key="GridCell.Tab.0.center" timestamp="1606275777385">
+    <state width="1878" height="305" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606280638661" />
+    <state width="1878" height="305" key="GridCell.Tab.0.center" timestamp="1606280638660">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606275777385" />
-    <state width="1878" height="376" key="GridCell.Tab.0.left" timestamp="1606275777385">
+    <state width="1878" height="305" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606280638660" />
+    <state width="1878" height="305" key="GridCell.Tab.0.left" timestamp="1606280638659">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606275777385" />
-    <state width="1878" height="376" key="GridCell.Tab.0.right" timestamp="1606275777386">
+    <state width="1878" height="305" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606280638658" />
+    <state width="1878" height="305" key="GridCell.Tab.0.right" timestamp="1606280638660">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606275777386" />
+    <state width="1878" height="305" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606280638660" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606275777388">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -218,7 +218,7 @@
     <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606178216076" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606275777348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
+    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606280638631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
     <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606273964637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

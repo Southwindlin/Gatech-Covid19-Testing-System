@@ -50,21 +50,32 @@
 </div>
 <script type="text/javascript">
   function student_display(){
-    var el = document.querySelectorAll('.studentInfo');
-    if(el.style.visibility="hidden"){
-      el.style.visibility="visible";
+     var stuList = document.querySelectorAll('.studentInfo');
+     var empList = document.querySelectorAll('.employeeInfo');
+     for (var x = 0; x < stuList.length; x++ ) {
+       stuList[x].style.visibility="visible";
+     }
 
-    }else{ el.style.visibility="hidden"
+    for (var y = 0; y < empList.length; y++ ) {
+      empList[y].style.visibility="hidden";
     }
+
+
   }
 
   function employee_display(){
-    var el = document.querySelectorAll('.employeeInfo');
-    if(el.style.visibility="hidden"){
-      el.style.visibility="visible";
+    var stuList = document.querySelectorAll('.studentInfo');
+    var empList = document.querySelectorAll('.employeeInfo');
+    for (var x = 0; x < stuList.length; x++ ) {
+      stuList[x].style.visibility="hidden";
+    }
 
-    }else{ el.style.visibility="hidden"
-    } }
+    for (var x = 0; x < empList.length; x++ ) {
+      empList[x].style.visibility="visible";
+    }
+
+
+  }
 </script>
 
 
