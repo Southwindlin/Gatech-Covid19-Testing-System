@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+</head>
+<body>
+<h1>Welcome! Student!</h1>
+
+  <form action="/StudentRegister" method = "POST">
+    <p>Username <input type = "text" name = "Username" required/></p>
+    <p>Password <input type = "text" name = "Password" required/></p>
+    <p>Confirm Password <input type = "text" name = "ConfirmPwd" required/></p>
+    <p>First Name <input type = "text" name = "FName" required/></p>
+    <p>Last Name <input type = "text" name = "LName" required/></p>
+    <p>Email <input type = "text" name = "Email" required/></p>
+
+
+    <label for="Location">Location:</label>
+    <select name="Location" id="Location" required = "false">
+      <option value="">--Select A Location--</option>
+      <option value="East">East Campus</option>
+      <option value="West">West Campus</option>
+    </select>
+
+    <label for="HouseType">Housing Typle:</label>
+    <select name="HouseType" id="HouseType" required = "false">
+      <option value="">--Select A Housing Type--</option>
+      <option value="Student Housing">Student Housing</option>
+      <option value="Greek Housing">Greek Housing</option>
+      <option value="Off-Campus House">Off-Campus House</option>
+      <option value="Off-Campus Apartments">Off-Campus Apartments</option>
+    </select>
+
+      </div>
+      <p><button type="submit" value="submit">Register</button></p>
+
+
+
+
+
+  </form>
+
+</body>
+</html>

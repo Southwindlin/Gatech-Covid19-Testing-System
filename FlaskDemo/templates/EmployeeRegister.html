@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Employee!</title>
+</head>
+<body>
+  <form action="/EmployeeRegister" method = "POST">
+    <p>Username <input type = "text" name = "Username" required/></p>
+    <p>Password <input type = "text" name = "Password" required/></p>
+    <p>Confirm Password <input type = "text" name = "ConfirmPwd" required/></p>
+    <p>First Name <input type = "text" name = "FName" required/></p>
+    <p>Last Name <input type = "text" name = "LName" required/></p>
+    <p>Email <input type = "text" name = "Email" required/></p>
+
+      <div class="employeeInfo"  >
+    <div id = "Role" required>
+      <input type="checkbox" name="employType" value="labTech" id = "Labtech"> Lab-Technician
+      <input type="checkbox" name="employType" value="siteTester" id = "Tester"> Site Tester
+    </div>
+
+    <p>Phone(for test) :<input type="number" name = "Phone" id="Phone" size="10" required/> </p>
+  </div>
+    <p><button type="submit" value="submit">Register</button></p>
+  </form>
+
+  <script type="text/javascript" >
+
+    //check the employee input
+    if (!document.getElementById("Labtech").checked || !document.getElementById("Tester").checked) {
+      alert('Please select at least one role!');
+
+    }
+  </script>
+</body>
+</html>
