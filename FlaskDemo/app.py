@@ -24,12 +24,18 @@ mysql = MySQL(app)
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# app.config['MYSQL_USER'] = 'newuser'
-# app.config['MYSQL_PASSWORD'] = '123123123'
+# # app.config['MYSQL_USER'] = 'newuser'
+# # app.config['MYSQL_PASSWORD'] = '123123123'
+# app.config['MYSQL_DB'] = 'covidtest_fall2020'
+# # This code assumes you've already instantiated the DB
+
+# yingnan's configs, comment these out
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -451,44 +457,44 @@ def dailyresults():
 
 # -------------------------- Student Specific Experience ----------------
 
-@app.route('/studentView',methods=['GET','POST'])
-def studentView():
-    if request.method == 'GET':
-        return render_template('studentView.html')
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-
-        #Will change the way of getting username after the front end is done
-        userName = request.form.get('Username')
-        status = request.form.get('Status')
-        startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
-        endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
-
-
-        try:
-            result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-        else:
-            #print the view to the html
-
-            # select from the student_view_results_result
-            sql = "select * from student_view_results_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            # get the field name
-            sql = "SHOW FIELDS FROM student_view_results_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            mysql.connection.commit()
-            labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
-
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('studentView.html', labels=labels, content=content)
+# @app.route('/studentView',methods=['GET','POST'])
+# def studentView():
+#     if request.method == 'GET':
+#         return render_template('studentView.html')
+#     elif request.method == 'POST':
+#         cursor = mysql.connection.cursor()
+#
+#         #Will change the way of getting username after the front end is done
+#         userName = request.form.get('Username')
+#         status = request.form.get('Status')
+#         startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
+#         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+#
+#
+#         try:
+#             result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
+#         except pymysql.IntegrityError or KeyError as e:
+#             return "unable to view because " + str(e)
+#         else:
+#             #print the view to the html
+#
+#             # select from the student_view_results_result
+#             sql = "select * from student_view_results_result"
+#             cursor.execute(sql)
+#             mysql.connection.commit()
+#             content = cursor.fetchall()
+#
+#             # get the field name
+#             sql = "SHOW FIELDS FROM student_view_results_result"
+#             cursor.execute(sql)
+#             labels = cursor.fetchall()
+#             mysql.connection.commit()
+#             labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
+#
+#             #visualization template source:
+#             #https://blog.csdn.net/a19990412/article/details/84955802
+#
+#             return render_template('studentView.html', labels=labels, content=content)
 
 # -------------------------- Tester Experience -------------------------- 
 
