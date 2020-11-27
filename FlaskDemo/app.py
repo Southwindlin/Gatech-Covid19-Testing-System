@@ -2,33 +2,49 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
-import numpy as np
-import hashlib
+
+
 
 #when cannot instal flask_mysqldb:
 #export PATH=$PATH:/usr/local/mysql/bin
 #pip3 install flask-mysqldb
 
 
+
+
+
+# -------------------------- App Config (reference:https://github.com/miguelgrinberg/flasky/tree/master/app)-------------------------
+
 app = Flask(__name__)
 app.secret_key = 'team 84 is the best team'
 
+mysql = MySQL(app)
+
+
 app.config['MYSQL_HOST'] = 'localhost'
 
-#Hongyu's configs, comment these back in lol
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# Hongyu's configs, comment these back in lol
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
-#zilong's configs, comment these out
-app.config['MYSQL_USER'] = 'newuser'
-app.config['MYSQL_PASSWORD'] = '123123123'
+# zilong's configs, comment these out
+# # app.config['MYSQL_USER'] = 'newuser'
+# # app.config['MYSQL_PASSWORD'] = '123123123'
+# app.config['MYSQL_DB'] = 'covidtest_fall2020'
+# # This code assumes you've already instantiated the DB
+
+# yingnan's configs, comment these out
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
-mysql = MySQL(app)
+
+
+
 
 # -------------------------- Platform Functions -------------------------
-
+#
 @app.route('/dashboard')
 def dashboard():
     #First checks to see if there's someone logged in
@@ -56,16 +72,18 @@ def logout():
 def index():
     return render_template('index.html')
 
+#Screen 1: Login
 #This is poorly named, but this is the login form
 @app.route('/form')
 def form():
     return render_template('form.html')
 
-#change this name to registForm for better understanding
+#Screen 2: Register
 @app.route('/registForm')
 def registForm():
     return render_template('regform.html')
 
+#Screen 3: Home Screens
 #a very basic screen collection for test
 @app.route('/EachScreen')
 def eachScreen():
@@ -93,6 +111,7 @@ def login():
         cursor.close()
         return "Login Failed"
 
+#Screen 1 to Home Screen decided by user's role
 def checkForPermissions():
     #These SQL statements check to see which class of user is logged in, and updates the session information accordingly
     cursor = mysql.connection.cursor()
@@ -122,6 +141,7 @@ def checkForPermissions():
         return
     return
 
+#Screen 2 functionality:
 @app.route('/registuser',methods=['GET','POST'])
 def getRegistRequest():
     if request.method == 'GET':
@@ -196,52 +216,29 @@ def getRegistRequest():
                         return "You have successfully registered"
 
 # -------------------------- All Users Experience -----------------------
-
-@app.route('/dailyresults')
-def dailyresults():
-    cursor = mysql.connection.cursor()
-    try:
-        result = cursor.callproc("daily_results")
-    except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-    else:
-        sql = "select * from daily_results_result"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall()
-
-        # get the field name
-        sql = "SHOW FIELDS FROM daily_results_result"
-        cursor.execute(sql)
-        labels = cursor.fetchall()
-        mysql.connection.commit()
-        labels = [l[0] for l in labels]
-
-        return render_template('dailyresults.html', labels=labels, content=content)
-
-
-# -------------------------- Student Specific Experience ----------------
-
-@app.route('/studentView',methods=['GET','POST'])
+# Screen 4
+# 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
+# 2. there is no "all" selection
+@app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
     if request.method == 'GET':
-        return render_template('studentView.html')
+        return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
-        #Will change the way of getting username after the front end is done
+        # Will change the way of getting username after the front end is done
+
         userName = request.form.get('Username')
-        status = request.form.get('Status')
-        startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
+        status = None if request.form.get('Status') == '' else request.form.get('Status')
+        startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
 
-
         try:
-            result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
+            result = cursor.callproc("student_view_results", [userName, status, startDate, endDate])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
-            #print the view to the html
+            # print the view to the html
 
             # select from the student_view_results_result
             sql = "select * from student_view_results_result"
@@ -254,12 +251,280 @@ def studentView():
             cursor.execute(sql)
             labels = cursor.fetchall()
             mysql.connection.commit()
-            labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
+            labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+
+            # visualization template source:
+            # https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('studentViewTestResults.html', labels=labels, content=content)
+        
+#Screen 5: Explore test result
+@app.route('/exploreTestResult', methods=['GET', 'POST'])
+def exploreTestResult():
+    if request.method == 'GET':
+        return render_template('exploreTestResult.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        testid = request.form.get('Testid')
+
+        try:
+            result = cursor.callproc("explore_results", [testid])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            # print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from explore_results_result"
+            cursor.execute(sql)
+            #one row code below may be not neccessary
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            # get the field name
+            sql = "SHOW FIELDS FROM explore_results_result"
+            cursor.execute(sql)
+            labels = cursor.fetchall()
+            mysql.connection.commit()
+            labels = ['Test ID#','Date Tested', 'Timeslot', 'Testing Location', 'Date Processed', 'Pooled Result', 'Individual Result','Processed By']
+
+            # visualization template source:
+            # https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('studentViewTestResults.html', labels=labels, content=content)
+
+#Screen 6: Aggregate Results
+@app.route('/aggregateResult', methods=['GET', 'POST'])
+def aggregateResult():
+    if request.method == 'GET':
+        return render_template('aggregateResult.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+
+        Location = None if request.form.get('Location') == '' else request.form.get('Location')
+        Housing = None if request.form.get('Housing') == '' else request.form.get('Housing')
+        Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
+        startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
+        endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        try:
+            result = cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            # print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from aggregate_results_result"
+            cursor.execute(sql)
+            #one row code below may be not neccessary
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            # get the field name
+            sql = "SHOW FIELDS FROM aggregate_results_result"
+            cursor.execute(sql)
+            labels = cursor.fetchall()
+            mysql.connection.commit()
+            labels = ['Total','Number of Testing','Percentage']
+
+            # visualization template source:
+            # https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('aggregateResult.html', labels=labels, content=content)
+
+#Screen 7a:
+@app.route('/testSignUpFilter', methods=['GET', 'POST'])
+def testSignUpFilter():
+    if request.method == 'GET':
+        return render_template('testSignUpFilter.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        username = request.form.get('Username')
+
+        Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
+        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
+        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        startTime = None if request.form.get('startTime') == '' else request.form.get('startTime')
+        endTime = None if request.form.get('endTime') == '' else request.form.get('endTime')
+        try:
+            result = cursor.callproc("test_sign_up_filter", [username,Testing_site,startDate,endDate,startTime,endTime])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            # print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from test_sign_up_filter_result"
+            cursor.execute(sql)
+            #one row code below may be not neccessary
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            print(content)
+            # get the field name
+            sql = "SHOW FIELDS FROM test_sign_up_filter_result"
+            cursor.execute(sql)
+            labels = cursor.fetchall()
+            print(labels)
+            mysql.connection.commit()
+            labels = ['appt_date','appt_time','street','city','state','zip','site_name']
+
+            # visualization template source:
+            # https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('testSignUpFilter.html', labels=labels, content=content)
+
+#Screen 7b:
+@app.route('/testSignUp', methods=['GET', 'POST'])
+def testSignUp():
+    if request.method == 'GET':
+        return render_template('testSignUp.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        username = request.form.get('Username')
+        Testid = request.form.get('Testid')
+        Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
+        Date = None if request.form.get('Date') == '' else request.form.get('Date')
+        Time = None if request.form.get('Time') == '' else request.form.get('Time')
+        print([username, Testing_site, Date, Time, Testid])
+        try:
+            cursor.callproc("test_sign_up", [username,Testing_site,Date,Time,Testid])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to sign up" + str(e)
+        else:
+            mysql.connection.commit()
+            return "You have successfully Signed up the Test"
+
+
+
+#Screen 8a:
+@app.route('/tests_processed', methods=['GET', 'POST'])
+def tests_processed():
+    if request.method == 'GET':
+        return render_template('tests_processed.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        username = request.form.get('labtechUsername')
+
+        testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
+        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
+        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        try:
+            result = cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            # print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from tests_processed_result"
+            cursor.execute(sql)
+            #one row code below may be not neccessary
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            print(content)
+            # get the field name
+            sql = "SHOW FIELDS FROM tests_processed_result"
+            cursor.execute(sql)
+            labels = cursor.fetchall()
+            print(labels)
+            mysql.connection.commit()
+            labels = ['test_id','pool_id','test_date','process_date','test_status']
+
+            # visualization template source:
+            # https://blog.csdn.net/a19990412/article/details/84955802
+
+            return render_template('tests_processed.html', labels=labels, content=content)
+
+#Screen 9: Viewpools
+@app.route('/viewPools',methods=['GET','POST'])
+def viewPools():
+    if request.method =='GET':
+        return render_template('viewPools.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
+        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+        status = request.form.get("Status")
+        labtech = request.form.get('LabTech')
+
+
+        try:
+            cursor.callproc("view_pools",[startDate,endDate,labtech,status])
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            #print the view to the html
+
+            # select from the student_view_results_result
+            sql = "select * from view_pools_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            # get the field name
+            sql = "SHOW FIELDS FROM view_pools_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
 
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('studentView.html', labels=labels, content=content)
+            return render_template('viewPools.html', labels=labels, content=content)
+
+
+#==================================
+#Screen 10a:
+#Screen 10b:
+#Screen 11a:
+#Screen 11b:
+
+#==================================
+
+
+
+
+
+# -------------------------- Student Specific Experience ----------------
+
+# @app.route('/studentView',methods=['GET','POST'])
+# def studentView():
+#     if request.method == 'GET':
+#         return render_template('studentView.html')
+#     elif request.method == 'POST':
+#         cursor = mysql.connection.cursor()
+#
+#         #Will change the way of getting username after the front end is done
+#         userName = request.form.get('Username')
+#         status = request.form.get('Status')
+#         startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
+#         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+#
+#
+#         try:
+#             result = cursor.callproc("student_view_results",[userName, status, startDate,endDate])
+#         except pymysql.IntegrityError or KeyError as e:
+#             return "unable to view because " + str(e)
+#         else:
+#             #print the view to the html
+#
+#             # select from the student_view_results_result
+#             sql = "select * from student_view_results_result"
+#             cursor.execute(sql)
+#             mysql.connection.commit()
+#             content = cursor.fetchall()
+#
+#             # get the field name
+#             sql = "SHOW FIELDS FROM student_view_results_result"
+#             cursor.execute(sql)
+#             labels = cursor.fetchall()
+#             mysql.connection.commit()
+#             labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
+#
+#             #visualization template source:
+#             #https://blog.csdn.net/a19990412/article/details/84955802
+#
+#             return render_template('studentView.html', labels=labels, content=content)
 
 # -------------------------- Tester Experience -------------------------- 
 
@@ -267,7 +532,8 @@ def studentView():
 
 # -------------------------- Admin User Experience ----------------------
 
-#I commandeered this to also include Tester, feel free to scoot the tester functionality to a different link
+#Screen 14 in Description: Reassign Tester
+#Screen 17 in Description: Self-Assign Tester
 @app.route('/reassigntester',methods=['GET','POST'])
 def reassigntester():
     if 'user' in session and session['userPerms'] == 'Admin':
@@ -310,7 +576,7 @@ def reassigntester():
     else:
         redirect(url_for('dashboard'))
     
-
+#Screen 12a: Create an appointment
 @app.route('/createAppointment',methods=['GET','POST'])
 def createAppointment():
     if request.method == 'GET':
@@ -330,7 +596,7 @@ def createAppointment():
             mysql.connection.commit()
             return "create appointment succesfully"
 
-
+#Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
     if request.method =='GET':
@@ -377,7 +643,7 @@ def viewAppointment():
 
 
 
-
+#Screen 14a: View Testers results
 @app.route('/viewTester',methods=['GET'])
 def viewTester():
 
@@ -408,7 +674,7 @@ def viewTester():
 
         return render_template('viewTester.html', labels=labels, content=content)
 
-
+#Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])
 def createTestSite():
     if request.method =='GET':
@@ -432,44 +698,10 @@ def createTestSite():
             return "create_testing_site alreay"
 
 
-@app.route('/viewPools',methods=['GET','POST'])
-def viewPools():
-    if request.method =='GET':
-        return render_template('viewPools.html')
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        status = request.form.get("Status")
-        labtech = request.form.get('LabTech')
-
-
-        try:
-            cursor.callproc("view_pools",[startDate,endDate,labtech,status])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-        else:
-            #print the view to the html
-
-            # select from the student_view_results_result
-            sql = "select * from view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            # get the field name
-            sql = "SHOW FIELDS FROM view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
-
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewPools.html', labels=labels, content=content)
 
 
 
+#Screen 16a: Explore Pool Result
 @app.route('/poolResult',methods=['GET'])
 def poolMetaDate():
     cursor = mysql.connection.cursor()
@@ -499,11 +731,35 @@ def poolMetaDate():
         return render_template('poolResult.html', labels=labels, content=content)
 
 
+#Screen 16b:
+#Screen 17a:
+#Screen 17b:
+#Screen 17c:
 
 
 
+#Screen 18a: View Daily Results
+@app.route('/dailyresults')
+def dailyresults():
+    cursor = mysql.connection.cursor()
+    try:
+        result = cursor.callproc("daily_results")
+    except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+    else:
+        sql = "select * from daily_results_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
 
+        # get the field name
+        sql = "SHOW FIELDS FROM daily_results_result"
+        cursor.execute(sql)
+        labels = cursor.fetchall()
+        mysql.connection.commit()
+        labels = [l[0] for l in labels]
 
+        return render_template('dailyresults.html', labels=labels, content=content)
 
 
 
