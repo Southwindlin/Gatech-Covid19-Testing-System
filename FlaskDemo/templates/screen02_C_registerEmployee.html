@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Register Employee</title>
+</head>
+<body>
+    <div class="container">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#exit">EXIT</a><li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Register Employee</h1>
+    <br>
+    <p>Directions: To register, enter a username and password along with your first name, last name, email address, and phone number.</p>
+    <p>Additionally, you must select your role as a lab tech, site tester, or both</p>
+    <hr>
+   
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="card">
+                    <form action="/EmployeeRegister" id="employeeRegister" name="employeeRegister" method="post">
+                        <table style="width:60%" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="height:50px"><label>Username:</label></td>
+                                    <td><input type = "text" name = "Username" size="50" required/></td>
+                                    <td style="height:50px"><label>Email:</label></td>
+                                    <td><input type = "text" name = "Email" size="50" required/></td>
+                                </tr>
+                        
+                                <tr>
+                                    <td style="height:50px"><label>First Name:</label></td>
+                                    <td><input type = "text" name = "FName" size="50" required/></td>
+                                    <td style="height:50px"><label>Last Name:</label></td>
+                                    <td><input type = "text" name = "LName" size="50" required/></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="height:50px"><label>Password:</label></td>
+                                    <td><input type = "password" name = "Password" size="50" id="password" required/></td>
+                                    <td style="height:50px"><label>Confirm Password:</label></td>
+                                    <td><input type = "password" name = "ConfirmPwd" size="50" id="confirm password" required/></td>
+                                </tr>
+                              
+                                <div class="employeeInfo">
+                                    <tr>
+                                        <div id = "Role" required>
+                                            <td style="height:50px">
+                                                <input type="checkbox" name="employType" value="labTech" id = "Labtech"> Lab-Technician
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div id= "Role" required>
+                                            <td>
+                                                <input type="checkbox" name="employType" value="siteTester" id = "Tester"> Site Tester
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                    <td style="height:50px"><label for="phone">Tel:</label></td>
+                                    <td><input type="tel" name="Phone" id="Phone"></td>
+                                    <td></td>
+                                </tr>
+                                </div>
+                                <tr>
+                                    <td style="height:50px"><button>Back (Home)</button></td>
+                                    <td></td>
+                                    <td><button type = "submit" value = "Create">Submit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <script type="text/javascript" >
+
+                        //check the employee input
+                        if (!document.getElementById("Labtech").checked || !document.getElementById("Tester").checked) 
+                        {
+                            alert('Please select at least one role!');
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    
+
+</body>
+</html>

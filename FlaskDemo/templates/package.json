@@ -1,0 +1,11 @@
+{
+  "name": "reassign-tester",
+  "version": "0.0.0",
+  "description": "Using react multi-select in reassign tester webpage",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-select": "^3.1.1"
+  }
+}

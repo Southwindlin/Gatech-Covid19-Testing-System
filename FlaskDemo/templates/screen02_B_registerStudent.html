@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Register Student</title>
+</head>
+<body>
+    <div class="container">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#exit">EXIT</a><li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Register Student</h1>
+    <br>
+    <p>Directions: To register, enter a username and password along with your first name, last name, and email address.</p>
+    <p>Additionally, select your location and housing type from the respective dropdown menus</p>
+    <hr>
+   
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="card">
+                    <form id="createTestSiteForm" name="createTestSite" method="post">
+                        <table style="width:60%" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="height:50px"><label>Username:</label></td>
+                                    <td><input type = "text" name = "Site" size="50"/></td>
+                                    <td style="height:50px"><label>Email:</label></td>
+                                    <td><input type = "text" name = "Site" size="50"/></td>
+                                </tr>
+                        
+                                <tr>
+                                    <td style="height:50px"><label>First Name:</label></td>
+                                    <td><input type = "text" name = "Site" size="50"/></td>
+                                    <td style="height:50px"><label>Last Name:</label></td>
+                                    <td><input type = "text" name = "Site" size="50"/></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="height:50px"><label>Password:</label></td>
+                                    <td><input type = "password" name = "Site" size="50" id="password"/></td>
+                                    <td style="height:50px"><label>Confirm Password:</label></td>
+                                    <td><input type = "password" name = "Site" size="50" id="confirm password"/></td>
+                                </tr>
+                              
+                                
+                                <tr>
+                                    <td style="height:50px">
+                                        <label for="Location">Location:</label>
+                                    </td>
+                                    <td>
+                                        <select name="Location" id="Location" required = "false">
+                                            <option value="">--Select A Location--</option>
+                                            <option value="East">East Campus</option>
+                                            <option value="West">West Campus</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="HouseType">Housing Typle:</label>
+                                    </td>
+                                    <td>
+                                        <select name="HouseType" id="HouseType" required = "false">
+                                            <option value="">--Select A Housing Type--</option>
+                                            <option value="Student Housing">Student Housing</option>
+                                            <option value="Greek Housing">Greek Housing</option>
+                                            <option value="Off-Campus House">Off-Campus House</option>
+                                            <option value="Off-Campus Apartments">Off-Campus Apartments</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="height:50px"><button>Back (Home)</button></td>
+                                    <td></td>
+                                    <td><button type = "submit" value = "Create">Submit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    
+
+</body>
+</html>

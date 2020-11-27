@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Create a Testing Site</title>
+</head>
+<body>
+    <div class="container">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#exit">EXIT</a><li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Create Test Site</h1>
+    <br>
+    <p>Directions: To create a new test site, input the site name, full address, and select a site tester from the dropdown menu.</p>
+    <hr>
+   
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="card">
+                    <form id="createTestSiteForm" name="createTestSite" method="post">
+                        <table style="width:60%" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="height:50px"><label>Site Name:</label></td>
+                                    <td colspan="2"><input type = "text" name = "Site" size="50"/></td>
+                                    <td></td>
+                                </tr>
+                        
+                                <tr>
+                                    <td style="height:50px"><label>Street Address:</label></td>
+                                    <td colspan="2"><input type = "text" name = "Address" size="50"/></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="height:50px"><label>City:</label></td>
+                                    <td><input type = "text" name = "City" /></td>
+                                    <td>
+                                        <label>State:</label>
+                                        <select>
+	                                        <option name="State" value="GA">Georgia</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                              
+                                <tr>
+                                    <td style="height:50px"><label>Zip Code: </label></td>
+                                    <td><input type = "text" name = "Zip" /></td>
+                                    <td>
+                                        <label>Location:</label>
+                                            <select>
+	                                            <option name="Location" value="east">East</option>
+	                                            <option name="Location" value="west">West</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:50px">
+                                        <label>Site Tester:</label>
+                                    </td>
+                                    <td>
+                                        <select>
+	                                        <option name="Tester" value="Tester1">Tester1</option>
+	                                        <option name="Tester" value="Tester2">Tester2</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="height:50px"><button>Back (Home)</button></td>
+                                    <td></td>
+                                    <td><button type = "submit" value = "Create">Create Site</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    
+
+</body>
+</html>
