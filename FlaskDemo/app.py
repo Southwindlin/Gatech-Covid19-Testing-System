@@ -56,7 +56,7 @@ def dashboard():
             #Not sure if this should be homeScreenStudent, left this here as a default
             return render_template('basicDashboard.html')
         elif session['userPerms'] == 'Tester':
-            return "You are a tester"
+            return render_template('testerDashboard.html')
         return None
     #If not logged in, pushes the user to the index page
     else:
@@ -532,12 +532,49 @@ def viewPools():
 
 # -------------------------- Admin User Experience ----------------------
 
-
-#Screem 14 in Description: Reassign Tester
-@app.route('/resassigntester')
+#Screen 14 in Description: Reassign Tester
+#Screen 17 in Description: Self-Assign Tester
+@app.route('/reassigntester',methods=['GET','POST'])
 def reassigntester():
-    if 'user' not in session or session['userPerms'] != 'Admin':
-        redirect(url_for('index'))
+    if 'user' in session and session['userPerms'] == 'Admin':
+        return "PLACEHOLDER"
+    elif 'user' in session and session['userPerms'] == 'Tester':
+        cursor = mysql.connection.cursor()
+        if request.method == 'POST':
+            addSite = request.form.get('siteNameAdd')
+            removeSite = request.form.get('siteNameRemove')
+            if(addSite != "None"):
+                try:
+                    print(addSite)
+                    result = cursor.callproc("assign_tester",[session['user'], addSite])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "Failed to Add"
+            if(removeSite != "None"):
+                try:
+                    result = cursor.callproc("unassign_tester",[session['user'], removeSite])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "Failed to Remove"
+        try:
+            result = cursor.callproc("tester_assigned_sites",[session['user']])
+        except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+        else:
+            sql = "select * from tester_assigned_sites_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            labels = ["Current Sites for user: " + session['user']]
+            sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content2 = cursor.fetchall()
+            realcontent = []
+            for i in content2:
+                realcontent.append(i[0])
+            cursor.close()
+            return render_template('testerSelfReassign.html', labels=labels, content=content, unassigned=realcontent)
+    else:
+        redirect(url_for('dashboard'))
     
 #Screen 12a: Create an appointment
 @app.route('/createAppointment',methods=['GET','POST'])
