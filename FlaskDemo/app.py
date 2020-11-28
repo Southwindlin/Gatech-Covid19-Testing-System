@@ -2,6 +2,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
+import datetime
 
 
 
@@ -512,14 +513,34 @@ def createPool():
         return "unable to view because " + str(e)
     else:
         return redirect(url_for('dashboard'))
-#Screen 11a:
-@app.route('/processPools',methods=['GET','POST'])
-def processPools():
+#Screen 11a & 11b:
+#I believe this will mainly be used in creating links, all you need to point to a given pool is to append it to the link
+@app.route('/processPools/<id>',methods=['GET','POST'])
+def processPools(id):
+    cursor = mysql.connection.cursor()
+    cursor.callproc("tests_in_pool",[id])
+    sql = "select test_id, date_tested from tests_in_pool_result"
+    cursor.execute(sql)
+    content = cursor.fetchall()
+    mysql.connection.commit()
     if request.method =='GET':
-        return render_template('processPools.html')
+        sql = "select min(appt_date) from test where pool_id =" + id
+        cursor.execute(sql)
+        content2 = cursor.fetchall()
+        mysql.connection.commit()
+        labels = ["Test ID","Date Tested"]
+        return render_template('processPools.html', id = id, minDate = content2[0][0] + datetime.timedelta(days=1), content = content, labels = labels)
     elif request.method == 'POST':
-        return None
-#Screen 11b:
+        #This needs more testing for valid inputs
+        print(id)
+
+        #cursor.callproc("process_pool",[id, poolStatus, processDate, session['user']])
+        mysql.connection.commit()
+        for indivTest in content:
+            testResult = request.form.get(indivTest)
+            print([id, testResult])
+            #cursor.callproc("process_test",[id,testResult])
+            mysql.connection.commit()
 
 #==================================
 
@@ -743,13 +764,13 @@ def createTestSite():
 
 
 
-#Screen 16a: Explore Pool Result
-@app.route('/poolResult',methods=['GET'])
-def poolMetaDate():
+#Screen 16a: Explore Pool Result & 16b
+@app.route('/poolResult/<id>',methods=['GET'])
+def poolMetaDate(id):
     cursor = mysql.connection.cursor()
 
     try:
-        cursor.callproc("pool_metadata")
+        cursor.callproc("pool_metadata",[id])
     except pymysql.IntegrityError or KeyError as e:
         return "unable to view because " + str(e)
     else:
@@ -767,13 +788,18 @@ def poolMetaDate():
         mysql.connection.commit()
         labels = ['Pool ID','Date Processed','Pooled Result','ProcessedBy']
 
+        labels_two = ['Test ID', 'Date Tested', 'Testing Site', 'Test Result']
+
+        cursor.callproc('tests_in_pool',[id])
+        sql = "select * from tests_in_pool_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content_two = cursor.fetchall()
+
         #visualization template source:
         #https://blog.csdn.net/a19990412/article/details/84955802
 
-        return render_template('poolResult.html', labels=labels, content=content)
-
-
-#Screen 16b:
+        return render_template('poolResult.html', labels=labels, content=content, labels_two = labels_two, content_two = content_two)
 
 #Screen 18a: View Daily Results
 @app.route('/dailyresults')
