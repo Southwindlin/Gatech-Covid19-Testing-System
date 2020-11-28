@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+       <script type="text/javascript">
+
+       $(document).on("change","#testerName",function(){
+            $.ajax({
+                type : "POST",
+                url : "/UpdateTesterDropDown",
+　　　　         dataType : "JSON",
+　　　　         data : "",
+                success:function(data){
+                    alert(data);
+                    addselect(data);
+                }
+            });
+        });
+
+
+        function addselect(data)
+        {
+
+            $("#testerName").empty();
+            for (var i = 0; i < data.length; i++) {
+                $("#testerName").append('<option value="' + data[i] + '">' + data[i] + '</option>');
+            }
+        }
+
+    </script>
+    <meta charset="UTF-8">
+    <title>TesterDropdown</title>
+</head>
+<body>
+<form action="/UpdateTesterDropDown" method="POST" >
+    <h1 align="center"> Just trying to see if the dropdown can be updated </h1>
+    <br>
+    <label align="center"> Tester Name </label>
+
+    <select id="testerName" align="center">
+        <option value="">--Please Select a Tester--</option>
+    </select>
+    <p><input type = "button" value = "View" /></p>
+</form>
+
+
+</body>
+</html>

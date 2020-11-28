@@ -42,7 +42,6 @@ app.config['MYSQL_DB'] = 'covidtest_fall2020'
 
 
 
-
 # -------------------------- Platform Functions -------------------------
 #
 @app.route('/dashboard')
@@ -143,6 +142,8 @@ def checkForPermissions():
         return
     return
 
+
+
 #-------------------------------Registration Screen for Student----------------------
 @app.route('/StudentRegister',methods=['GET','POST'])
 def getStuRegistRequest():#Register as student
@@ -177,6 +178,9 @@ def getStuRegistRequest():#Register as student
     else:
         mysql.connection.commit()
         return "You have successfully registered"
+
+
+
 
 #--------------------------Registration Screen for employee
 @app.route('/EmployeeRegister', methods=['GET', 'POST'])
@@ -233,16 +237,16 @@ def getEmpRegistRequest():  # Register as employee
 # Screen 4
 # 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
 # 2. there is no "all" selection
-@app.route('/studentViewTestResults', methods=['GET', 'POST'])
+@app.route('/studentView', methods=['GET', 'POST'])
 def studentView():
     if request.method == 'GET':
-        return render_template('studentViewTestResults.html')
+        return render_template('studentView.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
         # Will change the way of getting username after the front end is done
 
-        userName = request.form.get('Username')
+        userName = session['user']
         status = None if request.form.get('Status') == '' else request.form.get('Status')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
@@ -270,7 +274,7 @@ def studentView():
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('studentViewTestResults.html', labels=labels, content=content)
+            return render_template('studentView.html', labels=labels, content=content)
         
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
@@ -738,6 +742,20 @@ def dailyresults():
 
         return render_template('dailyresults.html', labels=labels, content=content)
 
+
+
+
+#---------------------------Update the Dropdown Menue
+@app.route('/UpdateTesterDropDown',methods=['POST','GET'])
+def dropdownUpdate():
+    if request.method=='POST':
+        cursor = mysql.connection.cursor()
+        sql = "select sitetester_username from SITETESTER;"
+        cursor.execute(sql)
+        result = cursor.fetchall();
+        return result
+    else:
+        return render_template('UpdateTesterDropDown.html')
 
 
 
