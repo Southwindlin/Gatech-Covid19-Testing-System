@@ -18,9 +18,6 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.secret_key = 'team 84 is the best team'
 
-mysql = MySQL(app)
-
-
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
@@ -28,19 +25,19 @@ app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# # app.config['MYSQL_USER'] = 'newuser'
-# # app.config['MYSQL_PASSWORD'] = '123123123'
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
 
-
+mysql = MySQL(app)
 
 
 # -------------------------- Platform Functions -------------------------
@@ -474,9 +471,54 @@ def viewPools():
 
 
 #==================================
-#Screen 10a:
-#Screen 10b:
+#Screen 10a & 10b:
+#For the frontend to this application, would be ideal if it doesn't allow user to submit without selecting exactly 1 - 7 tests.
+@app.route('/createPool',methods=['GET','POST'])
+def createPool():
+    cursor = mysql.connection.cursor()
+    try:
+        sql = "select test_id, appt_date from test where pool_id is NULL"
+        cursor.execute(sql)
+        content = cursor.fetchall()
+        mysql.connection.commit()
+        if request.method =='GET':
+                labels = ['Test ID', 'Date Tested']
+                cursor.close()
+                return render_template('createPool.html', content = content, labels = labels)
+        elif request.method == 'POST':
+            poolID = request.form.get('poolID')
+            sql = "select * from pool where pool_id = " + poolID
+            cursor.execute(sql)
+            content2 = cursor.fetchall()
+            mysql.connection.commit()
+            if content2:
+                return "You cannot remake an existing Pool, choose a different Pool ID"
+            else:
+                pool_flag = False
+                for i in range(0,len(content)):
+                    print(i)
+                    test = request.form.get(str(i))
+                    if test and not pool_flag:
+                        result = cursor.callproc("create_pool",[poolID, test])
+                        mysql.connection.commit()
+                        pool_flag = True
+                        print("made it here")
+                    elif test:
+                        result2 = cursor.callproc("assign_test_to_pool",[poolID, test])
+                        mysql.connection.commit()
+                        print('here too')
+                print('success!')
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to view because " + str(e)
+    else:
+        return redirect(url_for('dashboard'))
 #Screen 11a:
+@app.route('/processPools',methods=['GET','POST'])
+def processPools():
+    if request.method =='GET':
+        return render_template('processPools.html')
+    elif request.method == 'POST':
+        return None
 #Screen 11b:
 
 #==================================
@@ -732,11 +774,6 @@ def poolMetaDate():
 
 
 #Screen 16b:
-#Screen 17a:
-#Screen 17b:
-#Screen 17c:
-
-
 
 #Screen 18a: View Daily Results
 @app.route('/dailyresults')
