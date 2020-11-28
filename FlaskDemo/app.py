@@ -2,8 +2,11 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
-
-
+from pymysql.cursors import DictCursorMixin, Cursor
+#import math to use eval() to transform a str to dictionary
+from math import *
+#this function is used in screen 7 cause python need the datetime to transform time and date
+import datetime
 
 #when cannot instal flask_mysqldb:
 #export PATH=$PATH:/usr/local/mysql/bin
@@ -11,12 +14,12 @@ from flask_mysqldb import MySQL
 
 
 
-
-
 # -------------------------- App Config (reference:https://github.com/miguelgrinberg/flasky/tree/master/app)-------------------------
 
 app = Flask(__name__)
 app.secret_key = 'team 84 is the best team'
+#some configuration for Jinja templates
+Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_'], 'line_statement_prefix': '%'}
 
 mysql = MySQL(app)
 
@@ -40,6 +43,13 @@ app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
 
+# -------------------------- Help Functions -------------------------
+#this function is just for test
+def transform_label(labels):
+    list = []
+    for i in range(len(labels)):
+        list.append(labels[i][0])
+    return list
 
 
 
@@ -107,6 +117,8 @@ def login():
             session['user'] = username
             checkForPermissions()
             cursor.close()
+
+
             return redirect(url_for('dashboard'))
         cursor.close()
         return "Login Failed"
@@ -246,11 +258,16 @@ def studentView():
             mysql.connection.commit()
             content = cursor.fetchall()
 
-            # get the field name
-            sql = "SHOW FIELDS FROM student_view_results_result"
+            # get the field name (not used for now)
+            sql = '''SELECT `COLUMN_NAME` 
+                    FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+                    WHERE `TABLE_SCHEMA`='covidtest_fall2020' 
+                    AND `TABLE_NAME`='student_view_results_result';'''
             cursor.execute(sql)
             labels = cursor.fetchall()
-            mysql.connection.commit()
+            labels = transform_label(labels)
+            #print(labels)
+            # mysql.connection.commit()
             labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
 
             # visualization template source:
@@ -291,13 +308,25 @@ def exploreTestResult():
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('studentViewTestResults.html', labels=labels, content=content)
+            return render_template('exploreTestResult.html', labels=labels, content=content)
 
 #Screen 6: Aggregate Results
 @app.route('/aggregateResult', methods=['GET', 'POST'])
 def aggregateResult():
     if request.method == 'GET':
-        return render_template('aggregateResult.html')
+        #get all housing_type
+        cursor = mysql.connection.cursor()
+        sql_house = "select distinct housing_type from student order by housing_type"
+        cursor.execute(sql_house)
+        housing_type = transform_label(cursor.fetchall())
+
+        # get all site name
+        sql_site = "select distinct site_name from site order by site_name"
+        cursor.execute(sql_site)
+        site = transform_label(cursor.fetchall())
+
+        print("housing_type: ",housing_type,"site: ",site)
+        return render_template('aggregateResult.html', housing_type = housing_type,site = site)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
@@ -325,7 +354,11 @@ def aggregateResult():
             cursor.execute(sql)
             labels = cursor.fetchall()
             mysql.connection.commit()
-            labels = ['Total','Number of Testing','Percentage']
+            total = 0
+            for i in range(len(content)):
+                total += content[i][1]
+
+            labels = ['Total',str(total),'100%']
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
@@ -338,7 +371,7 @@ def testSignUpFilter():
     if request.method == 'GET':
         return render_template('testSignUpFilter.html')
     elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
+        cursor = mysql.connection.cursor(pymysql.cursors.DictCursor)
         username = request.form.get('Username')
 
         Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
@@ -354,24 +387,24 @@ def testSignUpFilter():
             # print the view to the html
 
             # select from the student_view_results_result
-            sql = "select * from test_sign_up_filter_result"
+            sql = "select appt_date, appt_time, street, site_name from test_sign_up_filter_result order by appt_date,appt_time"
             cursor.execute(sql)
             #one row code below may be not neccessary
             mysql.connection.commit()
             content = cursor.fetchall()
-            print(content)
+            #print('content:',content)
             # get the field name
             sql = "SHOW FIELDS FROM test_sign_up_filter_result"
             cursor.execute(sql)
             labels = cursor.fetchall()
-            print(labels)
+            #print(labels)
             mysql.connection.commit()
-            labels = ['appt_date','appt_time','street','city','state','zip','site_name']
+            labels = ['Date','Time','Site Address','Test Site','Sign Up']
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('testSignUpFilter.html', labels=labels, content=content)
+            return render_template('testSignUpFilter.html', labels=labels, content=content, user=username)
 
 #Screen 7b:
 @app.route('/testSignUp', methods=['GET', 'POST'])
@@ -380,14 +413,32 @@ def testSignUp():
         return render_template('testSignUp.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
-        username = request.form.get('Username')
-        Testid = request.form.get('Testid')
-        Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
-        Date = None if request.form.get('Date') == '' else request.form.get('Date')
-        Time = None if request.form.get('Time') == '' else request.form.get('Time')
-        print([username, Testing_site, Date, Time, Testid])
+        sql1 = 'SELECT test_id FROM test order by test_id'
+        cursor.execute(sql1)
+        all_testid = cursor.fetchall()
+        print(all_testid)
+        Testid = int(all_testid[-1][0])+1
+        #get a new testid first:
+
+        data = eval(request.form.get('data'))
+        print("datatype:",type(data))
+        print("data:",data)
+        Testing_site = data['site_name']
+        Date = data['appt_date']
+        print("Date: ",Date)
+        Time = data['appt_time']
+        print("Time: ",Time)
+        username = request.form.get('user')
+        print("user: ",username)
+
+        # username = request.form.get('Username')
+        # Testid = request.form.get('Testid')
+        # Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
+        # Date = None if request.form.get('Date') == '' else request.form.get('Date')
+        # Time = None if request.form.get('Time') == '' else request.form.get('Time')
+        print([username,Testing_site,str(Date),str(Time),str(Testid)])
         try:
-            cursor.callproc("test_sign_up", [username,Testing_site,Date,Time,Testid])
+            cursor.callproc("test_sign_up", [username,Testing_site,str(Date),str(Time),str(Testid)])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to sign up" + str(e)
         else:
@@ -738,4 +789,4 @@ def dailyresults():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

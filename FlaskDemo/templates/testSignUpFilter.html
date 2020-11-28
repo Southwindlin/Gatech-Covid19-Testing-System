@@ -11,11 +11,10 @@
 
     <title>Aggregate Test Results</title>
 </head>
-<body>
 <form action="/testSignUpFilter" method = "POST">
-<p>Test Sign Up Filter</p>
+<p>Signup for a Test</p>
 <div>
-        <p>Username: <input type = "text" name = "Username" /></p>
+        <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>
     <p>Testing Site <input type = "text" name = "testingSite" /></p>
     <label for="start">Start date:</label>
     <input type="date" id="start" name="DateStart"
@@ -36,13 +35,18 @@
 
 </div>
     <p><input type = "submit" value = "View" /></p>
+</form>
 
+
+
+<form action="/testSignUp" method="POST">
     <!-- copy some template online just for testing -->
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Sign Up for a Test</h3>
+                <span><button type="submit">Sign</button></span>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -55,13 +59,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for i in content %}
+                        {% for data in content %}
                             <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
+                                {% for key,value in data.items() %}
+                                    <td>{{ value }}</td>
                                 {% endfor %}
+                                <td><input type="radio" name="data" value = "{{data}}"></td>
                             </tr>
+
                         {% endfor %}
+                        <input type="hidden" value="{{user}}" name = "user">
                         </tbody>
                     </table>
                 </div>
