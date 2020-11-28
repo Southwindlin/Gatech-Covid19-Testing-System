@@ -12,10 +12,15 @@
     <title>Aggregate Test Results</title>
 </head>
 <form action="/testSignUpFilter" method = "POST">
-<p>Signup for a Test</p>
+<h1>Signup for a Test</h1>
 <div>
-        <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>
-    <p>Testing Site <input type = "text" name = "testingSite" /></p>
+<!--    <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
+    <p>Current user is <text style = "font-weight:bold">{{username}}</text></p>
+    <select name = "testingSite">
+        {% for t in testsite%}
+        <option name = "testingSite" value = "{{t}}">{{t}}</option>
+        {%endfor%}
+    </select>
     <label for="start">Start date:</label>
     <input type="date" id="start" name="DateStart"
        min="2020-01-01" max="2020-12-31">
