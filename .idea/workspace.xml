@@ -20,18 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/Login_Screen1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/allScreen.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/createAppointment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/createTestSite.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/loginSuccessfully.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/poolResult.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/regform.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testID.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewAppointment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewPools.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewTester.html" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/templates/EmployeeRegister.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/exploreTestResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/exploreTestResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testSignUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/.eslintcache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,12 +75,10 @@
       </map>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="master" />
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
@@ -79,6 +95,8 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -87,8 +105,15 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.HTML" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pufug\Desktop\4400\Project\Phase 4\project - Copy\FlaskDemo" />
+      <recent name="$PROJECT_DIR$/FlaskDemo" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.app">
     <configuration name="db_init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
@@ -101,6 +126,12 @@
       <script-file value="$PROJECT_DIR$/FlaskDemo/phase3_shell.sql" />
       <script-mode>FILE</script-mode>
       <data-source id="e5e2eace-3f9a-4613-a55e-dab42e445e9c" />
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/project - Copy/covid-19-system/public/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="App.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/FlaskDemo/front-end/src/App.js" working-dir="$PROJECT_DIR$/FlaskDemo/front-end/src">
       <method v="2" />
     </configuration>
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -130,7 +161,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="$USER_HOME$/Documents/GitHub/python/pythonProject/venv/bin/python" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -173,20 +204,55 @@
       <workItem from="1606000589551" duration="8953000" />
       <workItem from="1606068505618" duration="5540000" />
       <workItem from="1606076262205" duration="2267000" />
-      <workItem from="1606159016316" duration="1183000" />
+      <workItem from="1606265611782" duration="2992000" />
+      <workItem from="1606271264811" duration="5391000" />
+      <workItem from="1606284134945" duration="5000" />
+      <workItem from="1606418715459" duration="1329000" />
+      <workItem from="1606508228574" duration="2686000" />
     </task>
-    <task id="LOCAL-00001" summary="only keep my part">
-      <created>1606264197347</created>
+    <task id="LOCAL-00001" summary="Newest version of almost all screens">
+      <created>1606409952904</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1606264197347</updated>
+      <updated>1606409952904</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added some comments">
+      <created>1606421992505</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606421992505</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Newest version of almost all screens">
+      <created>1606448848733</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606448848733</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Newest version of almost all screens">
+      <created>1606449199578</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606449199578</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -203,80 +269,86 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="only keep my part" />
-    <option name="LAST_COMMIT_MESSAGE" value="only keep my part" />
+    <MESSAGE value="Added some comments" />
+    <MESSAGE value="Newest version of almost all screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="Newest version of almost all screens" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="594" y="225" key="#Inspections" timestamp="1606093703664">
+    <state x="452" y="208" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606452569686">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="452" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606452569686" />
+    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606271100967" />
+    <state x="628" y="84" key="CommitChangelistDialog2" timestamp="1606596134667">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="628" y="84" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606596134667" />
+    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog" timestamp="1606449116051">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606449116051" />
+    <state width="2021" height="288" key="GridCell.Tab.0.bottom" timestamp="1606595594904">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="288" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606595594904" />
+    <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549293" />
+    <state width="2021" height="288" key="GridCell.Tab.0.center" timestamp="1606595594904">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="288" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606595594904" />
+    <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
+    <state width="2021" height="288" key="GridCell.Tab.0.left" timestamp="1606595594903">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="288" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606595594903" />
+    <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549291" />
+    <state width="2021" height="288" key="GridCell.Tab.0.right" timestamp="1606595594904">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2021" height="288" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606595594904" />
+    <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606281549295">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="594" y="225" key="#Inspections/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606093703664" />
-    <state x="452" y="208" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606158661039">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="452" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606158661039" />
-    <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606075928440" />
-    <state x="595" y="84" key="CommitChangelistDialog2" timestamp="1606264196505">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="595" y="84" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606264196505" />
-    <state width="2021" height="3" key="GridCell.Tab.0.bottom" timestamp="1606264267463">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2021" height="3" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606264267463" />
-    <state width="1878" height="305" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795982" />
-    <state width="2021" height="3" key="GridCell.Tab.0.center" timestamp="1606264267463">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2021" height="3" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606264267463" />
-    <state width="1878" height="305" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795981" />
-    <state width="2021" height="3" key="GridCell.Tab.0.left" timestamp="1606264267463">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2021" height="3" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606264267463" />
-    <state width="1878" height="305" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795980" />
-    <state width="2021" height="3" key="GridCell.Tab.0.right" timestamp="1606264267463">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="2021" height="3" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606264267463" />
-    <state width="1878" height="305" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606103795982" />
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606096595682">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595682" />
+    <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549295" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540598" />
-    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606096595681">
+    <state width="1878" height="376" key="GridCell.Tab.1.center" timestamp="1606281549294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595681" />
+    <state width="1878" height="376" key="GridCell.Tab.1.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549294" />
     <state width="1878" height="376" key="GridCell.Tab.1.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
-    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606096595680">
+    <state width="1878" height="376" key="GridCell.Tab.1.left" timestamp="1606281549294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595680" />
+    <state width="1878" height="376" key="GridCell.Tab.1.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549294" />
     <state width="1878" height="376" key="GridCell.Tab.1.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540596" />
-    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606096595681">
+    <state width="1878" height="376" key="GridCell.Tab.1.right" timestamp="1606281549295">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606096595681" />
+    <state width="1878" height="376" key="GridCell.Tab.1.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549295" />
     <state width="1878" height="376" key="GridCell.Tab.1.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606074540597" />
     <state width="221" height="457" key="HiddenNamespacesPopup" timestamp="1606081553043">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="221" height="457" key="HiddenNamespacesPopup/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606081553043" />
-    <state x="740" y="218" key="RollbackChangesDialog" timestamp="1606177740901">
+    <state x="192" y="97" key="MergeDialog" timestamp="1606177516987">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="192" y="97" key="MergeDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606177516987" />
+    <state x="737" y="218" width="589" height="676" key="RollbackChangesDialog" timestamp="1606448888994">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="740" y="218" key="RollbackChangesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606177740901" />
-    <state x="500" y="184" key="SettingsEditor" timestamp="1606255581931">
+    <state x="737" y="218" width="589" height="676" key="RollbackChangesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606448888994" />
+    <state x="500" y="184" key="SettingsEditor" timestamp="1606524009806">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="500" y="184" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1606255581931" />
+    <state x="500" y="184" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1606524009806" />
     <state x="469" y="179" key="SettingsEditor/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606013030218" />
-    <state x="517" y="228" key="Vcs.Push.Dialog.v2" timestamp="1606261777516">
+    <state x="597" y="288" key="Vcs.Push.Dialog.v2" timestamp="1606448873439">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="517" y="228" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606261777516" />
+    <state x="597" y="288" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606448873439" />
+    <state x="560" y="280" key="Vcs.Push.Dialog.v2/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606268558421" />
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -285,29 +357,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="826" y="145" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606009567492" />
-    <state x="93" y="93" width="1862" height="926" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1606256592655">
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1606579548879">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="93" y="93" width="1862" height="926" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606256592655" />
-    <state x="93" y="93" width="1862" height="926" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1606254319288">
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606579548879" />
+    <state x="685" y="268" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606596095880">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="93" y="93" width="1862" height="926" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606254319288" />
-    <state x="672" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1606178035042">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="672" y="344" key="com.intellij.ide.util.TipDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606178035042" />
-    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606076830658">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606076830658" />
-    <state x="733" y="319" key="git4idea.merge.GitMergeDialog" timestamp="1606261815558">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="733" y="319" key="git4idea.merge.GitMergeDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606261815558" />
-    <state x="603" y="77" width="840" height="1034" key="search.everywhere.popup" timestamp="1606163416240">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="603" y="77" width="840" height="1034" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1606163416240" />
+    <state x="685" y="268" key="git4idea.branch.GitSmartOperationDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606596095880" />
+    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606178216076" />
   </component>
 </project>

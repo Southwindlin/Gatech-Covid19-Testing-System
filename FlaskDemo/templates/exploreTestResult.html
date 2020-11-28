@@ -12,12 +12,7 @@
     <title>test</title>
 </head>
 <body>
-<form action="/exploreTestResult" method = "POST">
-<p>View Student test results</p>
-<div>
-    <p>Test id: <input type = "text" name = "Testid" /></p>
-</div>
-    <p><input type = "submit" value = "View" /></p>
+
 
     <!-- copy some template online just for testing -->
 <div class="row">
@@ -29,22 +24,20 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
-                        <thead>
+                        {%for i in range(labels|length)%}
                         <tr>
-                            {% for i in labels %}
-                                <td>{{ i }}</td>
-                            {% endfor %}
+                            <th>{{labels[i]}}</th>
+                            {% for j in content%}
+                            {% if i == 0%}
+                            <td><span style="font-weight:bold">{{j[i]}}</span></td>
+                            {%else%}
+                            <td>{{j[i]}}</td>
+                            {%endif%}
+                            {%endfor%}
+
+
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in content %}
-                            <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
-                                {% endfor %}
-                            </tr>
                         {% endfor %}
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -53,7 +46,7 @@
     </div>
 
 </div>
-</form>
+
 
 </body>
 </html>

@@ -25,15 +25,35 @@
     </select>
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="b86aa092-6cfb-48fa-ada0-bb0a1cdc0110" name="Default Changelist" comment="" />
-
+    <list default="true" id="b86aa092-6cfb-48fa-ada0-bb0a1cdc0110" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/.eslintcache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../covid-19-system/src/setupTests.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -63,7 +83,6 @@
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
   <component name="ProjectId" id="1kcEbXN4YW27Jxptea0lzGopPu3" />
-
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -72,11 +91,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -86,7 +105,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
-  <component name="RunManager" selected="Flask server.Flask">
+  <component name="RunManager" selected="Python.FlaskDemo">
     <configuration name="db_init.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/db_init.sql" />
       <script-mode>FILE</script-mode>
@@ -151,16 +170,27 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Database Script.db_init.sql" />
       <item itemvalue="Python.FlaskDemo" />
-      <item itemvalue="Flask server.Flask" />
     </list>
-
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-
       <changelist id="b86aa092-6cfb-48fa-ada0-bb0a1cdc0110" name="Default Changelist" comment="" />
       <created>1605991552045</created>
       <option name="number" value="Default" />
@@ -200,6 +230,7 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -252,15 +283,13 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="786" y="350" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1605994111809" />
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1606452300441">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606452300441" />
     <state x="522" y="446" key="git4idea.ui.GitStashDialog" timestamp="1605998112139">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="522" y="446" key="git4idea.ui.GitStashDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1605998112139" />
-
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FlaskDemo$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1605996502166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/FlaskDemo$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1605990091766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/FlaskDemo$FlaskDemo.coverage" NAME="FlaskDemo Coverage Results" MODIFIED="1605995439160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
