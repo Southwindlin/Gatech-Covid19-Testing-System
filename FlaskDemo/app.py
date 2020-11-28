@@ -55,6 +55,8 @@ def dashboard():
             return render_template('basicDashboard.html')
         elif session['userPerms'] == 'Tester':
             return render_template('testerDashboard.html')
+        elif session['userPerms'] == 'LabTech':
+            return render_template('basicDashboard.html')
         return None
     #If not logged in, pushes the user to the index page
     else:
@@ -508,7 +510,7 @@ def createPool():
                         result2 = cursor.callproc("assign_test_to_pool",[poolID, test])
                         mysql.connection.commit()
                         print('here too')
-                print('success!')
+                return redirect(url_for('dashboard'))
     except pymysql.IntegrityError or KeyError as e:
         return "unable to view because " + str(e)
     else:
@@ -518,29 +520,34 @@ def createPool():
 @app.route('/processPools/<id>',methods=['GET','POST'])
 def processPools(id):
     cursor = mysql.connection.cursor()
-    cursor.callproc("tests_in_pool",[id])
-    sql = "select test_id, date_tested from tests_in_pool_result"
-    cursor.execute(sql)
-    content = cursor.fetchall()
-    mysql.connection.commit()
-    if request.method =='GET':
-        sql = "select min(appt_date) from test where pool_id =" + id
+    try:
+        cursor.callproc("tests_in_pool",[id])
+        sql = "select test_id, date_tested from tests_in_pool_result"
         cursor.execute(sql)
-        content2 = cursor.fetchall()
+        content = cursor.fetchall()
         mysql.connection.commit()
-        labels = ["Test ID","Date Tested"]
-        return render_template('processPools.html', id = id, minDate = content2[0][0] + datetime.timedelta(days=1), content = content, labels = labels)
-    elif request.method == 'POST':
-        #This needs more testing for valid inputs
-        print(id)
-
-        #cursor.callproc("process_pool",[id, poolStatus, processDate, session['user']])
-        mysql.connection.commit()
-        for indivTest in content:
-            testResult = request.form.get(indivTest)
-            print([id, testResult])
-            #cursor.callproc("process_test",[id,testResult])
+        if request.method =='GET':
+            sql = "select min(appt_date) from test where pool_id =" + id
+            cursor.execute(sql)
+            content2 = cursor.fetchall()
             mysql.connection.commit()
+            labels = ["Test ID","Date Tested"]
+            return render_template('processPools.html', id = id, minDate = content2[0][0] + datetime.timedelta(days=1), content = content, labels = labels)
+        elif request.method == 'POST':
+            #Need to check back over to see which are valid
+            poolStatus = request.form.get('poolStatus')
+            processDate = None if request.form.get('dateProcessed') == '' else request.form.get('dateProcessed')
+            cursor.callproc("process_pool",[id, poolStatus, processDate, session['user']])
+            mysql.connection.commit()
+            for indivTest in content:
+                testResult = request.form.get(indivTest[0])
+                cursor.callproc("process_test",[indivTest[0], testResult])
+                mysql.connection.commit()
+            return redirect(url_for('dashboard'))
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to view because " + str(e)
+    else:
+        return redirect(url_for('dashboard'))
 
 #==================================
 
