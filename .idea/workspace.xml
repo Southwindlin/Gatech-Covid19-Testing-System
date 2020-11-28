@@ -20,10 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="Update Screen 4-7">
+      <change beforePath="$PROJECT_DIR$/covid-19-system/.eslintcache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/covid-19-system/src/setupTests.js" beforeDir="false" />
+    </list>
+    <list id="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" name="Update Screen 4-7" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +244,35 @@
       <option name="project" value="LOCAL" />
       <updated>1606596267412</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update Screen 4-7">
+      <created>1606600678487</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1606600678487</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update Screen 4-7">
+      <created>1606600777788</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606600777788</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update Screen 4-7">
+      <created>1606602666437</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606602666437</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update Screen 4-7">
+      <created>1606602752365</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1606602752365</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,33 +314,33 @@
     </state>
     <state x="452" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606452569686" />
     <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606271100967" />
-    <state x="628" y="84" key="CommitChangelistDialog2" timestamp="1606602733464">
+    <state x="628" y="84" key="CommitChangelistDialog2" timestamp="1606602798472">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="628" y="84" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606602733464" />
-    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog" timestamp="1606596317860">
+    <state x="628" y="84" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606602798472" />
+    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog" timestamp="1606602790247">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606596317860" />
-    <state width="2021" height="288" key="GridCell.Tab.0.bottom" timestamp="1606602693766">
+    <state x="198" y="100" width="1638" height="917" key="DiffContextDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606602790247" />
+    <state width="2021" height="288" key="GridCell.Tab.0.bottom" timestamp="1606602860332">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="288" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606602693766" />
+    <state width="2021" height="288" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606602860332" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549293" />
-    <state width="2021" height="288" key="GridCell.Tab.0.center" timestamp="1606602693766">
+    <state width="2021" height="288" key="GridCell.Tab.0.center" timestamp="1606602860332">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="288" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606602693766" />
+    <state width="2021" height="288" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606602860332" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
-    <state width="2021" height="288" key="GridCell.Tab.0.left" timestamp="1606602693766">
+    <state width="2021" height="288" key="GridCell.Tab.0.left" timestamp="1606602860332">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="288" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606602693766" />
+    <state width="2021" height="288" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606602860332" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549291" />
-    <state width="2021" height="288" key="GridCell.Tab.0.right" timestamp="1606602693766">
+    <state width="2021" height="288" key="GridCell.Tab.0.right" timestamp="1606602860332">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="288" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606602693766" />
+    <state width="2021" height="288" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606602860332" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606281549292" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606281549295">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -318,10 +366,15 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="221" height="457" key="HiddenNamespacesPopup/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606081553043" />
-    <state x="192" y="97" key="MergeDialog" timestamp="1606177516987">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="205" y="100" key="MergeDialog" timestamp="1606601049027">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="205" y="100" key="MergeDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606601049027" />
     <state x="192" y="97" key="MergeDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606177516987" />
+    <state x="669" y="222" key="MultipleFileMergeDialog" timestamp="1606601049036">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="669" y="222" key="MultipleFileMergeDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606601049036" />
     <state x="737" y="218" width="589" height="676" key="RollbackChangesDialog" timestamp="1606448888994">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -335,10 +388,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="868" y="464" key="VCS.ChangelistChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1606602723259" />
-    <state x="597" y="288" key="Vcs.Push.Dialog.v2" timestamp="1606602677032">
+    <state x="597" y="288" key="Vcs.Push.Dialog.v2" timestamp="1606602806962">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="597" y="288" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606600708862" />
+    <state x="597" y="288" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606602806962" />
     <state x="560" y="280" key="Vcs.Push.Dialog.v2/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606268558421" />
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
