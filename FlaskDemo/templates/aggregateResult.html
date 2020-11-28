@@ -13,25 +13,28 @@
 </head>
 <body>
 <form action="/aggregateResult" method = "POST">
-<p>View Student test results</p>
+<h1>Aggregate Test Results</h1>
 <div>
         <label >Location</label>
-    <select name = location>
+    <select name = Location>
         <option name="Location" value="" id="All"><label for="Pos">All</label></option>
         <option name="Location" value="East" id="Neg"><label for="Neg">East</label></option>
         <option name="Location" value="West" id="Pos"><label for="Pos">West</label></option>
     </select>
         <label >Housing</label>
     <select name = "Housing">
+        <option name = "Housing" value = "">All</option>
         {% for house in housing_type%}
         <option name = "Housing" value = "{{house}}">{{house}}</option>
         {%endfor%}
     </select>
         <label >Testing Site</label>
     <select name = testingSite>
+        <option name = "testingSite" value = "">All</option>
         {% for s in site%}
         <option name = "testingSite" value = "{{s}}">{{s}}</option>
         {%endfor%}
+
     </select>
     <label for="start">Start date:</label>
     <input type="date" id="start" name="TimeStart"
