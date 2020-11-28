@@ -365,15 +365,24 @@ def aggregateResult():
 
             return render_template('aggregateResult.html', labels=labels, content=content)
 
-#Screen 7a:
+# now we need to manually add a username here for test:
+# Screen 7a:
+testsite = ''
+username = 'pbuffay56'
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
+    global testsite,username
     if request.method == 'GET':
-        return render_template('testSignUpFilter.html')
+        sql_site = "SELECT site_name from site where location = (select location from student where student_username = '{username}')".format(username=username)
+        cursor = mysql.connection.cursor()
+        cursor.execute(sql_site)
+        testsite = transform_label(cursor.fetchall())
+        print("testsite1: ",testsite)
+        return render_template('testSignUpFilter.html',testsite = testsite,username = username)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor(pymysql.cursors.DictCursor)
-        username = request.form.get('Username')
-
+        #username = request.form.get('Username')
+        #just for test: give username a specific name
         Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
@@ -385,7 +394,6 @@ def testSignUpFilter():
             return "unable to view because " + str(e)
         else:
             # print the view to the html
-
             # select from the student_view_results_result
             sql = "select appt_date, appt_time, street, site_name from test_sign_up_filter_result order by appt_date,appt_time"
             cursor.execute(sql)
@@ -403,8 +411,8 @@ def testSignUpFilter():
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('testSignUpFilter.html', labels=labels, content=content, user=username)
+            print("testsite2: ",testsite)
+            return render_template('testSignUpFilter.html', labels=labels, content=content, user=username,testsite=testsite,username=username)
 
 #Screen 7b:
 @app.route('/testSignUp', methods=['GET', 'POST'])
@@ -412,24 +420,24 @@ def testSignUp():
     if request.method == 'GET':
         return render_template('testSignUp.html')
     elif request.method == 'POST':
+        username = request.form.get('user')
+        #test whether there exists any pending tests
+        sql_test = "SELECT * FROM "
+        data = eval(request.form.get('data'))
+        Testing_site = data['site_name']
+        Date = data['appt_date']
+        Time = data['appt_time']
+
+
+        #get a new testid to register
         cursor = mysql.connection.cursor()
         sql1 = 'SELECT test_id FROM test order by test_id'
         cursor.execute(sql1)
         all_testid = cursor.fetchall()
-        print(all_testid)
         Testid = int(all_testid[-1][0])+1
-        #get a new testid first:
-
-        data = eval(request.form.get('data'))
-        print("datatype:",type(data))
-        print("data:",data)
-        Testing_site = data['site_name']
-        Date = data['appt_date']
-        print("Date: ",Date)
-        Time = data['appt_time']
-        print("Time: ",Time)
-        username = request.form.get('user')
-        print("user: ",username)
+        cursor.execute('SELECT count(*) from test')
+        number = cursor.fetchone()
+        print("number:",number)
 
         # username = request.form.get('Username')
         # Testid = request.form.get('Testid')
@@ -443,7 +451,13 @@ def testSignUp():
             return "unable to sign up" + str(e)
         else:
             mysql.connection.commit()
-            return "You have successfully Signed up the Test"
+            cursor.execute('SELECT count(*) from test')
+            after_number = cursor.fetchone()
+            print("number:", after_number)
+            if int(after_number[0]) == int(number[0]) + 1:
+                return "You have successfully Signed up the Test"
+            else:
+                return "something went wrong!"
 
 
 
