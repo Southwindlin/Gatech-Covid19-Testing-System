@@ -309,8 +309,11 @@ def exploreTestResult():
             return render_template('exploreTestResult.html', labels=labels, content=content)
 
 #Screen 6: Aggregate Results
+housing_type = ''
+site = ''
 @app.route('/aggregateResult', methods=['GET', 'POST'])
 def aggregateResult():
+    global housing_type,site
     if request.method == 'GET':
         #get all housing_type
         cursor = mysql.connection.cursor()
@@ -323,8 +326,10 @@ def aggregateResult():
         cursor.execute(sql_site)
         site = transform_label(cursor.fetchall())
 
-        print("housing_type: ",housing_type,"site: ",site)
+        print("housing_type1: ",housing_type,"site1: ",site)
+
         return render_template('aggregateResult.html', housing_type = housing_type,site = site)
+
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
@@ -333,8 +338,10 @@ def aggregateResult():
         Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        print("location: ",Location)
+
         try:
-            result = cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
+            cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
@@ -348,20 +355,18 @@ def aggregateResult():
             content = cursor.fetchall()
 
             # get the field name
-            sql = "SHOW FIELDS FROM aggregate_results_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            mysql.connection.commit()
+            # sql = "SHOW FIELDS FROM aggregate_results_result"
+            # cursor.execute(sql)
+            # labels = cursor.fetchall()
+            # mysql.connection.commit()
             total = 0
             for i in range(len(content)):
                 total += content[i][1]
 
             labels = ['Total',str(total),'100%']
-
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('aggregateResult.html', labels=labels, content=content)
+            print("content: ", content)
+            print("housing_type: ",housing_type,"site:",site)
+            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site)
 
 # now we need to manually add a username here for test:
 # Screen 7a:
