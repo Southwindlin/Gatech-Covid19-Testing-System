@@ -27,8 +27,8 @@ mysql = MySQL(app)
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
 # # app.config['MYSQL_USER'] = 'newuser'
@@ -37,8 +37,8 @@ app.config['MYSQL_PASSWORD'] = 'chy190354890'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -486,12 +486,13 @@ def tests_processed():
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         username = request.form.get('labtechUsername')
-
+        # username for test:
+        # username = 'ygao10'
         testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
         try:
-            result = cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
+            cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
