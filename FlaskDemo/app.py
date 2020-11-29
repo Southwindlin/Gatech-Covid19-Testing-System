@@ -876,10 +876,24 @@ def viewAppointment():
             allSites.append(site[0])
 
         cursor.close()
-        return render_template('viewAppointment.html', allSites=allSites)
+        filters = ["None",]
+
+        return render_template('viewAppointment.html', allSites=allSites, filters = filters)
 
 
     elif request.method == 'POST':
+        #GET also need to work here:
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+
+
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
@@ -914,10 +928,18 @@ def viewAppointment():
             mysql.connection.commit()
             labels = ['Date','Time','test Site','Location','User']
 
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
+            if avail == 0:
+                avail = "Booked"
+            elif avail == 1:
+                avail = "Available"
+            elif avail == None:
+                avail = "All"
 
-            return render_template('viewAppointment.html', labels=labels, content=content)
+            filters = [siteName,startDate,endDate,startTime,endTime,avail]
+
+
+
+            return render_template('viewAppointment.html', labels=labels, content=content, allSites=allSites, filters=filters)
 
 
 

@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<form action="/viewAppointment" method = "POST">
+<form action="/viewAppointment" method = "POST" id="viewForm">
     <div><label for="siteName">SiteName: (Dropdown can automatically update right now)</label>
 
     <select name="siteName" id="siteName">
@@ -53,13 +53,32 @@
 
     </label>
 
-    <p><input type = "submit" value = "view Apptment" /></p>
-        <!-- copy some template online just for testing -->
-    <div class="row">
+    <p><input type = "submit" value = "Filter Appointment" /></p>
+    <input type="submit" value="Reset" />
+
+    </form>
+
+
+<form action="/viewAppointment" method = "POST" >
+
+    <div class="row"  >
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>View Appointment</h3>
+                <h5>Current Filter:</h5>
+                <div>
+                    {%if filters|length > 1%}
+                    <p>siteName:{{filters[0]}}</p>
+                    <p>startDate:{{filters[1]}}</p>
+                    <p>endDate:{{filters[2]}}</p>
+                    <p>startTime:{{filters[3]}}</p>
+                    <p>endTime:{{filters[4]}}</p>
+                    <p>avail:{{filters[5]}}</p>
+                    {% endif %}
+
+
+                </div>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -71,7 +90,8 @@
                             {% endfor %}
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="viewTable">
+
                         {% for i in content %}
                             <tr>
                                 {% for j in i %}
@@ -86,6 +106,7 @@
         </div>
     </div>
 </div>
+
 </form>
 </body>
 </html>
