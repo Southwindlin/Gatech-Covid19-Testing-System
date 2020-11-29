@@ -28,8 +28,8 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-app.config['MYSQL_USER'] = 'newuser'
-app.config['MYSQL_PASSWORD'] = '123123123'
+# app.config['MYSQL_USER'] = 'newuser'
+# app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
@@ -874,7 +874,6 @@ def viewAppointment():
 @app.route('/viewTester',methods=['GET','POST'])
 def viewTester():
     if request.method =='GET':
-
         cursor = mysql.connection.cursor()
 
         try:
@@ -963,6 +962,13 @@ def viewTester():
                     else:
                         mysql.connection.commit()
 
+                        ##For test here
+                        cursor.callproc("tester_assigned_sites", [username])
+                        sql = "select * from tester_assigned_sites_result"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        assignedSitesInLoop = cursor.fetchall()
+
                 # Now do the assigned part
 
                 newSite = request.form.get(str(i) + "siteNameAdd")#Safely assumes we can only add one site once
@@ -973,48 +979,48 @@ def viewTester():
                 else:
                     mysql.connection.commit()
 
-     #Update the view here(This code is really long)
-    cursor = mysql.connection.cursor()
+         #Update the view here(This code is really long)
+        cursor = mysql.connection.cursor()
 
-    try:
-        cursor.callproc("view_testers")
-    except pymysql.IntegrityError or KeyError as e:
-        return "unable to view because " + str(e)
-    else:
-        #print the view to the html
-        # select from the student_view_results_result
-        sql = "select * from view_testers_result"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall()
+        try:
+            cursor.callproc("view_testers")
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to view because " + str(e)
+        else:
+            #print the view to the html
+            # select from the student_view_results_result
+            sql = "select * from view_testers_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
 
-        testers = []
-        for entry in content:
-            testers.append(entry[0])
+            testers = []
+            for entry in content:
+                testers.append(entry[0])
 
-        unassignedSites = []
-        assignedSites = []
-        for tester in testers:
-            try:
-                result = cursor.callproc("tester_assigned_sites",[tester])
-            except pymysql.IntegrityError or KeyError as e:
-                return "unable to view because " + str(e)
-            else:
-                sql = "select * from tester_assigned_sites_result"
-                cursor.execute(sql)
-                mysql.connection.commit()
-                assignedSitesInLoop = cursor.fetchall()
-                sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
-                cursor.execute(sql)
-                mysql.connection.commit()
-                unassignedSitesInLoop = cursor.fetchall()
-                unassignedSites.append(unassignedSitesInLoop)
-                assignedSites.append(assignedSitesInLoop)
+            unassignedSites = []
+            assignedSites = []
+            for tester in testers:
+                try:
+                    result = cursor.callproc("tester_assigned_sites",[tester])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to view because " + str(e)
+                else:
+                    sql = "select * from tester_assigned_sites_result"
+                    cursor.execute(sql)
+                    mysql.connection.commit()
+                    assignedSitesInLoop = cursor.fetchall()
+                    sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                    cursor.execute(sql)
+                    mysql.connection.commit()
+                    unassignedSitesInLoop = cursor.fetchall()
+                    unassignedSites.append(unassignedSitesInLoop)
+                    assignedSites.append(assignedSitesInLoop)
 
-        # get the field name
-        labels = ['Username','Name','Phone Number','Assigned Sites']
+            # get the field name
+            labels = ['Username','Name','Phone Number','Assigned Sites']
 
-        return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
+            return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
 
 
 #Screen 15a:  Create a Testing Site
@@ -1057,42 +1063,6 @@ def createTestSite():
 
 #Screen 16a: Explore Pool Result & 16b
 
-
-@app.route('/viewPools',methods=['GET','POST'])
-def viewPools():
-    if request.method =='GET':
-        return render_template('viewPools.html')
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        status = request.form.get("Status")
-        labtech = request.form.get('LabTech')
-
-
-        try:
-            cursor.callproc("view_pools",[startDate,endDate,labtech,status])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-        else:
-            #print the view to the html
-
-            # select from the student_view_results_result
-            sql = "select * from view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            # get the field name
-            sql = "SHOW FIELDS FROM view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
-
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewPools.html', labels=labels, content=content)
 
 
 
