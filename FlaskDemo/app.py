@@ -789,14 +789,67 @@ def createAppointment():
             allSites.append(site[0])
 
         cursor.close()
-        return render_template('createAppointment.html', allSites=allSites)
+        hint = "You don't have last Operation"
+        return render_template('createAppointment.html', allSites=allSites, hint=hint)
 
 
     elif request.method == 'POST':
+        # Some visulization stuff:
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        #Now the real code
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
         date = request.form.get('date')
         time = request.form.get('time')
+        #See if duplicate appointments
+        try:
+            select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
+            result = cursor.execute(select_statement, (siteName, date,time))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall();
+
+
+
+            if len(content) != 0:
+                hint = "Sorry, appointment already exsit"
+
+                return render_template('createAppointment.html', allSites=allSites, hint = hint)
+
+        #See if Overload Appointment for this site
+        try:
+            set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
+            result = cursor.execute(set, (siteName))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            maxNum = cursor.fetchall();
+            maxNum = maxNum[0]
+            try:
+                select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
+                result = cursor.execute(select_statement, (siteName, date))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+                mysql.connection.commit()
+                curNum = cursor.fetchall();
+                curNum = curNum[0]
+                if curNum >= maxNum:
+                    hint = "Test site is overloaded, Please select another testsite "
+                    return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+        #If things are alright
 
 
         try:
@@ -807,7 +860,7 @@ def createAppointment():
 
             #Commit to the procedure call
             mysql.connection.commit()
-            return redirect(url_for('dashboard'))
+            return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
 
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
