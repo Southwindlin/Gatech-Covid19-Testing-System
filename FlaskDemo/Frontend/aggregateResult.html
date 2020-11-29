@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Aggregate Test Results</title>
+</head>
+<body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+        
+                <a href="#exit">EXIT</a>
+        
+    </div>
+</div>
+
+<div class="container">
+    <h1 id="pageTitle">Aggregate Test Results</h1>
+     <hr>
+    <p id="directionText">Directions: Select location, housing, testing site and dates to view aggregate results.</p>
+<form action="/aggregateResult" method = "POST">
+<div>
+        <label >Location</label>
+    <select name = Location>
+        <option name="Location" value="" id="All"><label for="Pos">All</label></option>
+        <option name="Location" value="East" id="Neg"><label for="Neg">East</label></option>
+        <option name="Location" value="West" id="Pos"><label for="Pos">West</label></option>
+    </select>
+        <label >Housing</label>
+    <select name = "Housing">
+        <option name = "Housing" value = "">All</option>
+        {% for house in housing_type%}
+        <option name = "Housing" value = "{{house}}">{{house}}</option>
+        {%endfor%}
+    </select>
+        <label >Testing Site</label>
+    <select name = testingSite>
+        <option name = "testingSite" value = "">All</option>
+        {% for s in site%}
+        <option name = "testingSite" value = "{{s}}">{{s}}</option>
+        {%endfor%}
+
+    </select>
+    <label for="start">Start date:</label>
+    <input type="date" id="start" name="TimeStart"
+       min="2020-01-01" max="2020-12-31">
+
+    <label for="end">End date:</label>
+
+    <input type="date" id="end" name="TimeEnd"
+       min="2020-01-01" max="2020-12-31">
+</div>
+    <br>
+    <p><input type = "submit" value = "View" /></p>
+
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Aggregate Results</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in content %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</form>
+</div>
+</body>
+</html>
