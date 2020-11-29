@@ -537,6 +537,23 @@ def processPools(id):
             #Need to check back over to see which are valid
             poolStatus = request.form.get('poolStatus')
             processDate = None if request.form.get('dateProcessed') == '' else request.form.get('dateProcessed')
+
+            if not processDate:
+                return "You must specify a process date"
+            
+            positiveCount = 0
+            for indivTest in content:
+                testResult = request.form.get(indivTest[0])
+                if testResult == "positive":
+                    positiveCount += 1
+
+            if poolStatus == "negative":
+                if positiveCount > 0:
+                    return "Test result cannot be positive in a negative pool"
+            elif poolStatus == "positive":
+                if positiveCount < 1:
+                    return "Positive pool requires a minimum of one positive test"
+
             cursor.callproc("process_pool",[id, poolStatus, processDate, session['user']])
             mysql.connection.commit()
             for indivTest in content:
