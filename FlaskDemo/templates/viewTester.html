@@ -11,13 +11,21 @@
     <title>Show the Screen of the reassigned tester</title>
 </head>
 <body>
+<<<<<<< Updated upstream
+<form action="/viewTester" method = "POST">
+=======
 <form action="/viewTester" method = "GET">
+>>>>>>> Stashed changes
         <!-- copy some template online just for testing -->
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
+<<<<<<< Updated upstream
+                <h3>Reassign Testers</h3>
+=======
                 <h3>Students</h3>
+>>>>>>> Stashed changes
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -31,9 +39,37 @@
                         </thead>
                         <tbody>
                         {% for i in content %}
+<<<<<<< Updated upstream
+                            {% set counter = loop.index-1 %}
+                            <tr>
+                                {% for j in i %}
+                                    {% if loop.index == 1   %}
+                                        <td>
+                                            <input type="hidden" name = 'Username' value="{{j}}">
+                                            {{j}}
+                                        </td>
+                                    {% elif loop.index == 4 %}
+                                        <td>
+                                        {% for idx in assignedSites[counter] %}
+                                            unChecked to delete: <input type="checkbox" id="{{ idx[0] }}" name="{{counter}}assigned" value="{{ idx[0] }}" checked="checked">
+                                            <label for="{{ idx[0] }}">{{ idx[0] }}</label><br>
+                                        {% endfor %}
+                                        Add Site: 
+                                        <select name="{{counter}}siteNameAdd" id="siteNameAdd">
+                                            {% for idx in unassignedSites[counter] %}
+                                                <option value="{{ idx[0] }}" name="unAssigned">{{ idx[0] }}</option>
+                                            {% endfor %}
+                                                <option value = "None" selected>None</option>
+                                        </select>
+                                        </td>
+                                    {% else %}
+                                        <td>{{ j }}</td>
+                                    {% endif %}
+=======
                             <tr>
                                 {% for j in i %}
                                     <td>{{ j }}</td>
+>>>>>>> Stashed changes
                                 {% endfor %}
                             </tr>
                         {% endfor %}
@@ -42,10 +78,21 @@
                 </div>
             </div>
         </div>
+<<<<<<< Updated upstream
+        <p><input type = "submit" value = "update" /></p>
+=======
+>>>>>>> Stashed changes
 
     </div>
 
 </div>
+<<<<<<< Updated upstream
+
+
+</form>
+</body>
+</html>
+=======
     <form action="/reassignTester" method = "POST">
         <p>Username <input type = "text" name = "Username" /></p>
         <select name="siteName" id="siteName">
@@ -60,3 +107,4 @@
 </form>
 </body>
 </html>
+>>>>>>> Stashed changes
