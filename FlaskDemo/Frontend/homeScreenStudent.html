@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Student View</title>
+</head>
+<body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+        
+                <a href="#exit">EXIT</a>
+        
+    </div>
+</div>
+<div class="container">
+<h1 id="pageTitle">Student View</h1>
+     <hr>
+    <p id="directionText">Directions: Enter username, test status, start, and end date to view test results.</p>
+
+<form action="/studentView" method = "POST">
+<p></p>
+<div>
+    <p>
+    <label>Username</label><input type = "text" name = "Username" />
+    </p>
+    <label >Test Status</label>
+         <label class="form-control">
+
+         <input type="radio" name="Status" value="Negative" id="Neg"><label for="Neg">Negative</label>
+         <input type="radio" name="Status" value="Positive" id="Pos"><label for="Pos">Positive</label>
+         <input type="radio" name="Status" value="Pending" id="Pen"><label for="Pen">Pending</label>
+         
+    </label>
+
+    <label for="start">Start date:</label>
+    <input type="date" id="start" name="TimeStart"
+       min="2020-01-01" max="2020-12-31">
+
+    <label for="end">End date:</label>
+
+    <input type="date" id="end" name="TimeEnd"
+       min="2020-01-01" max="2020-12-31">
+</div>
+    <p></p>
+    <input class = "btn btn-primary" type = "submit" value = "View" />
+    <input class = "btn btn-primary" type = "submit" value = "Reset" />
+    <p></p>
+    
+    <!-- copy some template online just for testing -->
+     
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Students</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in content %}
+                            <tr>
+                                {% for j in i %}
+                                    <td>{{ j }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+   
+</div>
+<p><a href="/">Back</a></p>
+</div>
+
+    
+</div>
+</form>
+</body>
+</html>

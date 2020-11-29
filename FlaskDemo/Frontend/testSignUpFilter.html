@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Aggregate Test Results</title>
+</head>
+<form action="/testSignUpFilter" method = "POST">
+<h1>Signup for a Test</h1>
+<div>
+<!--    <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
+    <p>Current user is <text style = "font-weight:bold">{{username}}</text></p>
+    <select name = "testingSite">
+        <option name = "testingSite" value = "">All</option>
+        {% for t in testsite%}
+        <option name = "testingSite" value = "{{t}}">{{t}}</option>
+        {%endfor%}
+    </select>
+    <label for="start">Start date:</label>
+    <input type="date" id="start" name="DateStart"
+       min="2020-01-01" max="2020-12-31">
+
+    <label for="end">End date:</label>
+
+    <input type="date" id="end" name="DateEnd"
+       min="2020-01-01" max="2020-12-31">
+    <br>
+    <label for="startTime">Start Time:</label>
+
+    <input type="time" name="startTime" id = "startTime" />
+
+    <label for="endTime">End Time:</label>
+
+    <input type="time" name="endTime" id = "endTime" />
+
+</div>
+    <p><input type = "submit" value = "View" /></p>
+</form>
+
+
+
+<form action="/testSignUp" method="POST">
+    <!-- copy some template online just for testing -->
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Sign Up for a Test</h3>
+                <span><button type="submit">Sign</button></span>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            {% for i in labels %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in content %}
+                            <tr>
+                                {% for key,value in data.items() %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                                <td><input type="radio" name="data" value = "{{data}}"></td>
+                            </tr>
+
+                        {% endfor %}
+                        <input type="hidden" value="{{user}}" name = "user">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</form>
+
+</body>
+</html>

@@ -2,13 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create a Testing Site</title>
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Create Test Site</title>
 </head>
 <body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+        
+                <a href="#exit">EXIT</a>
+        
+    </div>
+</div>
+
+<div class="container">
+<h1 id="pageTitle">Create Test Site</h1>
+     <hr>
+    <p id="directionText">Directions: Select site name, street address, city, state, zip code, and location to create a new test site.</p>
+
 <form action="/createTestSite" method = "POST">
-    <p>Site Name <input type = "text" name = "Site" /></p>
-    <p>Street Address <input type = "text" name = "Address" /></p>
-    <p>City <input type = "text" name = "City" /></p>
+    <label>Site Name <input type = "text" name = "Site" /></label>
+    <label>Street Address <input type = "text" name = "Address" /></label>
+    <label>City <input type = "text" name = "City" /></label>
     <p>
         <label>State:</label>
 <select name="State" id="State">
@@ -68,7 +94,7 @@
 
 
     </p>
-    <p>Zip Code<input type = "text" name = "Zip" /></p>
+    <label>Zip Code<input type = "text" name = "Zip" /></label>
     <p>
         <label>Location:</label>
         <select name="Location">
@@ -78,7 +104,7 @@
         </select>
     </p>
 
-    <p>Site Tester:(should autimatically retrieve from the database)
+    <p><label>Site Tester:(should automatically retrieve from the database)</label>
         <select name="Tester">
 	        <option name="Tester" value="">---Please Select a Tester-------</option>
             {% for i in allTesters%}
@@ -91,5 +117,6 @@
     </p>
 <p><input type = "submit" value = "Create" /></p>
 </form>
+</div>
 </body>
 </html>

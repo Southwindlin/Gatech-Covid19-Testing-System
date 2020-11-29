@@ -1056,22 +1056,15 @@ def createTestSite():
             mysql.connection.commit()
             return redirect(url_for('dashboard'))
 
-
-
-
-
-
 #Screen 16a: Explore Pool Result & 16b
 
+@app.route('/poolResult/<id>',methods=['GET'])
+def poolMetaDate(id):
 
-
-
-@app.route('/poolResult',methods=['GET'])
-def poolMetaDate():
     cursor = mysql.connection.cursor()
 
     try:
-        cursor.callproc("pool_metadata")
+        cursor.callproc("pool_metadata",[id])
 
     except pymysql.IntegrityError or KeyError as e:
         return "unable to view because " + str(e)
