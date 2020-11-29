@@ -1103,12 +1103,14 @@ def viewTester():
         else:
             return "Sorry you don't have the access to this screen"
 
+
 #Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])
 def createTestSite():
     if request.method =='GET':
         cursor = mysql.connection.cursor()
-        sql = "select sitetester_username from SITETESTER"
+        #This is the Lname and Fname for selection
+        sql = "select concat(concat(fname,' '),lname) as name from User where USER.username in (select sitetester_username from SITETESTER)"
         cursor.execute(sql)
         mysql.connection.commit()
         content = cursor.fetchall()
@@ -1116,11 +1118,42 @@ def createTestSite():
         for tester in content:
             allTesters.append(tester[0])
 
-        cursor.close()
-        return render_template('createTestSite.html', allTesters=allTesters)
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
+        #Now is the username for each value
+        sql = "select sitetester_username from SITETESTER"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+        allUsernames = []
+        for tester in content:
+            allUsernames.append(tester[0])
 
+        cursor.close()
+        hint = "You don't have last Operation"
+        return render_template('createTestSite.html', allTesters=allTesters, allUsernames = allUsernames, hint=hint)
+    elif request.method == 'POST':
+        #Some visualizaiton stuff
+        cursor = mysql.connection.cursor()
+        # This is the Lname and Fname for selection
+        sql = "select concat(concat(fname,' '),lname) as name from User where USER.username in (select sitetester_username from SITETESTER)"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+        allTesters = []
+        for tester in content:
+            allTesters.append(tester[0])
+
+        # Now is the username for each value
+        sql = "select sitetester_username from SITETESTER"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+        allUsernames = []
+        for tester in content:
+            allUsernames.append(tester[0])
+
+
+
+        cursor = mysql.connection.cursor()
         site = request.form.get("Site")
         address = request.form.get("Address")
         city = request.form.get("City")
@@ -1129,12 +1162,26 @@ def createTestSite():
         location = request.form.get("Location")
         tester = request.form.get("Tester")
         try:
+            sql = "select * from SITE where site_name = %s"
+
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create because " + str(e)
+        else:
+            cursor.execute(sql,(site))
+            mysql.connection.commit()
+            exist = cursor.fetchall()
+            if len(exist) !=0:
+                hint = "Sorry this site already exist, Please re-enter another sitename"
+                return render_template('createTestSite.html', allTesters=allTesters, allUsernames=allUsernames, hint=hint)
+
+        try:
             cursor.callproc("create_testing_site",[site,address,city,state,zipCode,location,tester])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to create because " + str(e)
         else:
             mysql.connection.commit()
-            return redirect(url_for('dashboard'))
+            hint = "Successfully Created"
+            return render_template('createTestSite.html', allTesters=allTesters, allUsernames = allUsernames, hint=hint)
 
 #Screen 16a: Explore Pool Result & 16b
 
