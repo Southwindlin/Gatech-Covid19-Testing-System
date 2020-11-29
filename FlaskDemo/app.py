@@ -27,8 +27,8 @@ mysql = MySQL(app)
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'chy190354890'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
 # # app.config['MYSQL_USER'] = 'newuser'
@@ -37,8 +37,8 @@ app.config['MYSQL_HOST'] = 'localhost'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -88,8 +88,10 @@ def index():
 def form():
     return render_template('form.html')
 
-#Screen 2: Register
-@app.route('/registForm')
+
+#change this name to registForm for better understanding
+@app.route('/regform')
+
 def registForm():
     return render_template('regform.html')
 
@@ -151,17 +153,17 @@ def checkForPermissions():
         return
     return
 
-#Screen 2 functionality:
-@app.route('/registuser',methods=['GET','POST'])
-def getRegistRequest():
+#-------------------------------Registration Screen for Student----------------------
+@app.route('/StudentRegister',methods=['GET','POST'])
+def getStuRegistRequest():#Register as student
+
+
+
     if request.method == 'GET':
-        return "Please register through the register form"
+        return render_template('StudentRegister.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         #SQL command
-
-
-        userType = request.form.get('Type')
         userName = request.form.get('Username')
         email = request.form.get('Email')
         fName = request.form.get('FName')
@@ -169,61 +171,73 @@ def getRegistRequest():
         passWord = request.form.get('Password')
         confirmPass = request.form.get('ConfirmPwd')
 
+    #see if the password match
+    if confirmPass != passWord:
+        return "Sorry, your passwords don't match"
 
+    #no need to change the password to hashcode here since it's done in the mysql procedure
 
-        #see if the password match
+    houseType = request.form.get('HouseType')
+    location = request.form.get('Location')
+
+    try:
+        cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to register"+str(e)
+    else:
+        mysql.connection.commit()
+        return "You have successfully registered"
+
+#--------------------------Registration Screen for employee
+@app.route('/EmployeeRegister', methods=['GET', 'POST'])
+def getEmpRegistRequest():  # Register as employee
+    if request.method == 'GET':
+        return render_template('EmployeeRegister.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        # SQL command
+        userName = request.form.get('Username')
+        email = request.form.get('Email')
+        fName = request.form.get('FName')
+        lName = request.form.get('LName')
+        passWord = request.form.get('Password')
+        confirmPass = request.form.get('ConfirmPwd')
+        # see if the password match
         if confirmPass != passWord:
             return "Sorry, your passwords don't match"
 
-        #no need to change the password to hashcode here since it's done in the mysql procedure
-
-        #treatment according to the usertype
-        if userType == 'admin':
-            return 'erro: Sorry, Admin cannot register through here'
-        elif userType == 'student':
-            houseType = request.form.get('HouseType')
-            location = request.form.get('Location')
-
+        employee = request.form.getlist('employType')
+        phone = request.form.get('Phone')
+        if len(employee) == 2:
+            lab = True
+            tester = True
             try:
-                cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
+                cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
             except pymysql.IntegrityError or KeyError as e:
-                return "unable to register"+str(e)
+                return "unable to register" + str(e)
             else:
                 mysql.connection.commit()
                 return "You have successfully registered"
-        elif userType == 'employee':
-            employee = request.form.getlist('employType')
-            phone = request.form.get('Phone')
-            if len(employee) == 2:
-                lab = True
-                tester = True
+        elif len(employee) == 1:
+            job = employee[0]
+            if job == "labTech":
                 try:
-                    cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
+                    cursor.callproc("register_employee",
+                                    [userName, email, fName, lName, phone, True, False, passWord])
                 except pymysql.IntegrityError or KeyError as e:
                     return "unable to register" + str(e)
                 else:
                     mysql.connection.commit()
                     return "You have successfully registered"
-            elif len(employee) == 1:
-                job = employee[0]
-                if job == "labTech":
-                    try:
-                        cursor.callproc("register_employee",
-                                        [userName, email, fName, lName, phone, True, False, passWord])
-                    except pymysql.IntegrityError or KeyError as e:
-                        return "unable to register" + str(e)
-                    else:
-                        mysql.connection.commit()
-                        return "You have successfully registered"
-                elif job == "siteTester":
-                    try:
-                        cursor.callproc("register_employee",
-                                        [userName, email, fName, lName, phone, False, True, passWord])
-                    except pymysql.IntegrityError or KeyError as e:
-                        return "unable to register" + str(e)
-                    else:
-                        mysql.connection.commit()
-                        return "You have successfully registered"
+            elif job == "siteTester":
+                try:
+                    cursor.callproc("register_employee",
+                                    [userName, email, fName, lName, phone, False, True, passWord])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to register" + str(e)
+                else:
+                    mysql.connection.commit()
+                    return "You have successfully registered"
 
 # -------------------------- All Users Experience -----------------------
 # Screen 4
