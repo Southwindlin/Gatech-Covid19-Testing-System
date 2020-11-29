@@ -790,14 +790,67 @@ def createAppointment():
             allSites.append(site[0])
 
         cursor.close()
-        return render_template('createAppointment.html', allSites=allSites)
+        hint = "You don't have last Operation"
+        return render_template('createAppointment.html', allSites=allSites, hint=hint)
 
 
     elif request.method == 'POST':
+        # Some visulization stuff:
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        #Now the real code
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
         date = request.form.get('date')
         time = request.form.get('time')
+        #See if duplicate appointments
+        try:
+            select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
+            result = cursor.execute(select_statement, (siteName, date,time))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall();
+
+
+
+            if len(content) != 0:
+                hint = "Sorry, appointment already exsit"
+
+                return render_template('createAppointment.html', allSites=allSites, hint = hint)
+
+        #See if Overload Appointment for this site
+        try:
+            set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
+            result = cursor.execute(set, (siteName))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            maxNum = cursor.fetchall();
+            maxNum = maxNum[0]
+            try:
+                select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
+                result = cursor.execute(select_statement, (siteName, date))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+                mysql.connection.commit()
+                curNum = cursor.fetchall();
+                curNum = curNum[0]
+                if curNum >= maxNum:
+                    hint = "Test site is overloaded, Please select another testsite "
+                    return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+        #If things are alright
 
 
         try:
@@ -808,7 +861,7 @@ def createAppointment():
 
             #Commit to the procedure call
             mysql.connection.commit()
-            return redirect(url_for('dashboard'))
+            return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
 
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
@@ -875,154 +928,159 @@ def viewAppointment():
 @app.route('/viewTester',methods=['GET','POST'])
 def viewTester():
     if request.method =='GET':
-        cursor = mysql.connection.cursor()
+        if session['userPerms'] == 'Admin':
+            cursor = mysql.connection.cursor()
 
-        try:
-            cursor.callproc("view_testers")
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
+            try:
+                cursor.callproc("view_testers")
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                #print the view to the html
+                # select from the student_view_results_result
+                sql = "select * from view_testers_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                content = cursor.fetchall()
+
+                testers = []
+                for entry in content:
+                    testers.append(entry[0])
+
+                unassignedSites = []
+                assignedSites = []
+                for tester in testers:
+                    try:
+                        result = cursor.callproc("tester_assigned_sites",[tester])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to view because " + str(e)
+                    else:
+                        sql = "select * from tester_assigned_sites_result"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        assignedSitesInLoop = cursor.fetchall()
+                        sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        unassignedSitesInLoop = cursor.fetchall()
+                        unassignedSites.append(unassignedSitesInLoop)
+                        assignedSites.append(assignedSitesInLoop)
+
+                # get the field name
+                labels = ['Username','Name','Phone Number','Assigned Sites']
+
+                #visualization template source:
+                #https://blog.csdn.net/a19990412/article/details/84955802
+
+                return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
         else:
-            #print the view to the html
-            # select from the student_view_results_result
-            sql = "select * from view_testers_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
+            return "Sorry You don't have the access to this screen"
+    elif request.method == 'POST':
+        if session['userPerms'] == 'Admin':
+            cursor = mysql.connection.cursor()
+            #get the username
+            usernames = request.form.getlist("Username")
+            for i in range(len(usernames)):
+                username = usernames[i]
+                current = request.form.getlist(str(i)+"assigned")
 
-            testers = []
-            for entry in content:
-                testers.append(entry[0])
-
-            unassignedSites = []
-            assignedSites = []
-            for tester in testers:
+                #The original sites：
                 try:
-                    result = cursor.callproc("tester_assigned_sites",[tester])
+                    cursor.callproc("tester_assigned_sites", [username])
                 except pymysql.IntegrityError or KeyError as e:
                     return "unable to view because " + str(e)
                 else:
+                    mysql.connection.commit()
+
+                try:
                     sql = "select * from tester_assigned_sites_result"
                     cursor.execute(sql)
                     mysql.connection.commit()
-                    assignedSitesInLoop = cursor.fetchall()
-                    sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
-                    cursor.execute(sql)
-                    mysql.connection.commit()
-                    unassignedSitesInLoop = cursor.fetchall()
-                    unassignedSites.append(unassignedSitesInLoop)
-                    assignedSites.append(assignedSitesInLoop)
+                    originalSites = []
+                    content = cursor.fetchall()
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to view because " + str(e)
+                else:
 
-            # get the field name
-            labels = ['Username','Name','Phone Number','Assigned Sites']
+                    for each in content:
+                        originalSites.append(each[0])
 
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
+                    #to see which part is unchecked now
+                    uncheck = []
+                    for ori in originalSites:
+                        if ori not in current:
+                            uncheck.append(ori)
 
-            return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-        #get the username
-        usernames = request.form.getlist("Username")
-        for i in range(len(usernames)):
-            username = usernames[i]
-            current = request.form.getlist(str(i)+"assigned")
+                    #cancle each unchecked site
+                    for unSite in uncheck:
+                        try:
+                            cursor.callproc("unassign_tester",[username,unSite])
+                        except pymysql.IntegrityError or KeyError as e:
+                            return "unable to view because " + str(e)
+                        else:
+                            mysql.connection.commit()
 
-            #The original sites：
-            try:
-                cursor.callproc("tester_assigned_sites", [username])
-            except pymysql.IntegrityError or KeyError as e:
-                return "unable to view because " + str(e)
-            else:
-                mysql.connection.commit()
+                            ##For test here
+                            cursor.callproc("tester_assigned_sites", [username])
+                            sql = "select * from tester_assigned_sites_result"
+                            cursor.execute(sql)
+                            mysql.connection.commit()
+                            assignedSitesInLoop = cursor.fetchall()
 
-            try:
-                sql = "select * from tester_assigned_sites_result"
-                cursor.execute(sql)
-                mysql.connection.commit()
-                originalSites = []
-                content = cursor.fetchall()
-            except pymysql.IntegrityError or KeyError as e:
-                return "unable to view because " + str(e)
-            else:
+                    # Now do the assigned part
 
-                for each in content:
-                    originalSites.append(each[0])
-
-                #to see which part is unchecked now
-                uncheck = []
-                for ori in originalSites:
-                    if ori not in current:
-                        uncheck.append(ori)
-
-                #cancle each unchecked site
-                for unSite in uncheck:
+                    newSite = request.form.get(str(i) + "siteNameAdd")#Safely assumes we can only add one site once
                     try:
-                        cursor.callproc("unassign_tester",[username,unSite])
+                        cursor.callproc("assign_tester", [username, newSite])
                     except pymysql.IntegrityError or KeyError as e:
                         return "unable to view because " + str(e)
                     else:
                         mysql.connection.commit()
 
-                        ##For test here
-                        cursor.callproc("tester_assigned_sites", [username])
+             #Update the view here(This code is really long)
+            cursor = mysql.connection.cursor()
+
+            try:
+                cursor.callproc("view_testers")
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                #print the view to the html
+                # select from the student_view_results_result
+                sql = "select * from view_testers_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                content = cursor.fetchall()
+
+                testers = []
+                for entry in content:
+                    testers.append(entry[0])
+
+                unassignedSites = []
+                assignedSites = []
+                for tester in testers:
+                    try:
+                        result = cursor.callproc("tester_assigned_sites",[tester])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to view because " + str(e)
+                    else:
                         sql = "select * from tester_assigned_sites_result"
                         cursor.execute(sql)
                         mysql.connection.commit()
                         assignedSitesInLoop = cursor.fetchall()
+                        sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        unassignedSitesInLoop = cursor.fetchall()
+                        unassignedSites.append(unassignedSitesInLoop)
+                        assignedSites.append(assignedSitesInLoop)
 
-                # Now do the assigned part
+                # get the field name
+                labels = ['Username','Name','Phone Number','Assigned Sites']
 
-                newSite = request.form.get(str(i) + "siteNameAdd")#Safely assumes we can only add one site once
-                try:
-                    cursor.callproc("assign_tester", [username, newSite])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "unable to view because " + str(e)
-                else:
-                    mysql.connection.commit()
-
-         #Update the view here(This code is really long)
-        cursor = mysql.connection.cursor()
-
-        try:
-            cursor.callproc("view_testers")
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
+                return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
         else:
-            #print the view to the html
-            # select from the student_view_results_result
-            sql = "select * from view_testers_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            testers = []
-            for entry in content:
-                testers.append(entry[0])
-
-            unassignedSites = []
-            assignedSites = []
-            for tester in testers:
-                try:
-                    result = cursor.callproc("tester_assigned_sites",[tester])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "unable to view because " + str(e)
-                else:
-                    sql = "select * from tester_assigned_sites_result"
-                    cursor.execute(sql)
-                    mysql.connection.commit()
-                    assignedSitesInLoop = cursor.fetchall()
-                    sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
-                    cursor.execute(sql)
-                    mysql.connection.commit()
-                    unassignedSitesInLoop = cursor.fetchall()
-                    unassignedSites.append(unassignedSitesInLoop)
-                    assignedSites.append(assignedSitesInLoop)
-
-            # get the field name
-            labels = ['Username','Name','Phone Number','Assigned Sites']
-
-            return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
-
+            return "Sorry you don't have the access to this screen"
 
 #Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])

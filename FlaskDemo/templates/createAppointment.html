@@ -8,9 +8,10 @@
 </head>
 <body>
 <form action="/createAppointment" method = "POST">
-    <div><label for="siteName">SiteName: (Dropdown can automatically update right now)</label>
 
-    <select name="siteName" id="siteName">
+    <div><label for="siteName">SiteName: </label>
+
+    <select name="siteName" id="siteName" required>
         <option name="siteName" value="">----Please Select a Site------</option>
         {% for i in allSites %}
             <option name="siteName" value="{{ i }}">{{ i }}</option>
@@ -23,15 +24,20 @@
     <div>
         <label for="end">Date:</label>
         <input type="date" id="end" name="date"
-        min="2020-01-01" max="2020-12-31">
+        min="2020-01-01" max="2020-12-31" required>
     </div>
 
     <div>
         <label for="time">Time:</label>
 
        <input type="time" id="time" name="time"
-       min="09:00" max="18:00" required>
+       min="08:00" max="18:00" required>
     </div>
+        <h5>
+
+        <p>Your last "Create Operation Status" is: "{{hint}}</p>
+
+    </h5>
     <p><input type = "submit" value = "create Apptment" /></p>
 
 </form>
