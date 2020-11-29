@@ -34,14 +34,19 @@
                             {% set counter = loop.index-1 %}
                             <tr>
                                 {% for j in i %}
-                                    {% if loop.index == 4 %}
+                                    {% if loop.index == 1 %}
+                                        <td>
+                                            {{j}}
+                                            <input type="hidden" name = 'Username' value="{{j}}">
+                                        </td>
+                                    {% elif loop.index == 4 %}
                                         <td>
                                         {% for i in assignedSites[counter] %}
-                                            <input type="checkbox" id="{{ i[0] }}" name="{{ i[0] }}" value="assigned" checked="checked">
+                                            <input type="checkbox" id="{{ i[0] }}" name="{{ counter }}assigned" value="{{ i[0] }}" checked="checked">
                                             <label for="{{ i[0] }}">{{ i[0] }}</label><br>
                                         {% endfor %}
                                         Add Site: 
-                                        <select name="siteNameAdd" id="siteNameAdd">
+                                        <select name="{{ counter }}siteNameAdd" id="siteNameAdd">
                                             {% for i in unassignedSites[counter] %}
                                                 <option value="{{ i[0] }}">{{ i[0] }}</option>
                                             {% endfor %}
@@ -63,16 +68,9 @@
     </div>
 
 </div>
-    <form action="/reassignTester" method = "POST">
-        <p>Username <input type = "text" name = "Username" /></p>
-        <select name="siteName" id="siteName">
-        <option value="West Village">West Village</option>
-        <option value="Bobby Dodd Stadium">Bobby Dobb</option>
-        <option value="Site1">Site1</option>
-        <option value="Site2">Site2</option>
-    </select>
-        <p><input type = "submit" value = "update" /></p>
-    </form>>
+
+
+    <p><input type = "submit" value = "update" /></p>
 
 </form>
 </body>
