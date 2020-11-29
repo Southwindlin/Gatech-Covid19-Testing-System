@@ -8,13 +8,15 @@
 </head>
 <body>
 <form action="/createAppointment" method = "POST">
-    <div><label for="siteName">SiteName: (the drop down option should automatically update when admin create a new testing site)</label>
+    <div><label for="siteName">SiteName: (Dropdown can automatically update right now)</label>
 
     <select name="siteName" id="siteName">
-        <option value="West Village">West Village</option>
-        <option value="Bobby Dodd Stadium">Bobby Dobb</option>
-        <option value="Site1">Site1</option>
-        <option value="Site2">Site2</option>
+        <option name="siteName" value="">----Please Select a Site------</option>
+        {% for i in allSites %}
+            <option name="siteName" value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+
+
     </select>
     </div>
 

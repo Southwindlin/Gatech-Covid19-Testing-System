@@ -662,19 +662,29 @@ def reassigntester():
 @app.route('/createAppointment',methods=['GET','POST'])
 def createAppointment():
     if request.method == 'GET':
-        return render_template('createAppointment.html')
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        cursor.close()
+        return render_template('createAppointment.html', allSites=allSites)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
         date = request.form.get('date')
         time = request.form.get('time')
 
-
         try:
             cursor.callproc("create_appointment",[siteName,date,time])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to create appointment beacuse "+str(e)
         else:
+            #Commit to the procedure call
             mysql.connection.commit()
             return "create appointment succesfully"
 
@@ -682,7 +692,17 @@ def createAppointment():
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
     if request.method =='GET':
-        return render_template('viewAppointment.html')
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        cursor.close()
+        return render_template('viewAppointment.html', allSites=allSites)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
@@ -725,7 +745,8 @@ def viewAppointment():
 
 
 
-#Screen 14a: View Testers results
+#Screen 14a: View Testers results(This need to be combined with assigned testers)
+#Admin to assign or reassign testers to testing sites.
 @app.route('/viewTester',methods=['GET'])
 def viewTester():
 
@@ -760,7 +781,17 @@ def viewTester():
 @app.route('/createTestSite',methods=['GET','POST'])
 def createTestSite():
     if request.method =='GET':
-        return render_template('createTestSite.html')
+        cursor = mysql.connection.cursor()
+        sql = "select sitetester_username from SITETESTER"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allTesters = []
+        for tester in content:
+            allTesters.append(tester[0])
+
+        cursor.close()
+        return render_template('createTestSite.html', allTesters=allTesters)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
