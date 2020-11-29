@@ -846,24 +846,42 @@ def viewTester():
         return "unable to view because " + str(e)
     else:
         #print the view to the html
-
-
         # select from the student_view_results_result
         sql = "select * from view_testers_result"
         cursor.execute(sql)
         mysql.connection.commit()
         content = cursor.fetchall()
 
+        testers = []
+        for entry in content:
+            testers.append(entry[0])
+        
+        unassignedSites = []
+        assignedSites = []
+        for tester in testers:
+            try:
+                result = cursor.callproc("tester_assigned_sites",[tester])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                sql = "select * from tester_assigned_sites_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                assignedSitesInLoop = cursor.fetchall()
+                sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                unassignedSitesInLoop = cursor.fetchall()
+                unassignedSites.append(unassignedSitesInLoop)
+                assignedSites.append(assignedSitesInLoop)
+        
         # get the field name
-        sql = "SHOW FIELDS FROM view_testers_result"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        labels = ['UserName','Name','Phone Number','Assigned Site']
+        labels = ['Username','Name','Phone Number','Assigned Sites']
 
         #visualization template source:
         #https://blog.csdn.net/a19990412/article/details/84955802
 
-        return render_template('viewTester.html', labels=labels, content=content)
+        return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
 
 #Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])
@@ -961,18 +979,6 @@ def dailyresults():
         labels = [l[0] for l in labels]
 
         return render_template('dailyresults.html', labels=labels, content=content)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

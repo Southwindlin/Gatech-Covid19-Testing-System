@@ -11,13 +11,13 @@
     <title>Show the Screen of the reassigned tester</title>
 </head>
 <body>
-<form action="/viewTester" method = "GET">
+<form action="/viewTester" method = "POST">
         <!-- copy some template online just for testing -->
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Students</h3>
+                <h3>Reassign Testers</h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -31,9 +31,26 @@
                         </thead>
                         <tbody>
                         {% for i in content %}
+                            {% set counter = loop.index-1 %}
                             <tr>
                                 {% for j in i %}
-                                    <td>{{ j }}</td>
+                                    {% if loop.index == 4 %}
+                                        <td>
+                                        {% for i in assignedSites[counter] %}
+                                            <input type="checkbox" id="{{ i[0] }}" name="{{ i[0] }}" value="assigned" checked="checked">
+                                            <label for="{{ i[0] }}">{{ i[0] }}</label><br>
+                                        {% endfor %}
+                                        Add Site: 
+                                        <select name="siteNameRemove" id="siteNameRemove">
+                                            {% for i in unassignedSites[counter] %}
+                                                <option value="{{ i[0] }}">{{ i[0] }}</option>
+                                            {% endfor %}
+                                                <option value = "None" selected>None</option>
+                                        </select>
+                                        </td>
+                                    {% else %}
+                                        <td>{{ j }}</td>
+                                    {% endif %}
                                 {% endfor %}
                             </tr>
                         {% endfor %}
