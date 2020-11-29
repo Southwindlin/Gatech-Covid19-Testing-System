@@ -19,15 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-
-
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/EmployeeRegister.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/EmployeeRegister.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/StudentRegister.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/StudentRegister.html" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/basicDashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/basicDashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentView.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,44 +55,13 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-
         <entry key="$PROJECT_DIR$" value="TestingHongyu" />
-
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/.idea/workspace.xml">
-      <ranges>
-        <range start1="81" end1="81" start2="81" end2="82" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="316" end1="317" start2="317" end2="318" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="319" end1="320" start2="320" end2="321" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="324" end1="325" start2="325" end2="326" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="327" end1="328" start2="328" end2="329" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="329" end1="330" start2="330" end2="331" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="332" end1="333" start2="333" end2="334" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="334" end1="335" start2="335" end2="336" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="337" end1="338" start2="338" end2="339" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="339" end1="340" start2="340" end2="341" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="342" end1="343" start2="343" end2="344" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-        <range start1="407" end1="407" start2="408" end2="412" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="412" end1="412" start2="417" end2="421" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html">
-      <ranges>
-        <range start1="15" end1="16" start2="15" end2="16" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="18" end1="19" start2="18" end2="19" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="25" end1="25" start2="25" end2="26" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="31" end1="31" start2="32" end2="33" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="34" end1="34" start2="36" end2="37" changelist="6d332b93-69d2-45c9-9e5e-cbcf8109eff9" />
-        <range start1="46" end1="47" start2="49" end2="50" changelist="ef69b92b-a93f-43ef-8939-a33f107a97b8" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectId" id="1kcWuypuWQu9D3qpMJF2SkjztaQ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -110,11 +75,8 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-
     <property name="WebServerToolWindowFactoryState" value="false" />
-
     <property name="last_opened_file_path" value="$PROJECT_DIR$/FlaskDemo/backend" />
-
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -193,11 +155,10 @@
       <item itemvalue="Database Script.db_init.sql" />
       <item itemvalue="Database Script.phase3_shell.sql" />
       <item itemvalue="Flask server.Flask" />
+      <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="Python.app" />
     </list>
     <recent_temporary>
-
-
       <list>
         <item itemvalue="Python.app" />
         <item itemvalue="Database Script.phase3_shell.sql" />
@@ -206,7 +167,6 @@
         <item itemvalue="Database Script.phase3_shell.sql" />
       </list>
     </recent_temporary>
-
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -222,14 +182,10 @@
       <workItem from="1606265611782" duration="2992000" />
       <workItem from="1606271264811" duration="5391000" />
       <workItem from="1606284134945" duration="5000" />
-
-
       <workItem from="1606322638397" duration="388000" />
       <workItem from="1606330860014" duration="587000" />
       <workItem from="1606337599082" duration="117000" />
       <workItem from="1606352060140" duration="11453000" />
-
-
     </task>
     <task id="LOCAL-00001" summary="Newest version of almost all screens">
       <created>1606409952904</created>
@@ -322,13 +278,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -338,7 +293,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update Screen 4-7" />
   </component>
   <component name="WindowStateProjectService">
-
     <state x="689" y="371" key="#Notifications" timestamp="1606333643977">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -355,28 +309,27 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="294" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606366377047" />
-    <state width="1878" height="376" key="GridCell.Tab.0.bottom" timestamp="1606456146075">
+    <state width="1878" height="220" key="GridCell.Tab.0.bottom" timestamp="1606614677585">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146075" />
+    <state width="1878" height="220" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606614677585" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
-    <state width="1878" height="376" key="GridCell.Tab.0.center" timestamp="1606456146074">
+    <state width="1878" height="220" key="GridCell.Tab.0.center" timestamp="1606614677583">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146074" />
+    <state width="1878" height="220" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606614677583" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
-    <state width="1878" height="376" key="GridCell.Tab.0.left" timestamp="1606456146073">
+    <state width="1878" height="220" key="GridCell.Tab.0.left" timestamp="1606614677582">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146073" />
+    <state width="1878" height="220" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606614677582" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
-    <state width="1878" height="376" key="GridCell.Tab.0.right" timestamp="1606456146075">
+    <state width="1878" height="220" key="GridCell.Tab.0.right" timestamp="1606614677584">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146075" />
+    <state width="1878" height="220" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606614677584" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606456145962">
-
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="376" key="GridCell.Tab.1.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456145962" />
@@ -413,8 +366,6 @@
     </state>
     <state x="205" y="100" key="MergeDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606601049027" />
     <state x="192" y="97" key="MergeDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606177516987" />
-
-
     <state x="601" y="308" key="MultipleFileMergeDialog" timestamp="1606450544879">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -427,8 +378,6 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="560" y="280" key="Vcs.Push.Dialog.v2/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606455628599" />
-
-
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -437,7 +386,6 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="826" y="145" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606009567492" />
-
     <state x="667" y="172" width="586" height="735" key="find.popup" timestamp="1606363980147">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -452,8 +400,7 @@
     <state x="690" y="419" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606359084443" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606456145913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
+    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606614677571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
     <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606449734062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-
   </component>
 </project>
