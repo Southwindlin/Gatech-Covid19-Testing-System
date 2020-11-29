@@ -779,168 +779,180 @@ def reassigntester():
 @app.route('/createAppointment',methods=['GET','POST'])
 def createAppointment():
     if request.method == 'GET':
-        cursor = mysql.connection.cursor()
-        sql = "select site_name from SITE"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall();
-        allSites = []
-        for site in content:
-            allSites.append(site[0])
+        if 'user' in session and session['userPerms'] == 'Admin':
+            cursor = mysql.connection.cursor()
+            sql = "select site_name from SITE"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
 
-        cursor.close()
-        hint = "You don't have last Operation"
-        return render_template('createAppointment.html', allSites=allSites, hint=hint)
+            cursor.close()
+            hint = "You don't have last Operation"
+            return render_template('createAppointment.html', allSites=allSites, hint=hint)
+        else:
+            return "Sorry you don't have the access to this screen"
 
 
     elif request.method == 'POST':
-        # Some visulization stuff:
-        cursor = mysql.connection.cursor()
-        sql = "select site_name from SITE"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall();
-        allSites = []
-        for site in content:
-            allSites.append(site[0])
-
-        #Now the real code
-        cursor = mysql.connection.cursor()
-        siteName = request.form.get('siteName')
-        date = request.form.get('date')
-        time = request.form.get('time')
-        #See if duplicate appointments
-        try:
-            select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
-            result = cursor.execute(select_statement, (siteName, date,time))
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to create appointment beacuse "+str(e)
-        else:
+        if 'user' in session and session['userPerms'] == 'Admin':
+            # Some visulization stuff:
+            cursor = mysql.connection.cursor()
+            sql = "select site_name from SITE"
+            cursor.execute(sql)
             mysql.connection.commit()
             content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
 
-
-
-            if len(content) != 0:
-                hint = "Sorry, appointment already exsit"
-
-                return render_template('createAppointment.html', allSites=allSites, hint = hint)
-
-        #See if Overload Appointment for this site
-        try:
-            set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
-            result = cursor.execute(set, (siteName))
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to create appointment beacuse "+str(e)
-        else:
-            mysql.connection.commit()
-            maxNum = cursor.fetchall();
-            maxNum = maxNum[0]
+            #Now the real code
+            cursor = mysql.connection.cursor()
+            siteName = request.form.get('siteName')
+            date = request.form.get('date')
+            time = request.form.get('time')
+            #See if duplicate appointments
             try:
-                select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
-                result = cursor.execute(select_statement, (siteName, date))
+                select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
+                result = cursor.execute(select_statement, (siteName, date,time))
             except pymysql.IntegrityError or KeyError as e:
                 return "unable to create appointment beacuse "+str(e)
             else:
                 mysql.connection.commit()
-                curNum = cursor.fetchall();
-                curNum = curNum[0]
-                if curNum >= maxNum:
-                    hint = "Test site is overloaded, Please select another testsite "
-                    return render_template('createAppointment.html', allSites=allSites, hint=hint)
-
-        #If things are alright
+                content = cursor.fetchall();
 
 
-        try:
-            cursor.callproc("create_appointment",[siteName,date,time])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to create appointment beacuse "+str(e)
+
+                if len(content) != 0:
+                    hint = "Sorry, appointment already exsit"
+
+                    return render_template('createAppointment.html', allSites=allSites, hint = hint)
+
+            #See if Overload Appointment for this site
+            try:
+                set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
+                result = cursor.execute(set, (siteName))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+                mysql.connection.commit()
+                maxNum = cursor.fetchall();
+                maxNum = maxNum[0]
+                try:
+                    select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
+                    result = cursor.execute(select_statement, (siteName, date))
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to create appointment beacuse "+str(e)
+                else:
+                    mysql.connection.commit()
+                    curNum = cursor.fetchall();
+                    curNum = curNum[0]
+                    if curNum >= maxNum:
+                        hint = "Test site is overloaded, Please select another testsite "
+                        return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+            #If things are alright
+
+
+            try:
+                cursor.callproc("create_appointment",[siteName,date,time])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+
+                #Commit to the procedure call
+                mysql.connection.commit()
+                return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
         else:
+            return "Sorry you don't have the access to this screen"
 
-            #Commit to the procedure call
-            mysql.connection.commit()
-            return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
 
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
     if request.method =='GET':
-        cursor = mysql.connection.cursor()
-        sql = "select site_name from SITE"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall();
-        allSites = []
-        for site in content:
-            allSites.append(site[0])
+        if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester'):
+            cursor = mysql.connection.cursor()
+            sql = "select site_name from SITE"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
 
-        cursor.close()
-        filters = ["None",]
+            cursor.close()
+            filters = ["None",]
 
-        return render_template('viewAppointment.html', allSites=allSites, filters = filters)
+            return render_template('viewAppointment.html', allSites=allSites, filters = filters)
+        else:
+            return "Sorry you don't have the access to this screen"
 
 
     elif request.method == 'POST':
-        #GET also need to work here:
-        cursor = mysql.connection.cursor()
-        sql = "select site_name from SITE"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall();
-        allSites = []
-        for site in content:
-            allSites.append(site[0])
+        if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester'):
+            #GET also need to work here:
+            cursor = mysql.connection.cursor()
+            sql = "select site_name from SITE"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
 
 
 
-        cursor = mysql.connection.cursor()
-        siteName = request.form.get('siteName')
-        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        startTime = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
-        endTime = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
-        avail = request.form.get('Availability')
+            cursor = mysql.connection.cursor()
+            siteName = request.form.get('siteName')
+            startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
+            endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+            startTime = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
+            endTime = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+            avail = request.form.get('Availability')
 
-        if avail == 'booked':
-            avail = 0
-        elif avail == 'available':
-            avail = 1
-        elif avail == 'all':
-            avail = None
+            if avail == 'booked':
+                avail = 0
+            elif avail == 'available':
+                avail = 1
+            elif avail == 'all':
+                avail = None
 
-        try:
-            cursor.callproc("view_appointments",[siteName,startDate,endDate,startTime,endTime,avail])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
+            try:
+                cursor.callproc("view_appointments",[siteName,startDate,endDate,startTime,endTime,avail])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                #print the view to the html
+
+                # select from the student_view_results_result
+                sql = "select * from view_appointments_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                content = cursor.fetchall()
+
+                # get the field name
+                sql = "SHOW FIELDS FROM view_appointments_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                labels = ['Date','Time','test Site','Location','User']
+
+                if avail == 0:
+                    avail = "Booked"
+                elif avail == 1:
+                    avail = "Available"
+                elif avail == None:
+                    avail = "All"
+
+                filters = [siteName,startDate,endDate,startTime,endTime,avail]
+
+
+
+                return render_template('viewAppointment.html', labels=labels, content=content, allSites=allSites, filters=filters)
         else:
-            #print the view to the html
-
-            # select from the student_view_results_result
-            sql = "select * from view_appointments_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            # get the field name
-            sql = "SHOW FIELDS FROM view_appointments_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            labels = ['Date','Time','test Site','Location','User']
-
-            if avail == 0:
-                avail = "Booked"
-            elif avail == 1:
-                avail = "Available"
-            elif avail == None:
-                avail = "All"
-
-            filters = [siteName,startDate,endDate,startTime,endTime,avail]
-
-
-
-            return render_template('viewAppointment.html', labels=labels, content=content, allSites=allSites, filters=filters)
-
+            return "Sorry you don't have the access to this screen"
 
 
 
@@ -949,7 +961,7 @@ def viewAppointment():
 @app.route('/viewTester',methods=['GET','POST'])
 def viewTester():
     if request.method =='GET':
-        if session['userPerms'] == 'Admin':
+        if 'user' in session and (session['userPerms'] == 'Admin'):
             cursor = mysql.connection.cursor()
 
             try:
@@ -997,7 +1009,7 @@ def viewTester():
         else:
             return "Sorry You don't have the access to this screen"
     elif request.method == 'POST':
-        if session['userPerms'] == 'Admin':
+        if 'user' in session and (session['userPerms'] == 'Admin'):
             cursor = mysql.connection.cursor()
             #get the username
             usernames = request.form.getlist("Username")
@@ -1103,38 +1115,92 @@ def viewTester():
         else:
             return "Sorry you don't have the access to this screen"
 
+
 #Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])
 def createTestSite():
     if request.method =='GET':
-        cursor = mysql.connection.cursor()
-        sql = "select sitetester_username from SITETESTER"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall()
-        allTesters = []
-        for tester in content:
-            allTesters.append(tester[0])
-
-        cursor.close()
-        return render_template('createTestSite.html', allTesters=allTesters)
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-
-        site = request.form.get("Site")
-        address = request.form.get("Address")
-        city = request.form.get("City")
-        state = request.form.get("State")
-        zipCode = request.form.get("Zip")
-        location = request.form.get("Location")
-        tester = request.form.get("Tester")
-        try:
-            cursor.callproc("create_testing_site",[site,address,city,state,zipCode,location,tester])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to create because " + str(e)
-        else:
+        if 'user' in session and (session['userPerms'] == 'Admin'):
+            cursor = mysql.connection.cursor()
+            #This is the Lname and Fname for selection
+            sql = "select concat(concat(fname,' '),lname) as name from User where USER.username in (select sitetester_username from SITETESTER)"
+            cursor.execute(sql)
             mysql.connection.commit()
-            return redirect(url_for('dashboard'))
+            content = cursor.fetchall()
+            allTesters = []
+            for tester in content:
+                allTesters.append(tester[0])
+
+            #Now is the username for each value
+            sql = "select sitetester_username from SITETESTER"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            allUsernames = []
+            for tester in content:
+                allUsernames.append(tester[0])
+
+            cursor.close()
+            hint = "You don't have last Operation"
+            return render_template('createTestSite.html', allTesters=allTesters, allUsernames = allUsernames, hint=hint)
+        else:
+            return "Sorry you don't have the access to this screen"
+    elif request.method == 'POST':
+        if 'user' in session and (session['userPerms'] == 'Admin'):
+            #Some visualizaiton stuff
+            cursor = mysql.connection.cursor()
+            # This is the Lname and Fname for selection
+            sql = "select concat(concat(fname,' '),lname) as name from User where USER.username in (select sitetester_username from SITETESTER)"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            allTesters = []
+            for tester in content:
+                allTesters.append(tester[0])
+
+            # Now is the username for each value
+            sql = "select sitetester_username from SITETESTER"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            allUsernames = []
+            for tester in content:
+                allUsernames.append(tester[0])
+
+
+
+            cursor = mysql.connection.cursor()
+            site = request.form.get("Site")
+            address = request.form.get("Address")
+            city = request.form.get("City")
+            state = request.form.get("State")
+            zipCode = request.form.get("Zip")
+            location = request.form.get("Location")
+            tester = request.form.get("Tester")
+            try:
+                sql = "select * from SITE where site_name = %s"
+
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create because " + str(e)
+            else:
+                cursor.execute(sql,(site))
+                mysql.connection.commit()
+                exist = cursor.fetchall()
+                if len(exist) !=0:
+                    hint = "Sorry this site already exist, Please re-enter another sitename"
+                    return render_template('createTestSite.html', allTesters=allTesters, allUsernames=allUsernames, hint=hint)
+
+            try:
+                cursor.callproc("create_testing_site",[site,address,city,state,zipCode,location,tester])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create because " + str(e)
+            else:
+                mysql.connection.commit()
+                hint = "Successfully Created"
+                return render_template('createTestSite.html', allTesters=allTesters, allUsernames = allUsernames, hint=hint)
+        else:
+            return "Sorry you don't have the access to this screen"
+
 
 #Screen 16a: Explore Pool Result & 16b
 
