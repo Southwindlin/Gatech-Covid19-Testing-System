@@ -18,7 +18,7 @@
 <div>
 <!--    <p>Username <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
     <label >Status: </label>
-    <select name = "Status" id = "Status">
+    <select name = "Status" id = "testStatus">
         <option type="radio" name="Status" value="" id="all"><label for="all">All</label></option>
         <option type="radio" name="Status" value="Negative" id="Neg"><label for="Neg">Negative</label></option>
         <option type="radio" name="Status" value="Positive" id="Pos"><label for="Pos">Positive</label></option>
@@ -53,6 +53,9 @@
 
                             <tr>
                                 {% for i in labels %}
+                                {% if loop.index == 1%}
+                                    <td>{{i}}</td>
+                                {%else%}
                                 {%set l = loop.index%}
                                 <form action = "/studentViewTestResults" method="POST" id = '{{i}}'>
                                     <td>
@@ -61,6 +64,7 @@
                                         <a href="javascript:{}" onclick=" document.getElementById('{{i}}').submit(); return false;"> {{i}} </a>
                                     </td>
                                 </form>
+                                {%endif%}
                                 {% endfor %}
 
                             </tr>
@@ -96,7 +100,7 @@
 
 </div>
 </form>
-<form action="/EachScreen" method="GET">
+<form action="/dashboard" method="GET">
     <input type="submit" value="Back to HomeScreen" />
 </form>
 </body>

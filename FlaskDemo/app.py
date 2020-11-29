@@ -245,16 +245,6 @@ def getEmpRegistRequest():  # Register as employee
 # 2. there is no "all" selection
 filter_data = {}
 reverse = False
-def sort_table(html,):
-    counter = {}
-    column = eval(request.form.get('filter_column')) - 1
-    stuff = eval(request.form.get('content_filter'))
-    print("column:", type(column), "stuff:", type(stuff))
-    reverse = True if reverse == False else False
-    new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]), reverse=reverse)
-    return render_template('studentViewTestResults.html', labels=labels, content=new_content,
-                           filter_data=filter_data)
-
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
     # if session['userPerms'] != 'Student' or 'Admin':
