@@ -17,6 +17,7 @@
 <!--    <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
     <p>Current user is <text style = "font-weight:bold">{{username}}</text></p>
     <select name = "testingSite">
+        <option name = "testingSite" value = "">All</option>
         {% for t in testsite%}
         <option name = "testingSite" value = "{{t}}">{{t}}</option>
         {%endfor%}
