@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
         <!-- Required meta tags -->
+    <style>
+        div {margin-left:10px}
+        h1 {margin-left:10px}
+        p {margin-left:10px}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,6 +22,7 @@
 <!--    <p>Username: <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
     <p>Current user is <text style = "font-weight:bold">{{username}}</text></p>
     <select name = "testingSite">
+        <option name = "testingSite" value = "">All</option>
         {% for t in testsite%}
         <option name = "testingSite" value = "{{t}}">{{t}}</option>
         {%endfor%}
@@ -42,6 +48,9 @@
     <p><input type = "submit" value = "View" /></p>
 </form>
 
+<form action="/EachScreen" method="GET">
+    <input type="submit" value="Back to HomeScreen" />
+</form>
 
 
 <form action="/testSignUp" method="POST">
@@ -51,7 +60,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Sign Up for a Test</h3>
-                <span><button type="submit">Sign</button></span>
+                <span><button type="submit">Sign Up</button></span>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">

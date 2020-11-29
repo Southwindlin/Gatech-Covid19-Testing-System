@@ -21,9 +21,6 @@ app.secret_key = 'team 84 is the best team'
 #some configuration for Jinja templates
 Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_'], 'line_statement_prefix': '%'}
 
-mysql = MySQL(app)
-
-
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
@@ -42,6 +39,8 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
+mysql = MySQL(app)
+
 
 # -------------------------- Help Functions -------------------------
 #this function is just for test
@@ -51,10 +50,12 @@ def transform_label(labels):
         list.append(labels[i][0])
     return list
 
+# def sorted_None(l,column):
+#     if not l[column]:
+#         Min
 
 
 # -------------------------- Platform Functions -------------------------
-#
 @app.route('/dashboard')
 def dashboard():
     #First checks to see if there's someone logged in
@@ -64,10 +65,14 @@ def dashboard():
             return render_template('adminDashboard.html')
         elif session['userPerms'] == 'Student':
             #Not sure if this should be homeScreenStudent, left this here as a default
-            return render_template('basicDashboard.html')
+            return render_template('studentDashboard.html')
         elif session['userPerms'] == 'Tester':
             return render_template('testerDashboard.html')
-        return None
+        elif session['userPerms'] == 'LabTech':
+            return render_template('labTechDashboard.html')
+        elif session['userPerms'] == 'LabTech+Tester':
+            return render_template('labTechTesterDashboard.html')
+        return "Invalid user permissions, try logging out and back in"
     #If not logged in, pushes the user to the index page
     else:
         return redirect(url_for('index'))
@@ -88,18 +93,15 @@ def index():
 def form():
     return render_template('form.html')
 
-#Screen 2: Register
-@app.route('/registForm')
+@app.route('/regform')
 def registForm():
     return render_template('regform.html')
 
-#Screen 3: Home Screens
+
 #a very basic screen collection for test
 @app.route('/EachScreen')
 def eachScreen():
     return render_template('EachScreen.html')
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -141,27 +143,27 @@ def checkForPermissions():
     result = cursor.execute(select_statement, (session['user']))
     if result:
         session['userPerms'] = 'LabTech'
-        cursor.close()
-        return
     select_statement = "SELECT * FROM SITETESTER WHERE sitetester_username = %s"
     result = cursor.execute(select_statement, (session['user']))
-    if result:
+    if result and 'userPerms' in session and session['userPerms'] == 'LabTech':
+        session['userPerms'] = 'LabTech+Tester'
+        cursor.close()
+        return
+    elif result:
         session['userPerms'] = 'Tester'
         cursor.close()
         return
+    cursor.close()
     return
 
-#Screen 2 functionality:
-@app.route('/registuser',methods=['GET','POST'])
-def getRegistRequest():
+#-------------------------------Registration Screen for Student----------------------
+@app.route('/StudentRegister',methods=['GET','POST'])
+def getStuRegistRequest():#Register as student
     if request.method == 'GET':
-        return "Please register through the register form"
+        return render_template('StudentRegister.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         #SQL command
-
-
-        userType = request.form.get('Type')
         userName = request.form.get('Username')
         email = request.form.get('Email')
         fName = request.form.get('FName')
@@ -169,80 +171,124 @@ def getRegistRequest():
         passWord = request.form.get('Password')
         confirmPass = request.form.get('ConfirmPwd')
 
+    #see if the password match
+    if confirmPass != passWord:
+        return "Sorry, your passwords don't match"
 
+    #no need to change the password to hashcode here since it's done in the mysql procedure
 
-        #see if the password match
+    houseType = request.form.get('HouseType')
+    location = request.form.get('Location')
+
+    try:
+        cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to register"+str(e)
+    else:
+        mysql.connection.commit()
+        return "You have successfully registered"
+
+#--------------------------Registration Screen for employee
+@app.route('/EmployeeRegister', methods=['GET', 'POST'])
+def getEmpRegistRequest():  # Register as employee
+    if request.method == 'GET':
+        return render_template('EmployeeRegister.html')
+    elif request.method == 'POST':
+        cursor = mysql.connection.cursor()
+        # SQL command
+        userName = request.form.get('Username')
+        email = request.form.get('Email')
+        fName = request.form.get('FName')
+        lName = request.form.get('LName')
+        passWord = request.form.get('Password')
+        confirmPass = request.form.get('ConfirmPwd')
+        # see if the password match
         if confirmPass != passWord:
             return "Sorry, your passwords don't match"
 
-        #no need to change the password to hashcode here since it's done in the mysql procedure
-
-        #treatment according to the usertype
-        if userType == 'admin':
-            return 'erro: Sorry, Admin cannot register through here'
-        elif userType == 'student':
-            houseType = request.form.get('HouseType')
-            location = request.form.get('Location')
-
+        employee = request.form.getlist('employType')
+        phone = request.form.get('Phone')
+        if len(employee) == 2:
+            lab = True
+            tester = True
             try:
-                cursor.callproc("register_student",[userName,email,fName,lName,location,houseType,passWord])
+                cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
             except pymysql.IntegrityError or KeyError as e:
-                return "unable to register"+str(e)
+                return "unable to register" + str(e)
             else:
                 mysql.connection.commit()
-                return "You have successfully registered"
-        elif userType == 'employee':
-            employee = request.form.getlist('employType')
-            phone = request.form.get('Phone')
-            if len(employee) == 2:
-                lab = True
-                tester = True
+                return redirect(url_for('login'))
+        elif len(employee) == 1:
+            job = employee[0]
+            if job == "labTech":
                 try:
-                    cursor.callproc("register_employee",[userName,email,fName,lName,phone,lab,tester,passWord])
+                    cursor.callproc("register_employee",
+                                    [userName, email, fName, lName, phone, True, False, passWord])
                 except pymysql.IntegrityError or KeyError as e:
                     return "unable to register" + str(e)
                 else:
                     mysql.connection.commit()
-                    return "You have successfully registered"
-            elif len(employee) == 1:
-                job = employee[0]
-                if job == "labTech":
-                    try:
-                        cursor.callproc("register_employee",
-                                        [userName, email, fName, lName, phone, True, False, passWord])
-                    except pymysql.IntegrityError or KeyError as e:
-                        return "unable to register" + str(e)
-                    else:
-                        mysql.connection.commit()
-                        return "You have successfully registered"
-                elif job == "siteTester":
-                    try:
-                        cursor.callproc("register_employee",
-                                        [userName, email, fName, lName, phone, False, True, passWord])
-                    except pymysql.IntegrityError or KeyError as e:
-                        return "unable to register" + str(e)
-                    else:
-                        mysql.connection.commit()
-                        return "You have successfully registered"
+                    return redirect(url_for('login'))
+            elif job == "siteTester":
+                try:
+                    cursor.callproc("register_employee",
+                                    [userName, email, fName, lName, phone, False, True, passWord])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to register" + str(e)
+                else:
+                    mysql.connection.commit()
+                    return redirect(url_for('login'))
 
 # -------------------------- All Users Experience -----------------------
 # Screen 4
 # 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
 # 2. there is no "all" selection
+filter_data = {}
+reverse = False
+def sort_table(html,):
+    counter = {}
+    column = eval(request.form.get('filter_column')) - 1
+    stuff = eval(request.form.get('content_filter'))
+    print("column:", type(column), "stuff:", type(stuff))
+    reverse = True if reverse == False else False
+    new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]), reverse=reverse)
+    return render_template('studentViewTestResults.html', labels=labels, content=new_content,
+                           filter_data=filter_data)
+
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
+    # if session['userPerms'] != 'Student' or 'Admin':
+    #     return "you have no permission to this screen"
+    global filter_data
+    global reverse
     if request.method == 'GET':
         return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+        if request.form.get('filter_column') is not None:
+            counter = {}
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('studentViewTestResults.html', labels=labels, content=new_content,
+                                   filter_data=filter_data)
+
+
         cursor = mysql.connection.cursor()
 
         # Will change the way of getting username after the front end is done
 
-        userName = request.form.get('Username')
+        userName = session['user']
         status = None if request.form.get('Status') == '' else request.form.get('Status')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        stat = "All" if status is None else status
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
 
+        filter_data = {"Status":stat,"StartDate":sd,"EndDate":ed}
         try:
             result = cursor.callproc("student_view_results", [userName, status, startDate, endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -256,26 +302,18 @@ def studentView():
             mysql.connection.commit()
             content = cursor.fetchall()
 
-            # get the field name (not used for now)
-            sql = '''SELECT `COLUMN_NAME` 
-                    FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-                    WHERE `TABLE_SCHEMA`='covidtest_fall2020' 
-                    AND `TABLE_NAME`='student_view_results_result';'''
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            labels = transform_label(labels)
-            #print(labels)
-            # mysql.connection.commit()
-            labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('studentViewTestResults.html', labels=labels, content=content)
+            print(content)
+            return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
         
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
 def exploreTestResult():
+    if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+        return "you have no permission to this screen"
     if request.method == 'GET':
         return render_template('exploreTestResult.html')
     elif request.method == 'POST':
@@ -302,7 +340,9 @@ def exploreTestResult():
             labels = cursor.fetchall()
             mysql.connection.commit()
             labels = ['Test ID#','Date Tested', 'Timeslot', 'Testing Location', 'Date Processed', 'Pooled Result', 'Individual Result','Processed By']
-
+            print(content)
+            if content == ():
+                return "This test has not been processed yet"
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
@@ -339,7 +379,13 @@ def aggregateResult():
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
         print("location: ",Location)
+        ld = "ALL" if Location is None else Location
+        hou = "ALL" if Housing is None else Housing
+        ts = "ALL" if Testing_site is None else Testing_site
+        sd = "ALL" if startDate is None else startDate
+        ed = "ALL" if endDate is None else endDate
 
+        filter_data = {"Location":ld,"Housing":hou,"Testing_site":ts,"StartDate":sd,"EndDate":ed}
         try:
             cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -366,15 +412,17 @@ def aggregateResult():
             labels = ['Total',str(total),'100%']
             print("content: ", content)
             print("housing_type: ",housing_type,"site:",site)
-            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site)
+            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site,filter_data=filter_data)
 
 # now we need to manually add a username here for test:
 # Screen 7a:
 testsite = ''
-username = 'pbuffay56'
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
-    global testsite,username
+    # if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+    #     return "you have no permission to this screen"
+    global testsite
+    username = session['user']
     if request.method == 'GET':
         sql_site = "SELECT site_name from site where location = (select location from student where student_username = '{username}')".format(username=username)
         cursor = mysql.connection.cursor()
@@ -467,17 +515,19 @@ def testSignUp():
 #Screen 8a:
 @app.route('/tests_processed', methods=['GET', 'POST'])
 def tests_processed():
+    username = session['user']
     if request.method == 'GET':
-        return render_template('tests_processed.html')
+        return render_template('tests_processed.html',user=username)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
-        username = request.form.get('labtechUsername')
+        # username = request.form.get('labtechUsername')
 
         testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        print("test: ",[startDate,endDate,testStatus,username])
         try:
-            result = cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
+            cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
@@ -504,6 +554,23 @@ def tests_processed():
             return render_template('tests_processed.html', labels=labels, content=content)
 
 #Screen 9: Viewpools
+# def pending_filter(content):
+#     nopending = []
+#     pending = []
+#     for data in content:
+#         if data[-1] == 'pending':
+#             pending.append(data)
+#         else:
+#             nopending.append(data)
+#     return nopending,pending
+def pending_filter(content):
+    pending = []
+    for data in content:
+        if data[-1] == 'pending':
+            pending.append(data[0])
+    return pending
+
+
 @app.route('/viewPools',methods=['GET','POST'])
 def viewPools():
     if request.method =='GET':
@@ -512,8 +579,8 @@ def viewPools():
         cursor = mysql.connection.cursor()
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        status = request.form.get("Status")
-        labtech = request.form.get('LabTech')
+        status = None if request.form.get("Status") == '' else request.form.get("Status")
+        labtech = None if request.form.get('LabTech') == '' else request.form.get('LabTech')
 
 
         try:
@@ -524,7 +591,7 @@ def viewPools():
             #print the view to the html
 
             # select from the student_view_results_result
-            sql = "select * from view_pools_result"
+            sql = "select * from view_pools_result order by pool_id"
             cursor.execute(sql)
             mysql.connection.commit()
             content = cursor.fetchall()
@@ -534,18 +601,103 @@ def viewPools():
             cursor.execute(sql)
             mysql.connection.commit()
             labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
-
+            pending = pending_filter(content)
+            print("pending: ",pending)
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('viewPools.html', labels=labels, content=content)
+            return render_template('viewPools.html', labels=labels, content = content,pending=pending)
 
 
 #==================================
-#Screen 10a:
-#Screen 10b:
-#Screen 11a:
-#Screen 11b:
+#Screen 10a & 10b:
+#For the frontend to this application, would be ideal if it doesn't allow user to submit without selecting exactly 1 - 7 tests.
+@app.route('/createPool',methods=['GET','POST'])
+def createPool():
+    cursor = mysql.connection.cursor()
+    try:
+        sql = "select test_id, appt_date from test where pool_id is NULL"
+        cursor.execute(sql)
+        content = cursor.fetchall()
+        mysql.connection.commit()
+        if request.method =='GET':
+                labels = ['Test ID', 'Date Tested']
+                cursor.close()
+                return render_template('createPool.html', content = content, labels = labels)
+        elif request.method == 'POST':
+            poolID = request.form.get('poolID')
+            sql = "select * from pool where pool_id = " + poolID
+            cursor.execute(sql)
+            content2 = cursor.fetchall()
+            mysql.connection.commit()
+            if content2:
+                return "You cannot remake an existing Pool, choose a different Pool ID"
+            else:
+                pool_flag = False
+                for i in range(0,len(content)):
+                    test = request.form.get(str(i))
+                    if test and not pool_flag:
+                        result = cursor.callproc("create_pool",[poolID, test])
+                        mysql.connection.commit()
+                        pool_flag = True
+                    elif test:
+                        result2 = cursor.callproc("assign_test_to_pool",[poolID, test])
+                        mysql.connection.commit()
+                return redirect(url_for('dashboard'))
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to view because " + str(e)
+    else:
+        return redirect(url_for('dashboard'))
+#Screen 11a & 11b:
+#I believe this will mainly be used in creating links, all you need to point to a given pool is to append it to the link
+@app.route('/processPools/<id>',methods=['GET','POST'])
+def processPools(id):
+    cursor = mysql.connection.cursor()
+    try:
+        cursor.callproc("tests_in_pool",[id])
+        sql = "select test_id, date_tested from tests_in_pool_result"
+        cursor.execute(sql)
+        content = cursor.fetchall()
+        mysql.connection.commit()
+        if request.method =='GET':
+            sql = "select min(appt_date) from test where pool_id =" + id
+            cursor.execute(sql)
+            content2 = cursor.fetchall()
+            mysql.connection.commit()
+            labels = ["Test ID","Date Tested"]
+            return render_template('processPools.html', id = id, minDate = content2[0][0] + datetime.timedelta(days=1), content = content, labels = labels)
+        elif request.method == 'POST':
+            #Need to check back over to see which are valid
+            poolStatus = request.form.get('poolStatus')
+            processDate = None if request.form.get('dateProcessed') == '' else request.form.get('dateProcessed')
+
+            if not processDate:
+                return "You must specify a process date"
+
+            positiveCount = 0
+            for indivTest in content:
+                testResult = request.form.get(indivTest[0])
+                if testResult == "positive":
+                    positiveCount += 1
+
+            if poolStatus == "negative":
+                if positiveCount > 0:
+                    return "Test result cannot be positive in a negative pool"
+            elif poolStatus == "positive":
+                if positiveCount < 1:
+                    return "Positive pool requires a minimum of one positive test"
+
+            cursor.callproc("process_pool",[id, poolStatus, processDate, session['user']])
+            mysql.connection.commit()
+            for indivTest in content:
+                testResult = request.form.get(indivTest[0])
+                cursor.callproc("process_test",[indivTest[0], testResult])
+                mysql.connection.commit()
+            return redirect(url_for('dashboard'))
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to view because " + str(e)
+    else:
+        return redirect(url_for('dashboard'))
 
 #==================================
 
@@ -594,7 +746,7 @@ def viewPools():
 #
 #             return render_template('studentView.html', labels=labels, content=content)
 
-# -------------------------- Tester Experience -------------------------- 
+# -------------------------- Tester Experience --------------------------
 
 # -------------------------- LabTech Experience -------------------------
 
@@ -605,8 +757,8 @@ def viewPools():
 @app.route('/reassigntester',methods=['GET','POST'])
 def reassigntester():
     if 'user' in session and session['userPerms'] == 'Admin':
-        return "PLACEHOLDER"
-    elif 'user' in session and session['userPerms'] == 'Tester':
+        return redirect(url_for('viewTester'))
+    elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester'):
         cursor = mysql.connection.cursor()
         if request.method == 'POST':
             addSite = request.form.get('siteNameAdd')
@@ -643,17 +795,83 @@ def reassigntester():
             return render_template('testerSelfReassign.html', labels=labels, content=content, unassigned=realcontent)
     else:
         redirect(url_for('dashboard'))
-    
+
+
 #Screen 12a: Create an appointment
 @app.route('/createAppointment',methods=['GET','POST'])
 def createAppointment():
     if request.method == 'GET':
-        return render_template('createAppointment.html')
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        cursor.close()
+        hint = "You don't have last Operation"
+        return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+
     elif request.method == 'POST':
+        # Some visulization stuff:
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        #Now the real code
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
         date = request.form.get('date')
         time = request.form.get('time')
+        #See if duplicate appointments
+        try:
+            select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
+            result = cursor.execute(select_statement, (siteName, date,time))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall();
+
+
+
+            if len(content) != 0:
+                hint = "Sorry, appointment already exsit"
+
+                return render_template('createAppointment.html', allSites=allSites, hint = hint)
+
+        #See if Overload Appointment for this site
+        try:
+            set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
+            result = cursor.execute(set, (siteName))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to create appointment beacuse "+str(e)
+        else:
+            mysql.connection.commit()
+            maxNum = cursor.fetchall();
+            maxNum = maxNum[0]
+            try:
+                select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
+                result = cursor.execute(select_statement, (siteName, date))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+                mysql.connection.commit()
+                curNum = cursor.fetchall();
+                curNum = curNum[0]
+                if curNum >= maxNum:
+                    hint = "Test site is overloaded, Please select another testsite "
+                    return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+        #If things are alright
 
 
         try:
@@ -661,14 +879,28 @@ def createAppointment():
         except pymysql.IntegrityError or KeyError as e:
             return "unable to create appointment beacuse "+str(e)
         else:
+
+            #Commit to the procedure call
             mysql.connection.commit()
-            return "create appointment succesfully"
+            return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
 
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
     if request.method =='GET':
-        return render_template('viewAppointment.html')
+        cursor = mysql.connection.cursor()
+        sql = "select site_name from SITE"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall();
+        allSites = []
+        for site in content:
+            allSites.append(site[0])
+
+        cursor.close()
+        return render_template('viewAppointment.html', allSites=allSites)
+
+
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         siteName = request.form.get('siteName')
@@ -711,42 +943,181 @@ def viewAppointment():
 
 
 
-#Screen 14a: View Testers results
-@app.route('/viewTester',methods=['GET'])
+
+#Screen 14a: View Testers results(This need to be combined with assigned testers)
+#Admin to assign or reassign testers to testing sites.
+@app.route('/viewTester',methods=['GET','POST'])
 def viewTester():
+    if request.method =='GET':
+        if session['userPerms'] == 'Admin':
+            cursor = mysql.connection.cursor()
 
-    cursor = mysql.connection.cursor()
+            try:
+                cursor.callproc("view_testers")
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                #print the view to the html
+                # select from the student_view_results_result
+                sql = "select * from view_testers_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                content = cursor.fetchall()
 
-    try:
-        cursor.callproc("view_testers")
-    except pymysql.IntegrityError or KeyError as e:
-        return "unable to view because " + str(e)
-    else:
-        #print the view to the html
+                testers = []
+                for entry in content:
+                    testers.append(entry[0])
 
+                unassignedSites = []
+                assignedSites = []
+                for tester in testers:
+                    try:
+                        result = cursor.callproc("tester_assigned_sites",[tester])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to view because " + str(e)
+                    else:
+                        sql = "select * from tester_assigned_sites_result"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        assignedSitesInLoop = cursor.fetchall()
+                        sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        unassignedSitesInLoop = cursor.fetchall()
+                        unassignedSites.append(unassignedSitesInLoop)
+                        assignedSites.append(assignedSitesInLoop)
 
-        # select from the student_view_results_result
-        sql = "select * from view_testers_result"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        content = cursor.fetchall()
+                # get the field name
+                labels = ['Username','Name','Phone Number','Assigned Sites']
 
-        # get the field name
-        sql = "SHOW FIELDS FROM view_testers_result"
-        cursor.execute(sql)
-        mysql.connection.commit()
-        labels = ['UserName','Name','Phone Number','Assigned Site']
+                #visualization template source:
+                #https://blog.csdn.net/a19990412/article/details/84955802
 
-        #visualization template source:
-        #https://blog.csdn.net/a19990412/article/details/84955802
+                return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
+        else:
+            return "Sorry You don't have the access to this screen"
+    elif request.method == 'POST':
+        if session['userPerms'] == 'Admin':
+            cursor = mysql.connection.cursor()
+            #get the username
+            usernames = request.form.getlist("Username")
+            for i in range(len(usernames)):
+                username = usernames[i]
+                current = request.form.getlist(str(i)+"assigned")
 
-        return render_template('viewTester.html', labels=labels, content=content)
+                #The original sites：
+                try:
+                    cursor.callproc("tester_assigned_sites", [username])
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to view because " + str(e)
+                else:
+                    mysql.connection.commit()
+
+                try:
+                    sql = "select * from tester_assigned_sites_result"
+                    cursor.execute(sql)
+                    mysql.connection.commit()
+                    originalSites = []
+                    content = cursor.fetchall()
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to view because " + str(e)
+                else:
+
+                    for each in content:
+                        originalSites.append(each[0])
+
+                    #to see which part is unchecked now
+                    uncheck = []
+                    for ori in originalSites:
+                        if ori not in current:
+                            uncheck.append(ori)
+
+                    #cancle each unchecked site
+                    for unSite in uncheck:
+                        try:
+                            cursor.callproc("unassign_tester",[username,unSite])
+                        except pymysql.IntegrityError or KeyError as e:
+                            return "unable to view because " + str(e)
+                        else:
+                            mysql.connection.commit()
+
+                            ##For test here
+                            cursor.callproc("tester_assigned_sites", [username])
+                            sql = "select * from tester_assigned_sites_result"
+                            cursor.execute(sql)
+                            mysql.connection.commit()
+                            assignedSitesInLoop = cursor.fetchall()
+
+                    # Now do the assigned part
+
+                    newSite = request.form.get(str(i) + "siteNameAdd")#Safely assumes we can only add one site once
+                    try:
+                        cursor.callproc("assign_tester", [username, newSite])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to view because " + str(e)
+                    else:
+                        mysql.connection.commit()
+
+             #Update the view here(This code is really long)
+            cursor = mysql.connection.cursor()
+
+            try:
+                cursor.callproc("view_testers")
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                #print the view to the html
+                # select from the student_view_results_result
+                sql = "select * from view_testers_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                content = cursor.fetchall()
+
+                testers = []
+                for entry in content:
+                    testers.append(entry[0])
+
+                unassignedSites = []
+                assignedSites = []
+                for tester in testers:
+                    try:
+                        result = cursor.callproc("tester_assigned_sites",[tester])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "unable to view because " + str(e)
+                    else:
+                        sql = "select * from tester_assigned_sites_result"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        assignedSitesInLoop = cursor.fetchall()
+                        sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                        cursor.execute(sql)
+                        mysql.connection.commit()
+                        unassignedSitesInLoop = cursor.fetchall()
+                        unassignedSites.append(unassignedSitesInLoop)
+                        assignedSites.append(assignedSitesInLoop)
+
+                # get the field name
+                labels = ['Username','Name','Phone Number','Assigned Sites']
+
+                return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
+        else:
+            return "Sorry you don't have the access to this screen"
 
 #Screen 15a:  Create a Testing Site
 @app.route('/createTestSite',methods=['GET','POST'])
 def createTestSite():
     if request.method =='GET':
-        return render_template('createTestSite.html')
+        cursor = mysql.connection.cursor()
+        sql = "select sitetester_username from SITETESTER"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
+        allTesters = []
+        for tester in content:
+            allTesters.append(tester[0])
+
+        cursor.close()
+        return render_template('createTestSite.html', allTesters=allTesters)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
@@ -763,19 +1134,18 @@ def createTestSite():
             return "unable to create because " + str(e)
         else:
             mysql.connection.commit()
-            return "create_testing_site alreay"
+            return redirect(url_for('dashboard'))
 
+#Screen 16a: Explore Pool Result & 16b
 
+@app.route('/poolResult/<id>',methods=['GET'])
+def poolMetaDate(id):
 
-
-
-#Screen 16a: Explore Pool Result
-@app.route('/poolResult',methods=['GET'])
-def poolMetaDate():
     cursor = mysql.connection.cursor()
 
     try:
-        cursor.callproc("pool_metadata")
+        cursor.callproc("pool_metadata",[id])
+
     except pymysql.IntegrityError or KeyError as e:
         return "unable to view because " + str(e)
     else:
@@ -793,18 +1163,19 @@ def poolMetaDate():
         mysql.connection.commit()
         labels = ['Pool ID','Date Processed','Pooled Result','ProcessedBy']
 
+
+        labels_two = ['Test ID', 'Date Tested', 'Testing Site', 'Test Result']
+
+        cursor.callproc('tests_in_pool',[id])
+        sql = "select * from tests_in_pool_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content_two = cursor.fetchall()
+
         #visualization template source:
         #https://blog.csdn.net/a19990412/article/details/84955802
 
-        return render_template('poolResult.html', labels=labels, content=content)
-
-
-#Screen 16b:
-#Screen 17a:
-#Screen 17b:
-#Screen 17c:
-
-
+        return render_template('poolResult.html', labels=labels, content=content, labels_two = labels_two, content_two = content_two)
 
 #Screen 18a: View Daily Results
 @app.route('/dailyresults')
@@ -828,17 +1199,6 @@ def dailyresults():
         labels = [l[0] for l in labels]
 
         return render_template('dailyresults.html', labels=labels, content=content)
-
-
-
-
-
-
-
-
-
-
-
 
 
 

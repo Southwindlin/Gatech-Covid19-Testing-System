@@ -9,23 +9,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Aggregate Test Results</title>
+    <title>tests_processed</title>
 </head>
 <body>
 <form action="/tests_processed" method = "POST">
-<p>Test Sign Up Filter</p>
+<h1>Lab Tech Test Processed</h1>
 <div>
-        <p>Labtech Username: <input type = "text" name = "labtechUsername" /></p>
-    <p>Test Status<input type = "text" name = "testStatus" /></p>
-    <label for="start">Start date:</label>
+<!--    <label for="start">Username: </label>-->
+<!--    <input type="text" id = "username" name="labtechUsername">-->
+    <p>Current user: {{user}}</p>
+
+    <label for="start">Date Tested: </label>
     <input type="date" id="start" name="DateStart"
        min="2020-01-01" max="2020-12-31">
 
-    <label for="end">End date:</label>
+    <label for="end"> - </label>
 
     <input type="date" id="end" name="DateEnd"
        min="2020-01-01" max="2020-12-31">
-
+    <br>
+    <label for="status">Test Result:</label>
+    <select name = testStatus id="status">
+        <option name="testStatus" value="" id="All"><label for="Pos">All</label></option>
+        <option name="testStatus" value="positive" id="positive"><label for="Neg">positive</label></option>
+        <option name="testStatus" value="negative" id="negative"><label for="Pos">negative</label></option>
+        <option name="testStatus" value="pending" id="pending"><label for="Pos">pending</label></option>
+    </select>
 
 </div>
     <p><input type = "submit" value = "View" /></p>
@@ -48,13 +57,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for i in content %}
-                            <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
+                            {% for i in content %}
+                                <tr>
+                                    {% for j in i %}
+                                        {%if loop.index == 2%}
+                                        <form action = "/poolResult/{{j}}" method="GET" id = '{{j}}'>
+                                            <td>
+                                                <input type="hidden" name = 'Testid' value="{{j}}">
+                                                <a href="javascript:{}" onclick="document.getElementById('{{j}}').submit(); return false;">{{j}}</a>
+                                            </td>
+                                        </form>
+                                        {% else %}
+                                        <td>{{ j }}</td>
+                                        {%endif%}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
