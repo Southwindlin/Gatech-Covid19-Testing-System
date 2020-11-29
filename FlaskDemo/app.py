@@ -24,12 +24,12 @@ Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# app.config['MYSQL_USER'] = 'newuser'
-# app.config['MYSQL_PASSWORD'] = '123123123'
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
@@ -1191,12 +1191,7 @@ def dailyresults():
         mysql.connection.commit()
         content = cursor.fetchall()
 
-        # get the field name
-        sql = "SHOW FIELDS FROM daily_results_result"
-        cursor.execute(sql)
-        labels = cursor.fetchall()
-        mysql.connection.commit()
-        labels = [l[0] for l in labels]
+        labels = ['Date', 'Tests Processed', 'Positive Count', 'Positive Percent']
 
         return render_template('dailyresults.html', labels=labels, content=content)
 
