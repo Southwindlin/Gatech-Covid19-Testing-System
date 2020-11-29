@@ -50,12 +50,21 @@
 
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
+
                             <tr>
                                 {% for i in labels %}
-                                    <td>{{ i }}</td>
+                                {%set l = loop.index%}
+                                <form action = "/studentViewTestResults" method="POST" id = '{{i}}'>
+                                    <td>
+                                        <input type="hidden" name="filter_column" value = {{l}}>
+                                        <input type="hidden" name="content_filter" value = "{{content}}">
+                                        <a href="javascript:{}" onclick=" document.getElementById('{{i}}').submit(); return false;"> {{i}} </a>
+                                    </td>
+                                </form>
                                 {% endfor %}
 
                             </tr>
+
                             </thead>
 
                             <tbody>

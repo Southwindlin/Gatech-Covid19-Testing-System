@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FlaskDemo/test_calls.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/createAppointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/createAppointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.HTML" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -119,17 +118,17 @@
       <method v="2" />
     </configuration>
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Phase IV" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/local/bin/python3.8" />
+      <option name="SDK_HOME" value="C:\Python39\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/FlaskDemo" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/FlaskDemo/app.py" />
       <option name="PARAMETERS" value="" />
@@ -154,23 +153,28 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Database Script.db_init.sql" />
-      <item itemvalue="Database Script.phase3_shell.sql" />
-      <item itemvalue="Flask server.Flask" />
       <item itemvalue="Python.app" />
-      <item itemvalue="Database Script.test_calls.sql" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
-        <item itemvalue="Database Script.test_calls.sql" />
-        <item itemvalue="Database Script.phase3_shell.sql" />
-        <item itemvalue="Database Script.db_init.sql" />
         <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -297,12 +301,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -317,9 +322,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="689" y="371" key="#Notifications/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606333643977" />
-    <state x="424" y="221" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606625522128">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="452" y="208" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606685881891">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="452" y="208" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606685881891" />
     <state x="424" y="202" width="1071" height="724" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606271100967" />
     <state x="424" y="221" key="#com.intellij.execution.impl.EditConfigurationsDialog/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606625522128" />
     <state x="711" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606355392260">
@@ -330,30 +336,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="294" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606366377047" />
-    <state width="1878" height="376" key="GridCell.Tab.0.bottom" timestamp="1606681384529">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom" timestamp="1606691449634">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606691449634" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384529" />
     <state width="1878" height="358" key="GridCell.Tab.0.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="208" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150826" />
-    <state width="1878" height="376" key="GridCell.Tab.0.center" timestamp="1606681384528">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2021" height="190" key="GridCell.Tab.0.center" timestamp="1606691449634">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state width="2021" height="190" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606691449634" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384528" />
     <state width="1878" height="358" key="GridCell.Tab.0.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.center/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150825" />
-    <state width="1878" height="376" key="GridCell.Tab.0.left" timestamp="1606681384528">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2021" height="190" key="GridCell.Tab.0.left" timestamp="1606691449634">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state width="2021" height="190" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606691449634" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384528" />
     <state width="1878" height="358" key="GridCell.Tab.0.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.left/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150824" />
-    <state width="1878" height="376" key="GridCell.Tab.0.right" timestamp="1606681384529">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2021" height="190" key="GridCell.Tab.0.right" timestamp="1606691449634">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state width="2021" height="190" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606691449634" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384529" />
     <state width="1878" height="358" key="GridCell.Tab.0.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
@@ -400,9 +410,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="601" y="308" key="MultipleFileMergeDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606450544879" />
-    <state x="469" y="179" key="SettingsEditor" timestamp="1606364361249">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="500" y="184" key="SettingsEditor" timestamp="1606689593180">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="500" y="184" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1606689593180" />
     <state x="469" y="179" key="SettingsEditor/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606364361249" />
     <state x="560" y="280" key="Vcs.Push.Dialog.v2" timestamp="1606455628599">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -421,17 +432,19 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="826" y="145" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606009567492" />
-    <state x="765" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606626128866">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="816" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606690192048">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="816" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606690192048" />
     <state x="765" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606626128866" />
     <state x="667" y="172" width="586" height="735" key="find.popup" timestamp="1606363980147">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="667" y="172" width="586" height="735" key="find.popup/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606363980147" />
-    <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606450534986">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="685" y="268" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606691615438">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="685" y="268" key="git4idea.branch.GitSmartOperationDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606691615438" />
     <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606450534986" />
     <state x="690" y="419" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1606359084443">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -443,79 +456,75 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>854</line>
+          <line>875</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>855</line>
+          <line>876</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>856</line>
+          <line>877</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>857</line>
+          <line>878</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>858</line>
+          <line>879</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>861</line>
+          <line>882</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>862</line>
+          <line>883</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>819</line>
+          <line>840</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>823</line>
+          <line>844</line>
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>808</line>
+          <line>829</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>809</line>
+          <line>830</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>810</line>
+          <line>831</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>845</line>
+          <line>866</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>847</line>
+          <line>868</line>
           <option name="timeStamp" value="158" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606681384302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
-    <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606449734062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

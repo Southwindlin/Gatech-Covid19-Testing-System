@@ -50,6 +50,11 @@ def transform_label(labels):
         list.append(labels[i][0])
     return list
 
+# def sorted_None(l,column):
+#     if not l[column]:
+#         Min
+
+
 # -------------------------- Platform Functions -------------------------
 @app.route('/dashboard')
 def dashboard():
@@ -238,13 +243,39 @@ def getEmpRegistRequest():  # Register as employee
 # Screen 4
 # 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
 # 2. there is no "all" selection
+filter_data = {}
+reverse = False
+def sort_table(html,):
+    counter = {}
+    column = eval(request.form.get('filter_column')) - 1
+    stuff = eval(request.form.get('content_filter'))
+    print("column:", type(column), "stuff:", type(stuff))
+    reverse = True if reverse == False else False
+    new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]), reverse=reverse)
+    return render_template('studentViewTestResults.html', labels=labels, content=new_content,
+                           filter_data=filter_data)
+
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
     # if session['userPerms'] != 'Student' or 'Admin':
     #     return "you have no permission to this screen"
+    global filter_data
+    global reverse
     if request.method == 'GET':
         return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+        if request.form.get('filter_column') is not None:
+            counter = {}
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('studentViewTestResults.html', labels=labels, content=new_content,
+                                   filter_data=filter_data)
+
+
         cursor = mysql.connection.cursor()
 
         # Will change the way of getting username after the front end is done
@@ -271,21 +302,11 @@ def studentView():
             mysql.connection.commit()
             content = cursor.fetchall()
 
-            # get the field name (not used for now)
-            sql = '''SELECT `COLUMN_NAME` 
-                    FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-                    WHERE `TABLE_SCHEMA`='covidtest_fall2020' 
-                    AND `TABLE_NAME`='student_view_results_result';'''
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            labels = transform_label(labels)
-            #print(labels)
-            # mysql.connection.commit()
-            labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
-            print(filter_data)
+            print(content)
             return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
         
 #Screen 5: Explore test result
