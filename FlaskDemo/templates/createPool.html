@@ -20,7 +20,9 @@
                 <h3>Create Pool</h3>
             </div>
             <div class="panel-body">
-                <p>Pool ID:</label><input type="number" name = "poolID" id="poolID" size="5" min ="0"/> </p>
+                <p>Pool ID:</label><input type="number" name = "poolID" id="poolID" size="5" min ="0" required/> 
+                    <label id="poolIDFalse" style="color: red; visibility: hidden" >You must enter a poolID</label>
+                    <label id="poolIDRepeated" style="color: red; visibility: hidden" >PoolID cannot already exist in the databse</label></p>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
