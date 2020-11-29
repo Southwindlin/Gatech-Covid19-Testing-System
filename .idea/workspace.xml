@@ -19,18 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80fdaeb3-dea1-4b04-9bfe-fe6a647cc4a5" name="Default Changelist" comment="Update the Screen 8 and 9 compatible to the Screen 11 and 16">
+    <list default="true" id="80fdaeb3-dea1-4b04-9bfe-fe6a647cc4a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/EachScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/exploreTestResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/exploreTestResult.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/studentViewTestResults.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewPools.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/viewPools.html" afterDir="false" />
     </list>
-    <list id="1ebeef20-8b83-43eb-8fa6-fa1920ceac89" name="Update Screen 4-7" comment="">
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" afterDir="false" />
-    </list>
+    <list id="1ebeef20-8b83-43eb-8fa6-fa1920ceac89" name="Update Screen 4-7" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,21 +59,13 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Yingnan" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html">
-      <ranges>
-        <range start1="17" end1="19" start2="17" end2="21" changelist="80fdaeb3-dea1-4b04-9bfe-fe6a647cc4a5" />
-        <range start1="61" end1="62" start2="63" end2="64" changelist="1ebeef20-8b83-43eb-8fa6-fa1920ceac89" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectId" id="1kcWuypuWQu9D3qpMJF2SkjztaQ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -111,19 +101,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
-    <configuration name="db_init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/FlaskDemo/db_init.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="4b400182-9235-4df1-8032-a9bcd4436215" />
-      <data-source id="4b400182-9235-4df1-8032-a9bcd4436215" namespace="schema/&quot;information_schema&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="phase3_shell.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/FlaskDemo/phase3_shell.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="4b400182-9235-4df1-8032-a9bcd4436215" namespace="schema/&quot;covidtest_fall2020&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/project - Copy/covid-19-system/public/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -171,7 +148,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
-        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +169,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="" />
+      <changelist id="80fdaeb3-dea1-4b04-9bfe-fe6a647cc4a5" name="Default Changelist" comment="" />
       <created>1606000587911</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -352,28 +328,28 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="515" y="85" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606626407917" />
-    <state width="2021" height="292" key="GridCell.Tab.0.bottom" timestamp="1606627370445">
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom" timestamp="1606676035441">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="292" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606627370445" />
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606676035441" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146075" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
-    <state width="2021" height="292" key="GridCell.Tab.0.center" timestamp="1606627370445">
+    <state width="2021" height="190" key="GridCell.Tab.0.center" timestamp="1606676035441">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="292" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606627370445" />
+    <state width="2021" height="190" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606676035441" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146074" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
-    <state width="2021" height="292" key="GridCell.Tab.0.left" timestamp="1606627370445">
+    <state width="2021" height="190" key="GridCell.Tab.0.left" timestamp="1606676035441">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="292" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606627370445" />
+    <state width="2021" height="190" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606676035441" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146073" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
-    <state width="2021" height="292" key="GridCell.Tab.0.right" timestamp="1606627370445">
+    <state width="2021" height="190" key="GridCell.Tab.0.right" timestamp="1606676035441">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="292" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606627370445" />
+    <state width="2021" height="190" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606676035441" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606456146075" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="376" key="GridCell.Tab.1.bottom" timestamp="1606456145962">
@@ -442,14 +418,14 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="93" y="93" width="1862" height="926" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606613910170" />
-    <state x="672" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1606614911213">
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1606666644009">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="672" y="344" key="com.intellij.ide.util.TipDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606614911213" />
-    <state x="805" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606621516124">
+    <state x="672" y="344" key="com.intellij.ide.util.TipDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1606666644009" />
+    <state x="805" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606632761842">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="805" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606621516124" />
+    <state x="805" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606632761842" />
     <state x="667" y="172" width="586" height="735" key="find.popup" timestamp="1606363980147">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -458,6 +434,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="642" y="260" key="git4idea.branch.GitSmartOperationDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606450534986" />
+    <state x="603" y="77" width="840" height="1034" key="search.everywhere.popup" timestamp="1606669693170">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="603" y="77" width="840" height="1034" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1606669693170" />
     <state x="690" y="419" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1606359084443">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

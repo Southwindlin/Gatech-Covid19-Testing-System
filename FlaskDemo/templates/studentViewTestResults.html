@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
         <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -41,7 +42,8 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Students</h3>
+                <h3>Current Filter: </h3>
+                <p>{%for key in filter_data%}<span><text style="font-weight: bold">{{key}}:</text>{{filter_data[key]}}   </span>{%endfor%}</p>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -85,6 +87,8 @@
 
 </div>
 </form>
-
+<form action="/EachScreen" method="GET">
+    <input type="submit" value="Back to HomeScreen" />
+</form>
 </body>
 </html>

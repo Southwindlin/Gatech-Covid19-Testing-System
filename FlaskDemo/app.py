@@ -52,6 +52,9 @@ def transform_label(labels):
 
 
 
+
+
+
 # -------------------------- Platform Functions -------------------------
 #
 @app.route('/dashboard')
@@ -246,6 +249,8 @@ def getEmpRegistRequest():  # Register as employee
 # 2. there is no "all" selection
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
+    # if session['userPerms'] != 'Student' or 'Admin':
+    #     return "you have no permission to this screen"
     if request.method == 'GET':
         return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
@@ -257,7 +262,11 @@ def studentView():
         status = None if request.form.get('Status') == '' else request.form.get('Status')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        stat = "All" if status is None else status
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
 
+        filter_data = {"Status":stat,"StartDate":sd,"EndDate":ed}
         try:
             result = cursor.callproc("student_view_results", [userName, status, startDate, endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -285,12 +294,14 @@ def studentView():
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('studentViewTestResults.html', labels=labels, content=content)
+            print(filter_data)
+            return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
         
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
 def exploreTestResult():
+    if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+        return "you have no permission to this screen"
     if request.method == 'GET':
         return render_template('exploreTestResult.html')
     elif request.method == 'POST':
@@ -356,7 +367,13 @@ def aggregateResult():
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
         print("location: ",Location)
+        ld = "ALL" if Location is None else Location
+        hou = "ALL" if Housing is None else Housing
+        ts = "ALL" if Testing_site is None else Testing_site
+        sd = "ALL" if startDate is None else startDate
+        ed = "ALL" if endDate is None else endDate
 
+        filter_data = {"Location":ld,"Housing":hou,"Testing_site":ts,"StartDate":sd,"EndDate":ed}
         try:
             cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -383,13 +400,15 @@ def aggregateResult():
             labels = ['Total',str(total),'100%']
             print("content: ", content)
             print("housing_type: ",housing_type,"site:",site)
-            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site)
+            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site,filter_data=filter_data)
 
 # now we need to manually add a username here for test:
 # Screen 7a:
 testsite = ''
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
+    # if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+    #     return "you have no permission to this screen"
     global testsite
     username = session['user']
     if request.method == 'GET':
