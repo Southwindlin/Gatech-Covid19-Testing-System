@@ -244,10 +244,10 @@ def getEmpRegistRequest():  # Register as employee
 # Screen 4
 # 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
 # 2. there is no "all" selection
-@app.route('/studentView', methods=['GET', 'POST'])
+@app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
     if request.method == 'GET':
-        return render_template('studentView.html')
+        return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
@@ -286,7 +286,7 @@ def studentView():
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('studentView.html', labels=labels, content=content)
+            return render_template('studentViewTestResults.html', labels=labels, content=content)
         
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
@@ -317,7 +317,9 @@ def exploreTestResult():
             labels = cursor.fetchall()
             mysql.connection.commit()
             labels = ['Test ID#','Date Tested', 'Timeslot', 'Testing Location', 'Date Processed', 'Pooled Result', 'Individual Result','Processed By']
-
+            print(content)
+            if content == ():
+                return "This test has not been processed yet"
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
@@ -395,10 +397,10 @@ def aggregateResult():
 # now we need to manually add a username here for test:
 # Screen 7a:
 testsite = ''
-username = 'pbuffay56'
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
-    global testsite,username
+    global testsite
+    username = session['user']
     if request.method == 'GET':
         sql_site = "SELECT site_name from site where location = (select location from student where student_username = '{username}')".format(username=username)
         cursor = mysql.connection.cursor()
@@ -497,15 +499,17 @@ def testSignUp():
 #Screen 8a:
 @app.route('/tests_processed', methods=['GET', 'POST'])
 def tests_processed():
+    username = session['user']
     if request.method == 'GET':
-        return render_template('tests_processed.html')
+        return render_template('tests_processed.html',user=username)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
-        username = request.form.get('labtechUsername')
+        # username = request.form.get('labtechUsername')
 
         testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        print("test: ",[startDate,endDate,testStatus,username])
         try:
             cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
         except pymysql.IntegrityError or KeyError as e:
@@ -534,6 +538,23 @@ def tests_processed():
             return render_template('tests_processed.html', labels=labels, content=content)
 
 #Screen 9: Viewpools
+# def pending_filter(content):
+#     nopending = []
+#     pending = []
+#     for data in content:
+#         if data[-1] == 'pending':
+#             pending.append(data)
+#         else:
+#             nopending.append(data)
+#     return nopending,pending
+def pending_filter(content):
+    pending = []
+    for data in content:
+        if data[-1] == 'pending':
+            pending.append(data[0])
+    return pending
+
+
 @app.route('/viewPools',methods=['GET','POST'])
 def viewPools():
     if request.method =='GET':
@@ -542,8 +563,8 @@ def viewPools():
         cursor = mysql.connection.cursor()
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        status = request.form.get("Status")
-        labtech = request.form.get('LabTech')
+        status = None if request.form.get("Status") == '' else request.form.get("Status")
+        labtech = None if request.form.get('LabTech') == '' else request.form.get('LabTech')
 
 
         try:
@@ -554,7 +575,7 @@ def viewPools():
             #print the view to the html
 
             # select from the student_view_results_result
-            sql = "select * from view_pools_result"
+            sql = "select * from view_pools_result order by pool_id"
             cursor.execute(sql)
             mysql.connection.commit()
             content = cursor.fetchall()
@@ -564,11 +585,12 @@ def viewPools():
             cursor.execute(sql)
             mysql.connection.commit()
             labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
-
+            pending = pending_filter(content)
+            print("pending: ",pending)
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('viewPools.html', labels=labels, content=content)
+            return render_template('viewPools.html', labels=labels, content = content,pending=pending)
 
 
 #==================================
@@ -957,58 +979,48 @@ def viewTester():
                 else:
                     mysql.connection.commit()
 
-        #Update the view here(This code is really long)
-        cursor = mysql.connection.cursor()
+     #Update the view here(This code is really long)
+    cursor = mysql.connection.cursor()
 
-        try:
-            cursor.callproc("view_testers")
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-        else:
-            # print the view to the html
-            # select from the student_view_results_result
-            sql = "select * from view_testers_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
+    try:
+        cursor.callproc("view_testers")
+    except pymysql.IntegrityError or KeyError as e:
+        return "unable to view because " + str(e)
+    else:
+        #print the view to the html
+        # select from the student_view_results_result
+        sql = "select * from view_testers_result"
+        cursor.execute(sql)
+        mysql.connection.commit()
+        content = cursor.fetchall()
 
-            testers = []
-            for entry in content:
-                testers.append(entry[0])
+        testers = []
+        for entry in content:
+            testers.append(entry[0])
+        
+        unassignedSites = []
+        assignedSites = []
+        for tester in testers:
+            try:
+                result = cursor.callproc("tester_assigned_sites",[tester])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to view because " + str(e)
+            else:
+                sql = "select * from tester_assigned_sites_result"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                assignedSitesInLoop = cursor.fetchall()
+                sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
+                cursor.execute(sql)
+                mysql.connection.commit()
+                unassignedSitesInLoop = cursor.fetchall()
+                unassignedSites.append(unassignedSitesInLoop)
+                assignedSites.append(assignedSitesInLoop)
+        
+        # get the field name
+        labels = ['Username','Name','Phone Number','Assigned Sites']
 
-            unassignedSites = []
-            assignedSites = []
-            for tester in testers:
-                try:
-                    result = cursor.callproc("tester_assigned_sites", [tester])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "unable to view because " + str(e)
-                else:
-                    sql = "select * from tester_assigned_sites_result"
-                    cursor.execute(sql)
-                    mysql.connection.commit()
-                    assignedSitesInLoop = cursor.fetchall()
-                    sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
-                    cursor.execute(sql)
-                    mysql.connection.commit()
-                    unassignedSitesInLoop = cursor.fetchall()
-                    unassignedSites.append(unassignedSitesInLoop)
-                    assignedSites.append(assignedSitesInLoop)
-
-            # get the field name
-            labels = ['Username', 'Name', 'Phone Number', 'Assigned Sites']
-
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewTester.html', labels=labels, content=content,
-                                   unassignedSites=unassignedSites, assignedSites=assignedSites)
-
-
-
-
-
-
+        return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
 
 
 #Screen 15a:  Create a Testing Site
@@ -1150,10 +1162,6 @@ def dailyresults():
         labels = [l[0] for l in labels]
 
         return render_template('dailyresults.html', labels=labels, content=content)
-
-
-
-
 
 
 

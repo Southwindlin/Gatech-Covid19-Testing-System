@@ -19,12 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/Phase IV.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Phase IV.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewTester.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/viewTester.html" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +64,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html">
+      <ranges>
+        <range start1="17" end1="19" start2="17" end2="21" changelist="80fdaeb3-dea1-4b04-9bfe-fe6a647cc4a5" />
+        <range start1="61" end1="62" start2="63" end2="64" changelist="1ebeef20-8b83-43eb-8fa6-fa1920ceac89" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectId" id="1kcWuypuWQu9D3qpMJF2SkjztaQ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -154,11 +164,10 @@
     <list>
       <item itemvalue="Database Script.db_init.sql" />
       <item itemvalue="Database Script.phase3_shell.sql" />
-<<<<<<< Updated upstream
+
       <item itemvalue="Flask server.Flask" />
       <item itemvalue="JavaScript Debug.index.html" />
-=======
->>>>>>> Stashed changes
+
       <item itemvalue="Python.app" />
       <item itemvalue="Flask server.Flask" />
     </list>
@@ -261,7 +270,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606602895038</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update Screen 4-7">
+      <created>1606622220478</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1606622220478</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update Screen 8 compatible to Screen 16">
+      <created>1606622335200</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1606622335200</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +317,8 @@
     <MESSAGE value="Added some comments" />
     <MESSAGE value="Newest version of almost all screens" />
     <MESSAGE value="Update Screen 4-7" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Screen 4-7" />
+    <MESSAGE value="Update Screen 8 compatible to Screen 16" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Screen 8 compatible to Screen 16" />
   </component>
   <component name="WindowStateProjectService">
     <state x="689" y="371" key="#Notifications" timestamp="1606333643977">
@@ -314,6 +338,7 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="294" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606366377047" />
+
     <state width="1878" height="208" key="GridCell.Tab.0.bottom" timestamp="1606631150826">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -340,6 +365,7 @@
     </state>
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606619051385" />
     <state width="1878" height="358" key="GridCell.Tab.0.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606631042803" />
+
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="208" key="GridCell.Tab.0.right/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150825" />
     <state width="1878" height="358" key="GridCell.Tab.1.bottom" timestamp="1606631042804">
@@ -388,9 +414,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="469" y="179" key="SettingsEditor/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606364361249" />
+
     <state x="560" y="280" key="Vcs.Push.Dialog.v2" timestamp="1606455628599">
       <screen x="0" y="0" width="1920" height="1080" />
+
     </state>
+    <state x="597" y="288" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1606622358970" />
     <state x="560" y="280" key="Vcs.Push.Dialog.v2/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606455628599" />
     <state x="850" y="434" width="323" height="232" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1606011381539">
       <screen x="0" y="0" width="1920" height="1080" />
