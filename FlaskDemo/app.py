@@ -28,14 +28,14 @@ app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# # app.config['MYSQL_USER'] = 'newuser'
-# # app.config['MYSQL_PASSWORD'] = '123123123'
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -50,8 +50,6 @@ def transform_label(labels):
         list.append(labels[i][0])
     return list
 
-
-
 # -------------------------- Platform Functions -------------------------
 #
 @app.route('/dashboard')
@@ -63,12 +61,14 @@ def dashboard():
             return render_template('adminDashboard.html')
         elif session['userPerms'] == 'Student':
             #Not sure if this should be homeScreenStudent, left this here as a default
-            return render_template('basicDashboard.html')
+            return render_template('studentDashboard.html')
         elif session['userPerms'] == 'Tester':
             return render_template('testerDashboard.html')
         elif session['userPerms'] == 'LabTech':
-            return render_template('basicDashboard.html')
-        return None
+            return render_template('labTechDashboard.html')
+        elif session['userPerms'] == 'LabTech+Tester':
+            return render_template('labTechTesterDashboard.html')
+        return "Invalid user permissions, try logging out and back in"
     #If not logged in, pushes the user to the index page
     else:
         return redirect(url_for('index'))
@@ -89,10 +89,7 @@ def index():
 def form():
     return render_template('form.html')
 
-
-#change this name to registForm for better understanding
 @app.route('/regform')
-
 def registForm():
     return render_template('regform.html')
 
@@ -101,8 +98,6 @@ def registForm():
 @app.route('/EachScreen')
 def eachScreen():
     return render_template('EachScreen.html')
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -144,22 +139,22 @@ def checkForPermissions():
     result = cursor.execute(select_statement, (session['user']))
     if result:
         session['userPerms'] = 'LabTech'
-        cursor.close()
-        return
     select_statement = "SELECT * FROM SITETESTER WHERE sitetester_username = %s"
     result = cursor.execute(select_statement, (session['user']))
-    if result:
+    if result and 'userPerms' in session and session['userPerms'] == 'LabTech':
+        session['userPerms'] = 'LabTech+Tester'
+        cursor.close()
+        return
+    elif result:
         session['userPerms'] = 'Tester'
         cursor.close()
         return
+    cursor.close()
     return
 
 #-------------------------------Registration Screen for Student----------------------
 @app.route('/StudentRegister',methods=['GET','POST'])
 def getStuRegistRequest():#Register as student
-
-
-
     if request.method == 'GET':
         return render_template('StudentRegister.html')
     elif request.method == 'POST':
@@ -218,7 +213,7 @@ def getEmpRegistRequest():  # Register as employee
                 return "unable to register" + str(e)
             else:
                 mysql.connection.commit()
-                return "You have successfully registered"
+                return redirect(url_for('login'))
         elif len(employee) == 1:
             job = employee[0]
             if job == "labTech":
@@ -229,7 +224,7 @@ def getEmpRegistRequest():  # Register as employee
                     return "unable to register" + str(e)
                 else:
                     mysql.connection.commit()
-                    return "You have successfully registered"
+                    return redirect(url_for('login'))
             elif job == "siteTester":
                 try:
                     cursor.callproc("register_employee",
@@ -238,7 +233,7 @@ def getEmpRegistRequest():  # Register as employee
                     return "unable to register" + str(e)
                 else:
                     mysql.connection.commit()
-                    return "You have successfully registered"
+                    return redirect(url_for('login'))
 
 # -------------------------- All Users Experience -----------------------
 # Screen 4
@@ -475,7 +470,7 @@ def testSignUp():
             after_number = cursor.fetchone()
             print("number:", after_number)
             if int(after_number[0]) == int(number[0]) + 1:
-                return "You have successfully Signed up the Test"
+                return redirect(url_for('dashboard'))
             else:
                 return "something went wrong!"
 
@@ -726,8 +721,8 @@ def processPools(id):
 @app.route('/reassigntester',methods=['GET','POST'])
 def reassigntester():
     if 'user' in session and session['userPerms'] == 'Admin':
-        return "PLACEHOLDER"
-    elif 'user' in session and session['userPerms'] == 'Tester':
+        return redirect(url_for('viewTester'))
+    elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester'):
         cursor = mysql.connection.cursor()
         if request.method == 'POST':
             addSite = request.form.get('siteNameAdd')
@@ -794,7 +789,7 @@ def createAppointment():
         else:
             #Commit to the procedure call
             mysql.connection.commit()
-            return "create appointment succesfully"
+            return redirect(url_for('dashboard'))
 
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
@@ -911,7 +906,7 @@ def createTestSite():
         sql = "select sitetester_username from SITETESTER"
         cursor.execute(sql)
         mysql.connection.commit()
-        content = cursor.fetchall();
+        content = cursor.fetchall()
         allTesters = []
         for tester in content:
             allTesters.append(tester[0])
@@ -934,7 +929,7 @@ def createTestSite():
             return "unable to create because " + str(e)
         else:
             mysql.connection.commit()
-            return "create_testing_site alreay"
+            return redirect(url_for('dashboard'))
 
 
 
