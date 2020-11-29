@@ -266,11 +266,14 @@ def studentView():
     elif request.method == 'POST':
         labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
         if request.form.get('filter_column') is not None:
-            counter = {}
+            #I used jinja whose index starts from 1, column indicates which column to sort
             column = eval(request.form.get('filter_column'))-1
+            #the content from the original
             stuff = eval(request.form.get('content_filter'))
             print("column:",type(column),"stuff:",type(stuff))
+            #reverse will change everytime, and reverse is a global variable.
             reverse = True if reverse == False else False
+            #sort the target column
             new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
             return render_template('studentViewTestResults.html', labels=labels, content=new_content,
                                    filter_data=filter_data)
