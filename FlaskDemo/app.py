@@ -24,20 +24,18 @@ Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-app.config['MYSQL_USER'] = 'newuser'
-app.config['MYSQL_PASSWORD'] = '123123123'
+# # app.config['MYSQL_USER'] = 'newuser'
+# # app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -51,7 +49,6 @@ def transform_label(labels):
     for i in range(len(labels)):
         list.append(labels[i][0])
     return list
-
 
 
 
@@ -495,7 +492,7 @@ def tests_processed():
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
         try:
-            result = cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
+            cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
@@ -623,7 +620,7 @@ def processPools(id):
 
             if not processDate:
                 return "You must specify a process date"
-            
+
             positiveCount = 0
             for indivTest in content:
                 testResult = request.form.get(indivTest[0])
@@ -766,6 +763,7 @@ def createAppointment():
         siteName = request.form.get('siteName')
         date = request.form.get('date')
         time = request.form.get('time')
+
 
         try:
             cursor.callproc("create_appointment",[siteName,date,time])
