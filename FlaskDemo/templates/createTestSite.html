@@ -5,16 +5,12 @@
     <title>Create a Testing Site</title>
 </head>
 <body>
-<<<<<<< Updated upstream
 <form action="/createTestSite" method = "POST">
-=======
->>>>>>> Stashed changes
     <p>Site Name <input type = "text" name = "Site" /></p>
     <p>Street Address <input type = "text" name = "Address" /></p>
     <p>City <input type = "text" name = "City" /></p>
     <p>
         <label>State:</label>
-<<<<<<< Updated upstream
 <select name="State" id="State">
     <option value="">--Please Select your State-----</option>
 	<option value="AL">Alabama</option>
@@ -71,50 +67,29 @@
 </select>
 
 
-=======
-        <select>
-	<option name="State" value="AL">Alabama</option>
-	<option name="State" value="AK">Alaska</option>
-	<option name="State" value="AZ">Arizona</option>
-        </select>
->>>>>>> Stashed changes
     </p>
     <p>Zip Code<input type = "text" name = "Zip" /></p>
     <p>
         <label>Location:</label>
-<<<<<<< Updated upstream
         <select name="Location">
             <option value="">--Please Select your Location-----</option>
-=======
-        <select>
->>>>>>> Stashed changes
 	        <option name="Location" value="east">east</option>
 	        <option name="Location" value="west">west</option>
         </select>
     </p>
 
     <p>Site Tester:(should autimatically retrieve from the database)
-<<<<<<< Updated upstream
         <select name="Tester">
 	        <option name="Tester" value="">---Please Select a Tester-------</option>
             {% for i in allTesters%}
             <option name="Tester" value="{{i}}">{{i}}</option>
 
             {% endfor %}
-=======
-        <select>
-	        <option name="Tester" value="Tester1">Tester1</option>
-	        <option name="Tester" value="Tester2">Tester2</option>
->>>>>>> Stashed changes
         </select>
 
 
     </p>
 <p><input type = "submit" value = "Create" /></p>
-<<<<<<< Updated upstream
 </form>
-=======
-
->>>>>>> Stashed changes
 </body>
 </html>

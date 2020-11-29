@@ -1050,58 +1050,13 @@ def createTestSite():
             mysql.connection.commit()
             return redirect(url_for('dashboard'))
 
-
-
-
-
-
 #Screen 16a: Explore Pool Result & 16b
-
-
-@app.route('/viewPools',methods=['GET','POST'])
-def viewPools():
-    if request.method =='GET':
-        return render_template('viewPools.html')
-    elif request.method == 'POST':
-        cursor = mysql.connection.cursor()
-        startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
-        status = request.form.get("Status")
-        labtech = request.form.get('LabTech')
-
-
-        try:
-            cursor.callproc("view_pools",[startDate,endDate,labtech,status])
-        except pymysql.IntegrityError or KeyError as e:
-            return "unable to view because " + str(e)
-        else:
-            #print the view to the html
-
-            # select from the student_view_results_result
-            sql = "select * from view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            content = cursor.fetchall()
-
-            # get the field name
-            sql = "SHOW FIELDS FROM view_pools_result"
-            cursor.execute(sql)
-            mysql.connection.commit()
-            labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
-
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewPools.html', labels=labels, content=content)
-
-
-
-@app.route('/poolResult',methods=['GET'])
-def poolMetaDate():
+@app.route('/poolResult/<id>',methods=['GET'])
+def poolMetaDate(id):
     cursor = mysql.connection.cursor()
 
     try:
-        cursor.callproc("pool_metadata")
+        cursor.callproc("pool_metadata",[id])
 
     except pymysql.IntegrityError or KeyError as e:
         return "unable to view because " + str(e)
