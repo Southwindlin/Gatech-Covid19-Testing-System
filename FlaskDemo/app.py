@@ -924,9 +924,9 @@ def viewAppointment():
                                        filter_data=filter_data)
 
             cursor = mysql.connection.cursor()
-            siteName = request.form.get('siteName')
+            siteName = None if request.form.get('siteName') == '' else request.form.get('siteName')
             startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-            endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+            endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
             startTime = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
             endTime = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
             avail = request.form.get('Availability')
