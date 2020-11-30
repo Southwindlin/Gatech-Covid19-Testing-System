@@ -49,9 +49,7 @@
     <p><input type = "submit" value = "View" /></p>
 </form>
 
-<form action="/EachScreen" method="GET">
-    <input type="submit" value="Back to HomeScreen" />
-</form>
+
 
 
 <form action="/testSignUp" method="POST">
@@ -59,6 +57,10 @@
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Current Filter: </h3>
+                <p>{%for key in filter_data%}<span><text style="font-weight: bold">{{key}}:</text>{{filter_data[key]}}   </span>{%endfor%}</p>
+            </div>
             <div class="panel-heading">
                 <h3>Sign Up for a Test</h3>
                 <span><button type="submit">Sign Up</button></span>
@@ -100,7 +102,7 @@
 </form>
 <form action="/dashboard" method="GET" id="backToDashboard">
 </form>
-<form action="/tests_processed" method="GET" id="Reset">
+<form action="/testSignUpFilter" method="GET" id="Reset">
 </form>
 <a href="javascript:{}" onclick=" document.getElementById('backToDashboard').submit(); return false;"><button type="button">Back(Home)</button></a>
 <span>&nbsp&nbsp&nbsp&nbsp<a href="javascript:{}" onclick=" document.getElementById('Reset').submit(); return false;"><button type="button">Reset</button></a></span>

@@ -480,11 +480,13 @@ def aggregateResult():
 # now we need to manually add a username here for test:
 # Screen 7a:
 testsite = ''
+filter_data = {}
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
-    # if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
-    #     return "you have no permission to this screen"
+    if session['userPerms'] != 'Student':
+        return "you have no permission to this screen"
     global testsite
+    global filter_data
     username = session['user']
     if request.method == 'GET':
         sql_site = "SELECT site_name from site where location = (select location from student where student_username = '{username}')".format(username=username)
@@ -502,6 +504,15 @@ def testSignUpFilter():
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
         startTime = None if request.form.get('startTime') == '' else request.form.get('startTime')
         endTime = None if request.form.get('endTime') == '' else request.form.get('endTime')
+        ts = "All" if Testing_site is None else Testing_site
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
+        st = "All" if startTime is None else startTime
+        et = "All" if endTime is None else endTime
+        filter_data = {"Testing Site":ts,"StartDate":sd,"EndDate":ed,"Start Time":st,"End Time":et}
+
+
+
         print("data:",[username,Testing_site,startDate,endDate,startTime,endTime])
         try:
             result = cursor.callproc("test_sign_up_filter", [username,Testing_site,startDate,endDate,startTime,endTime])
@@ -522,7 +533,7 @@ def testSignUpFilter():
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
             print("testsite2: ",testsite)
-            return render_template('testSignUpFilter.html', labels=labels, content=content, user=username,testsite=testsite,username=username)
+            return render_template('testSignUpFilter.html', labels=labels, content=content,filter_data = filter_data, user=username,testsite=testsite,username=username)
 
 #Screen 7b:
 @app.route('/testSignUp', methods=['GET', 'POST'])
@@ -691,7 +702,8 @@ def viewPools():
             print("pending: ",pending)
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
-            content = sorted(content,key = lambda x:int(x[0]))
+            # content = sorted(content,key = lambda x:int(x[0]))
+
             return render_template('viewPools.html', labels=labels, content = content,pending=pending,filter_data=filter_data)
 
 
