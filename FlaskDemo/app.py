@@ -24,12 +24,12 @@ Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = 'chy190354890'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-app.config['MYSQL_USER'] = 'newuser'
-app.config['MYSQL_PASSWORD'] = '123123123'
+# app.config['MYSQL_USER'] = 'newuser'
+# app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
@@ -880,10 +880,13 @@ def createAppointment():
         else:
             return "Sorry you don't have the access to this screen"
 
-
+filter_data = {}
+reverse = False
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
+    global filter_data
+    global reverse
     if request.method =='GET':
         if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester'):
             cursor = mysql.connection.cursor()
@@ -896,15 +899,17 @@ def viewAppointment():
                 allSites.append(site[0])
 
             cursor.close()
-            filters = ["None",]
+            filter_data = {"Site": "None", "StartDate": "None", "EndDate": "None", "StartTime": "None",
+                           "EndTime": "None", "Availability": "None"}
 
-            return render_template('viewAppointment.html', allSites=allSites, filters = filters)
+            return render_template('viewAppointment.html', allSites=allSites, filter_data = filter_data)
         else:
             return "Sorry you don't have the access to this screen"
 
 
     elif request.method == 'POST':
         if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester'):
+            labels = ['Date', 'Time', 'test Site', 'Location', 'User']
             #GET also need to work here:
             cursor = mysql.connection.cursor()
             sql = "select site_name from SITE"
@@ -915,12 +920,25 @@ def viewAppointment():
             for site in content:
                 allSites.append(site[0])
 
-
+            #The sorting part
+            if request.form.get('filter_column') is not None:
+                # I used jinja whose index starts from 1, column indicates which column to sort
+                column = eval(request.form.get('filter_column')) - 1
+                # the content from the original
+                stuff = eval(request.form.get('content_filter'))
+                print("column:", type(column), "stuff:", type(stuff))
+                # reverse will change everytime, and reverse is a global variable.
+                reverse = True if reverse == False else False
+                # sort the target column
+                new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]),
+                                     reverse=reverse)
+                return render_template('viewAppointment.html',allSites=allSites, labels=labels, content=new_content,
+                                       filter_data=filter_data)
 
             cursor = mysql.connection.cursor()
-            siteName = request.form.get('siteName')
+            siteName = None if request.form.get('siteName') == '' else request.form.get('siteName')
             startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-            endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+            endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
             startTime = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
             endTime = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
             avail = request.form.get('Availability')
@@ -949,7 +967,7 @@ def viewAppointment():
                 sql = "SHOW FIELDS FROM view_appointments_result"
                 cursor.execute(sql)
                 mysql.connection.commit()
-                labels = ['Date','Time','test Site','Location','User']
+
 
                 if avail == 0:
                     avail = "Booked"
@@ -958,11 +976,11 @@ def viewAppointment():
                 elif avail == None:
                     avail = "All"
 
-                filters = [siteName,startDate,endDate,startTime,endTime,avail]
+                filter_data = {"Site":siteName,"StartDate":startDate,"EndDate":endDate,"StartTime":startTime,"EndTime":endTime,"Availability":avail}
 
 
 
-                return render_template('viewAppointment.html', labels=labels, content=content, allSites=allSites, filters=filters)
+                return render_template('viewAppointment.html', labels=labels, content=content, allSites=allSites, filter_data=filter_data)
         else:
             return "Sorry you don't have the access to this screen"
 

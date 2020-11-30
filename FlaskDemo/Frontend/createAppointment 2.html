@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+
+    <title>Create Appointment</title>
+</head>
+<body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+        
+                <a href="#exit">EXIT</a>
+        
+    </div>
+</div>
+</div class="container">
+
+    <h1 id="pageTitle">Create Appointment</h1>
+     <hr>
+    <p id="directionText">Directions: Select site, date and time for new appointment.</p>
+   
+    <div class="row">
+        <div class="col-sm-1"></div> 
+        <div class="col-sm-10">  
+            <form action="/createAppointment" method = "POST">
+            <div><label for="siteName">SiteName: (Dropdown can automatically update right now)</label>
+
+            <select name="siteName" id="siteName">
+                <option name="siteName" value="">----Please Select a Site------</option>
+                {% for i in allSites %}
+                    <option name="siteName" value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+
+
+            </select>
+            </div>
+
+            <div>
+                <label for="end">Date:</label>
+                <input type="date" id="end" name="date"
+                min="2020-01-01" max="2020-12-31">
+            </div>
+
+            <div>
+                <label for="time">Time:</label>
+
+            <input type="time" id="time" name="time"
+            min="09:00" max="18:00" required>
+            </div>
+            <br>
+            <p><input type = "submit" value = "create Apptment" /></p>
+
+        </form>
+        <a href="/EachScreen">Access for other screen</a>
+
+        <p><a href="/">Back</a></p>
+    </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+</body>
+</html>
