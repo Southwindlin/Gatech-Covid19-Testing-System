@@ -552,16 +552,8 @@ def tests_processed():
 
             return render_template('tests_processed.html', labels=labels, content=content,user=username,filter_data=filter_data)
 
+
 #Screen 9: Viewpools
-# def pending_filter(content):
-#     nopending = []
-#     pending = []
-#     for data in content:
-#         if data[-1] == 'pending':
-#             pending.append(data)
-#         else:
-#             nopending.append(data)
-#     return nopending,pending
 def pending_filter(content):
     pending = []
     for data in content:
@@ -569,18 +561,39 @@ def pending_filter(content):
             pending.append(data[0])
     return pending
 
-
+filter_data = {}
+reverse = False
 @app.route('/viewPools',methods=['GET','POST'])
 def viewPools():
+    if session['userPerms'] != "LabTech+Tester" and session['userPerms'] != "LabTech":
+        return "you have no permission to this screen"
+    global filter_data
+    global reverse
     if request.method =='GET':
         return render_template('viewPools.html')
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Pool id', 'Date Tested', 'Date Processed', 'Result']
+        if request.form.get('filter_column') is not None:
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            pending = request.form.get('pending1')
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('viewPools.html', labels=labels, content=new_content,pending=pending,
+                                   filter_data=filter_data)
+
         cursor = mysql.connection.cursor()
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
         status = None if request.form.get("Status") == '' else request.form.get("Status")
         labtech = None if request.form.get('LabTech') == '' else request.form.get('LabTech')
 
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
+        st = "All" if status is None else status
+        lb = "ALL" if labtech is None else labtech
+        filter_data = {"Status":st,"StartDate":sd,"EndDate":ed,"LabTech Name":lb}
 
         try:
             cursor.callproc("view_pools",[startDate,endDate,labtech,status])
@@ -604,8 +617,8 @@ def viewPools():
             print("pending: ",pending)
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewPools.html', labels=labels, content = content,pending=pending)
+            content = sorted(content,key = lambda x:int(x[0]))
+            return render_template('viewPools.html', labels=labels, content = content,pending=pending,filter_data=filter_data)
 
 
 #==================================
