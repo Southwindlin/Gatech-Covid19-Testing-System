@@ -367,8 +367,7 @@ def studentView():
 
 
 
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
+
             print(content)
             return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
         
@@ -406,8 +405,7 @@ def exploreTestResult():
             print(content)
             if content == ():
                 return "This test has not been processed yet"
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
+
 
             return render_template('exploreTestResult.html', labels=labels, content=content)
 
@@ -518,8 +516,6 @@ def testSignUpFilter():
             mysql.connection.commit()
             labels = ['Date','Time','Site Address','Test Site','Sign Up']
 
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
             print("testsite2: ",testsite)
             return render_template('testSignUpFilter.html', labels=labels, content=content, user=username,testsite=testsite,username=username)
 
@@ -620,8 +616,7 @@ def tests_processed():
             content = cursor.fetchall()
 
             print(content)
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
+
 
             return render_template('tests_processed.html', labels=labels, content=content,user=username,filter_data=filter_data)
 
@@ -688,8 +683,7 @@ def viewPools():
             labels = ['Pool ID','Test Ids','Date Processed','Processed By','Pool Status']
             pending = pending_filter(content)
             print("pending: ",pending)
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
+
             content = sorted(content,key = lambda x:int(x[0]))
             return render_template('viewPools.html', labels=labels, content = content,pending=pending,filter_data=filter_data)
 
@@ -833,8 +827,7 @@ def processPools(id):
 #             mysql.connection.commit()
 #             labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
 #
-#             #visualization template source:
-#             #https://blog.csdn.net/a19990412/article/details/84955802
+
 #
 #             return render_template('studentView.html', labels=labels, content=content)
 
@@ -1217,8 +1210,7 @@ def viewTester():
                 # get the field name
                 labels = ['Username','Name','Phone Number','Assigned Sites']
 
-                #visualization template source:
-                #https://blog.csdn.net/a19990412/article/details/84955802
+
 
                 return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
         else:
@@ -1453,8 +1445,7 @@ def poolMetaDate(id):
         mysql.connection.commit()
         content_two = cursor.fetchall()
 
-        #visualization template source:
-        #https://blog.csdn.net/a19990412/article/details/84955802
+
 
         return render_template('poolResult.html', labels=labels, content=content, labels_two = labels_two, content_two = content_two)
 
