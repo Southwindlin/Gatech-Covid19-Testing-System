@@ -43,7 +43,8 @@
   <label class="visibilityHidden" id="pwdfalse2" style="color: red;">Two passwords are not consistent</label>
   <p>First Name <input type = "text" name = "FName" required/></p>
   <p>Last Name <input type = "text" name = "LName" required/></p>
-  <p>Email <input type = "email" name = "Email" required/></p>
+  <p>Email <input type = "email" name = "Email" id="emailInput" required minlength="5" maxlength="25"/></p>
+    <label class="visibilityHidden" id="emailFalse" style="color: red;">Email must be greater than 5 characters and fewer than 25 characters</label>
 
   <div class="employeeInfo"  >
     <div id = "Role" >
@@ -90,10 +91,19 @@
 
     }
 
+     function checkEmail(){
+        var emailVar = document.getElementById("emailInput");
+        if(emailVar.length<5||emailVar.length>25) {
+            document.getElementById("emailFalse").style.visibility="visible";
+            return false;
+        }
+    }
+
     function checkall(){
       var cpd=chechpwd();
       var cr = checkRole();
-      if(cpd&&cr){
+      var em = checkEmail();
+      if(cpd&&cr&&em){
         return true;
       }else{
         return false;
