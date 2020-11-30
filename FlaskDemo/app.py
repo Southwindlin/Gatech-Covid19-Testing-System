@@ -612,7 +612,14 @@ def createPool():
                 return "You cannot remake an existing Pool, choose a different Pool ID"
             else:
                 pool_flag = False
-                for i in range(0,len(content)):
+                testCount = 0
+                for i in range(0,len(content)+1):
+                    test = request.form.get(str(i))
+                    if test:
+                        testCount += 1
+                if testCount < 1 or testCount > 7:
+                    return "You must select 1 - 7 tests per pool"
+                for i in range(0,len(content)+1):
                     test = request.form.get(str(i))
                     if test and not pool_flag:
                         result = cursor.callproc("create_pool",[poolID, test])
@@ -738,25 +745,30 @@ def reassigntester():
         return redirect(url_for('viewTester'))
     elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester'):
         cursor = mysql.connection.cursor()
-        if request.method == 'POST':
-            addSite = request.form.get('siteNameAdd')
-            removeSite = request.form.get('siteNameRemove')
-            if(addSite != "None"):
-                try:
-                    print(addSite)
-                    result = cursor.callproc("assign_tester",[session['user'], addSite])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "Failed to Add"
-            if(removeSite != "None"):
-                try:
-                    result = cursor.callproc("unassign_tester",[session['user'], removeSite])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "Failed to Remove"
         try:
             result = cursor.callproc("tester_assigned_sites",[session['user']])
         except pymysql.IntegrityError or KeyError as e:
                 return "unable to view because " + str(e)
         else:
+            sql = "select * from tester_assigned_sites_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            if request.method == 'POST':
+                addSite = request.form.get('siteNameAdd')
+                if(addSite != "None"):
+                    try:
+                        print(addSite)
+                        result2 = cursor.callproc("assign_tester",[session['user'], addSite])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "Failed to Add"
+                for entry in content:
+                    if not request.form.get(entry[0]) or request.form.get(entry[0]) != 'assigned':
+                        try:
+                           result2 = cursor.callproc("unassign_tester",[session['user'], entry[0]])
+                        except:
+                            return "Failed to Remove"
+            result = cursor.callproc("tester_assigned_sites",[session['user']])
             sql = "select * from tester_assigned_sites_result"
             cursor.execute(sql)
             mysql.connection.commit()
