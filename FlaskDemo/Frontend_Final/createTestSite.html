@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create a Testing Site</title>
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+	<title>Create a Testing Site</title>
 </head>
 <body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+
+                <a href="#exit">EXIT</a>
+
+    </div>
+</div>
+
+<div class="container">
+<h1 id="pageTitle">Create Test Site</h1>
+     <hr>
+    <p id="directionText">Directions: Select site name, street address, city, state, zip code, and location to create a new test site.</p>
+
 <form action="/createTestSite" method = "POST">
 	<p>Your last "Create Operation Status" is: {{hint}}</p>
-    <p>Site Name <input type = "text" name = "Site" required/></p>
-    <p>Street Address <input type = "text" name = "Address" required/></p>
-    <p>City <input type = "text" name = "City" required/></p>
+    <label>Site Name <input type = "text" name = "Site" required/></label>
+    <label>Street Address <input type = "text" name = "Address" required/></label>
+    <label>City <input type = "text" name = "City" required/></label>
     <p>
+
+
         <label>State:</label>
 <select name="State" id="State" required>
     <option value="">--Please Select your State-----</option>
@@ -69,11 +95,15 @@
 
 
     </p>
+<<<<<<< HEAD
+	<p><label>Zip Code<input type = "text" name = "Zip" size="5"required/></label></p>
+=======
 
 
-    <p>Zip Code<input type = "text" name = "Zip" size="5" required minlength="5 maxlength="5"/></p>
-	
-	
+    <p>Zip Code<input type = "text" name = "Zip" size="5" required/></p>
+
+
+>>>>>>> origin/master
     <p>
         <label>Location:</label>
         <select name="Location" required>
@@ -83,11 +113,10 @@
         </select>
     </p>
 
-    <p>Site Tester:(should autimatically retrieve from the database)
-        <select name="Tester" required>
+    <p><label>Site Tester:(should automatically retrieve from the database)</label>
+        <select name="Tester">
 	        <option name="Tester" value="">---Please Select a Tester-------</option>
-            {% for i in allTesters%}
-			{% set counter = loop.index-1 %}
+            {% for i in allTesters%}{% set counter = loop.index-1 %}
 			{% set userName = allUsernames[counter] %}
             <option name="Tester" value="{{userName}}">{{i}}</option>
 
@@ -98,5 +127,6 @@
     </p>
 <p><input type = "submit" value = "Create" /></p>
 </form>
+</div>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Easy Covid-19 Test Scheduling at Georgia Tech" name="description">
+	<meta content="Georgia Tech Covid-19 Testing" property="og:title">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <title>View Test Result</title>
+</head>
+<body>
+<div id="header">
+    <div class="headerContainer">
+                <h3>Georgia Tech Easy Covid-19 Testing</h3>
+
+                <a href="#exit">EXIT</a>
+
+    </div>
+</div>
+</div class="container">
+
+    <h1 id="pageTitle">View Test Result</h1>
+     <hr>
+    <p id="directionText">Directions: Enter your username.</p>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <form action="/test ID" method = "POST">
+    <p>Username <input type = "text" name = "Username" /></p>
+</form>
+    </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+</body>
+</html>

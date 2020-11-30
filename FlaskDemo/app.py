@@ -753,7 +753,7 @@ def processPools(id):
         content = cursor.fetchall()
         mysql.connection.commit()
         if request.method =='GET':
-            sql = "select min(appt_date) from test where pool_id =" + id
+            sql = "select max(appt_date) from test where pool_id =" + id
             cursor.execute(sql)
             content2 = cursor.fetchall()
             mysql.connection.commit()
@@ -912,6 +912,23 @@ def createAppointment():
             cursor.close()
             hint = "You don't have last Operation"
             return render_template('createAppointment.html', allSites=allSites, hint=hint)
+        elif 'user' in session and session['userPerms'] == 'Tester':
+            cursor = mysql.connection.cursor()
+            userName = session['user']
+            sql = "select site from WORKING_AT where username = %s"
+            cursor.execute(sql,(userName))
+            mysql.connection.commit()
+            content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
+
+            cursor.close()
+            hint = "You don't have last Operation"
+            return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+
+
         else:
             return "Sorry you don't have the access to this screen"
 
@@ -985,11 +1002,79 @@ def createAppointment():
                 #Commit to the procedure call
                 mysql.connection.commit()
                 return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
+        elif 'user' in session and session['userPerms'] == 'Tester':
+            cursor = mysql.connection.cursor()
+            userName = session['user']
+            sql = "select site from WORKING_AT where username = %s"
+            cursor.execute(sql,(userName))
+            mysql.connection.commit()
+            content = cursor.fetchall();
+            allSites = []
+            for site in content:
+                allSites.append(site[0])
+
+            cursor.close()
+            hint = "You don't have last Operation"
+            #Now the real code
+            cursor = mysql.connection.cursor()
+            siteName = request.form.get('siteName')
+            date = request.form.get('date')
+            time = request.form.get('time')
+            #See if duplicate appointments
+            try:
+                select_statement = "select * from Appointment where site_name = %s and appt_date = %s and appt_time = %s"
+                result = cursor.execute(select_statement, (siteName, date,time))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment because "+str(e)
+            else:
+                mysql.connection.commit()
+                content = cursor.fetchall();
+
+                if len(content) != 0:
+                    hint = "Sorry, appointment already exsit"
+
+                    return render_template('createAppointment.html', allSites=allSites, hint = hint)
+
+            #See if Overload Appointment for this site
+            try:
+                set = "select 10* count(distinct sitetester_username) from SITETESTER join WORKING_AT on sitetester_username = WORKING_AT.username where WORKING_AT.site = %s;"
+                result = cursor.execute(set, (siteName))
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+                mysql.connection.commit()
+                maxNum = cursor.fetchall();
+                maxNum = maxNum[0]
+                try:
+                    select_statement = "select count(*) from Appointment where site_name = %s and %s = appt_date"
+                    result = cursor.execute(select_statement, (siteName, date))
+                except pymysql.IntegrityError or KeyError as e:
+                    return "unable to create appointment beacuse "+str(e)
+                else:
+                    mysql.connection.commit()
+                    curNum = cursor.fetchall();
+                    curNum = curNum[0]
+                    if curNum >= maxNum:
+                        hint = "Test site is overloaded Thank you for your hardwork "
+                        return render_template('createAppointment.html', allSites=allSites, hint=hint)
+
+            #If things are alright
+
+
+            try:
+                cursor.callproc("create_appointment",[siteName,date,time])
+            except pymysql.IntegrityError or KeyError as e:
+                return "unable to create appointment beacuse "+str(e)
+            else:
+
+                #Commit to the procedure call
+                mysql.connection.commit()
+                return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
+
         else:
             return "Sorry you don't have the access to this screen"
 
-filter_data = {}
-reverse = False
+
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
@@ -1028,20 +1113,7 @@ def viewAppointment():
             for site in content:
                 allSites.append(site[0])
 
-            #The sorting part
-            if request.form.get('filter_column') is not None:
-                # I used jinja whose index starts from 1, column indicates which column to sort
-                column = eval(request.form.get('filter_column')) - 1
-                # the content from the original
-                stuff = eval(request.form.get('content_filter'))
-                print("column:", type(column), "stuff:", type(stuff))
-                # reverse will change everytime, and reverse is a global variable.
-                reverse = True if reverse == False else False
-                # sort the target column
-                new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]),
-                                     reverse=reverse)
-                return render_template('viewAppointment.html',allSites=allSites, labels=labels, content=new_content,
-                                       filter_data=filter_data)
+
 
             cursor = mysql.connection.cursor()
             siteName = None if request.form.get('siteName') == '' else request.form.get('siteName')
