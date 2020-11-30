@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <h3>Current Filter: </h3>
+
     <title>Aggregate Test Results</title>
 </head>
 <body>
@@ -60,6 +60,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Aggregate Results</h3>
+                <h5>Current Filter: </h5>
                 <p>{%for key in filter_data%}
                     <span>
                         <text style="font-weight: bold">{{key}}:</text>
@@ -96,8 +97,12 @@
 
 </div>
 </form>
-<form action="/EachScreen" method="GET">
-    <input type="submit" value="Back to HomeScreen" />
+<form action="/dashboard" method="GET" id="backToDashboard">
 </form>
+<form action="/aggregateResult" method="GET" id="Reset">
+</form>
+<a href="javascript:{}" onclick=" document.getElementById('backToDashboard').submit(); return false;"><button type="button">Back(Home)</button></a>
+<span>&nbsp&nbsp&nbsp&nbsp<a href="javascript:{}" onclick=" document.getElementById('Reset').submit(); return false;"><button type="button">Reset</button></a></span>
+
 </body>
 </html>

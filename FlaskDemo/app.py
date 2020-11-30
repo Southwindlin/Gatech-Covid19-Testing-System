@@ -247,8 +247,8 @@ filter_data = {}
 reverse = False
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
-    # if session['userPerms'] != 'Student' or 'Admin':
-    #     return "you have no permission to this screen"
+    if session['userPerms'] != 'Student':
+        return "you have no permission to this screen"
     global filter_data
     global reverse
     if request.method == 'GET':
@@ -302,7 +302,7 @@ def studentView():
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
 def exploreTestResult():
-    if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+    if session['userPerms'] != 'Student':
         return "you have no permission to this screen"
     if request.method == 'GET':
         return render_template('exploreTestResult.html')
