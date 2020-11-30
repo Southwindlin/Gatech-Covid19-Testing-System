@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
         <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,7 +18,7 @@
 <div>
 <!--    <p>Username <input type = "text" name = "Username" /> <== This need to be deleted later</p>-->
     <label >Status: </label>
-    <select name = "Status" id = "Status">
+    <select name = "Status" id = "testStatus">
         <option type="radio" name="Status" value="" id="all"><label for="all">All</label></option>
         <option type="radio" name="Status" value="Negative" id="Neg"><label for="Neg">Negative</label></option>
         <option type="radio" name="Status" value="Positive" id="Pos"><label for="Pos">Positive</label></option>
@@ -41,19 +42,33 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Students</h3>
+                <h3>Current Filter: </h3>
+                <p>{%for key in filter_data%}<span><text style="font-weight: bold">{{key}}:</text>{{filter_data[key]}}   </span>{%endfor%}</p>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
 
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
+
                             <tr>
                                 {% for i in labels %}
-                                    <td>{{ i }}</td>
+                                {% if loop.index == 1%}
+                                    <td>{{i}}</td>
+                                {%else%}
+                                {%set l = loop.index%}
+                                <form action = "/studentViewTestResults" method="POST" id = '{{i}}'>
+                                    <td>
+                                        <input type="hidden" name="filter_column" value = {{l}}>
+                                        <input type="hidden" name="content_filter" value = "{{content}}">
+                                        <a href="javascript:{}" onclick=" document.getElementById('{{i}}').submit(); return false;"> {{i}} </a>
+                                    </td>
+                                </form>
+                                {%endif%}
                                 {% endfor %}
 
                             </tr>
+
                             </thead>
 
                             <tbody>
@@ -85,6 +100,8 @@
 
 </div>
 </form>
-
+<form action="/dashboard" method="GET">
+    <input type="submit" value="Back to HomeScreen" />
+</form>
 </body>
 </html>

@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
         <!-- Required meta tags -->
+    <style>
+        div {margin-left:10px}
+        h1 {margin-left:10px}
+        p {margin-left:10px}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -14,7 +19,7 @@
 <body>
 <form action="/aggregateResult" method = "POST">
 <h1>Aggregate Test Results</h1>
-<div>
+<div >
         <label >Location</label>
     <select name = Location>
         <option name="Location" value="" id="All"><label for="Pos">All</label></option>
@@ -36,6 +41,7 @@
         {%endfor%}
 
     </select>
+    <div>
     <label for="start">Start date:</label>
     <input type="date" id="start" name="TimeStart"
        min="2020-01-01" max="2020-12-31">
@@ -44,6 +50,7 @@
 
     <input type="date" id="end" name="TimeEnd"
        min="2020-01-01" max="2020-12-31">
+    </div>
 </div>
     <p><input type = "submit" value = "View" /></p>
 
@@ -53,6 +60,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Aggregate Results</h3>
+                <h5>Current Filter: </h5>
+                <p>{%for key in filter_data%}
+                    <span>
+                        <text style="font-weight: bold">{{key}}:</text>
+                        <text style="font-style: italic">{{filter_data[key]}}   </text>
+                    </span>
+                    {%endfor%}
+                </p>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -82,6 +97,12 @@
 
 </div>
 </form>
+<form action="/dashboard" method="GET" id="backToDashboard">
+</form>
+<form action="/aggregateResult" method="GET" id="Reset">
+</form>
+<a href="javascript:{}" onclick=" document.getElementById('backToDashboard').submit(); return false;"><button type="button">Back(Home)</button></a>
+<span>&nbsp&nbsp&nbsp&nbsp<a href="javascript:{}" onclick=" document.getElementById('Reset').submit(); return false;"><button type="button">Reset</button></a></span>
 
 </body>
 </html>

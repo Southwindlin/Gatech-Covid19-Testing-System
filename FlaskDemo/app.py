@@ -24,18 +24,18 @@ Flask.jinja_options = {'extensions': ['jinja2.ext.autoescape', 'jinja2.ext.with_
 app.config['MYSQL_HOST'] = 'localhost'
 
 # Hongyu's configs, comment these back in lol
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'chy190354890'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# app.config['MYSQL_USER'] = 'newuser'
-# app.config['MYSQL_PASSWORD'] = '123123123'
+# # app.config['MYSQL_USER'] = 'newuser'
+# # app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -49,6 +49,11 @@ def transform_label(labels):
     for i in range(len(labels)):
         list.append(labels[i][0])
     return list
+
+# def sorted_None(l,column):
+#     if not l[column]:
+#         Min
+
 
 # -------------------------- Platform Functions -------------------------
 @app.route('/dashboard')
@@ -238,11 +243,29 @@ def getEmpRegistRequest():  # Register as employee
 # Screen 4
 # 1. only student can do it and he/she doesn't need to upload the form, the system should know who he/she is
 # 2. there is no "all" selection
+filter_data = {}
+reverse = False
 @app.route('/studentViewTestResults', methods=['GET', 'POST'])
 def studentView():
+    if session['userPerms'] != 'Student':
+        return "you have no permission to this screen"
+    global filter_data
+    global reverse
     if request.method == 'GET':
         return render_template('studentViewTestResults.html')
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+        if request.form.get('filter_column') is not None:
+            counter = {}
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('studentViewTestResults.html', labels=labels, content=new_content,
+                                   filter_data=filter_data)
+
+
         cursor = mysql.connection.cursor()
 
         # Will change the way of getting username after the front end is done
@@ -251,7 +274,11 @@ def studentView():
         status = None if request.form.get('Status') == '' else request.form.get('Status')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
+        stat = "All" if status is None else status
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
 
+        filter_data = {"Status":stat,"StartDate":sd,"EndDate":ed}
         try:
             result = cursor.callproc("student_view_results", [userName, status, startDate, endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -265,26 +292,18 @@ def studentView():
             mysql.connection.commit()
             content = cursor.fetchall()
 
-            # get the field name (not used for now)
-            sql = '''SELECT `COLUMN_NAME`
-                    FROM `INFORMATION_SCHEMA`.`COLUMNS`
-                    WHERE `TABLE_SCHEMA`='covidtest_fall2020'
-                    AND `TABLE_NAME`='student_view_results_result';'''
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            labels = transform_label(labels)
-            #print(labels)
-            # mysql.connection.commit()
-            labels = ['Test ID#', 'Timeslot Date', 'Date Processed', 'Pool Status', 'Status']
+
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('studentViewTestResults.html', labels=labels, content=content)
-
+            print(content)
+            return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
+        
 #Screen 5: Explore test result
 @app.route('/exploreTestResult', methods=['GET', 'POST'])
 def exploreTestResult():
+    if session['userPerms'] != 'Student':
+        return "you have no permission to this screen"
     if request.method == 'GET':
         return render_template('exploreTestResult.html')
     elif request.method == 'POST':
@@ -344,22 +363,19 @@ def aggregateResult():
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
 
-
         Location = None if request.form.get('Location') == '' else request.form.get('Location')
         Housing = None if request.form.get('Housing') == '' else request.form.get('Housing')
         Testing_site = None if request.form.get('testingSite') == '' else request.form.get('testingSite')
         startDate = None if request.form.get('TimeStart') == '' else request.form.get('TimeStart')
         endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
         print("location: ",Location)
+        ld = "ALL" if Location is None else Location
+        hou = "ALL" if Housing is None else Housing
+        ts = "ALL" if Testing_site is None else Testing_site
+        sd = "ALL" if startDate is None else startDate
+        ed = "ALL" if endDate is None else endDate
 
-        #Will change the way of getting username after the front end is done
-        userName = request.form.get('Username')
-        status = request.form.get('Status')
-        startDate = None if request.form.get('TimeStart')  == '' else request.form.get('TimeStart')
-        endDate = None if request.form.get('TimeEnd') == '' else request.form.get('TimeEnd')
-
-
-
+        filter_data = {"Location":ld,"Housing":hou,"Testing_site":ts,"StartDate":sd,"EndDate":ed}
         try:
             cursor.callproc("aggregate_results", [Location,Housing,Testing_site,startDate,endDate])
         except pymysql.IntegrityError or KeyError as e:
@@ -386,13 +402,15 @@ def aggregateResult():
             labels = ['Total',str(total),'100%']
             print("content: ", content)
             print("housing_type: ",housing_type,"site:",site)
-            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site)
+            return render_template('aggregateResult.html', labels=labels, content=content, housing_type = housing_type,site = site,filter_data=filter_data)
 
 # now we need to manually add a username here for test:
 # Screen 7a:
 testsite = ''
 @app.route('/testSignUpFilter', methods=['GET', 'POST'])
 def testSignUpFilter():
+    # if session['userPerms'] != 'Student' and session['userPerms'] != 'Admin':
+    #     return "you have no permission to this screen"
     global testsite
     username = session['user']
     if request.method == 'GET':
@@ -423,20 +441,9 @@ def testSignUpFilter():
             #one row code below may be not neccessary
             mysql.connection.commit()
             content = cursor.fetchall()
-            #print('content:',content)
-            # get the field name
-            sql = "SHOW FIELDS FROM test_sign_up_filter_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            #print(labels)
+
             mysql.connection.commit()
-
             labels = ['Date','Time','Site Address','Test Site','Sign Up']
-
-
-            #visualization template source:
-            #https://blog.csdn.net/a19990412/article/details/84955802
-
 
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
@@ -484,25 +491,46 @@ def testSignUp():
             after_number = cursor.fetchone()
             print("number:", after_number)
             if int(after_number[0]) == int(number[0]) + 1:
-                return redirect(url_for('dashboard'))
+                return "You have successfully Signed up the Test"
             else:
                 return "something went wrong!"
 
 
 
 #Screen 8a:
+filter_data = {}
+reverse = False
 @app.route('/tests_processed', methods=['GET', 'POST'])
 def tests_processed():
+    if session['userPerms'] != "LabTech+Tester" and session['userPerms'] != "LabTech":
+        return "you have no permission to this screen"
+    global filter_data
+    global reverse
     username = session['user']
     if request.method == 'GET':
         return render_template('tests_processed.html',user=username)
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Pool id', 'Date Tested', 'Date Processed', 'Result']
+        if request.form.get('filter_column') is not None:
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('tests_processed.html', labels=labels, content=new_content,user=username,
+                                   filter_data=filter_data)
         cursor = mysql.connection.cursor()
         # username = request.form.get('labtechUsername')
 
         testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        ts = "All" if testStatus is None else testStatus
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
+
+        filter_data = {"Test Status":ts,"StartDate":sd,"EndDate":ed}
+
         print("test: ",[startDate,endDate,testStatus,username])
         try:
             cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
@@ -517,30 +545,15 @@ def tests_processed():
             #one row code below may be not neccessary
             mysql.connection.commit()
             content = cursor.fetchall()
-            print(content)
-            # get the field name
-            sql = "SHOW FIELDS FROM tests_processed_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            print(labels)
-            mysql.connection.commit()
-            labels = ['test_id','pool_id','test_date','process_date','test_status']
 
+            print(content)
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('tests_processed.html', labels=labels, content=content)
+            return render_template('tests_processed.html', labels=labels, content=content,user=username,filter_data=filter_data)
+
 
 #Screen 9: Viewpools
-# def pending_filter(content):
-#     nopending = []
-#     pending = []
-#     for data in content:
-#         if data[-1] == 'pending':
-#             pending.append(data)
-#         else:
-#             nopending.append(data)
-#     return nopending,pending
 def pending_filter(content):
     pending = []
     for data in content:
@@ -548,18 +561,39 @@ def pending_filter(content):
             pending.append(data[0])
     return pending
 
-
+filter_data = {}
+reverse = False
 @app.route('/viewPools',methods=['GET','POST'])
 def viewPools():
+    if session['userPerms'] != "LabTech+Tester" and session['userPerms'] != "LabTech":
+        return "you have no permission to this screen"
+    global filter_data
+    global reverse
     if request.method =='GET':
         return render_template('viewPools.html')
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Pool id', 'Date Tested', 'Date Processed', 'Result']
+        if request.form.get('filter_column') is not None:
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            pending = request.form.get('pending1')
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('viewPools.html', labels=labels, content=new_content,pending=pending,
+                                   filter_data=filter_data)
+
         cursor = mysql.connection.cursor()
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
         status = None if request.form.get("Status") == '' else request.form.get("Status")
         labtech = None if request.form.get('LabTech') == '' else request.form.get('LabTech')
 
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
+        st = "All" if status is None else status
+        lb = "ALL" if labtech is None else labtech
+        filter_data = {"Status":st,"StartDate":sd,"EndDate":ed,"LabTech Name":lb}
 
         try:
             cursor.callproc("view_pools",[startDate,endDate,labtech,status])
@@ -583,8 +617,8 @@ def viewPools():
             print("pending: ",pending)
             #visualization template source:
             #https://blog.csdn.net/a19990412/article/details/84955802
-
-            return render_template('viewPools.html', labels=labels, content = content,pending=pending)
+            content = sorted(content,key = lambda x:int(x[0]))
+            return render_template('viewPools.html', labels=labels, content = content,pending=pending,filter_data=filter_data)
 
 
 #==================================
