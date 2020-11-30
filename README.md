@@ -1,5 +1,3 @@
-A readme including: i. Instructions to setup your app ii. Instructions to run your app iii. Brief explanation of what technologies you used and how you accomplished your application (don’t spend too much time on this) iv. Explanation of how work was distributed among the team members 
-
 Setup Instruction: 
 
 Requires MySQL server running on local machine. 
@@ -72,7 +70,7 @@ Navigate to the given web address on a web browser
 
 Technologies: 
 
-We used Python with the Flask framework to create the core-backend for the website, creating the base web-app. In order to build the frontend to this webapp, we utilized Bootstrap with HTML and CSS. From there, we utilized flask_mysqldb in order to connect the Flask app with our locally hosted mySQL database. User logins were handled via sessions in Flask, enabling us to return specific webpages depending on the type of user logged in. 
+We used Python with the Flask framework to create the core-backend for the website, creating the base web-app. In order to build the frontend to this webapp, we utilized Bootstrap with HTML and CSS, including the extension Bootstrap Table. From there, we utilized flask_mysqldb in order to connect the Flask app with our locally hosted mySQL database. User logins were handled via sessions in Flask, enabling us to return specific webpages depending on the type of user logged in. 
 
  
 
@@ -84,7 +82,7 @@ Yingnan: Handled screens 4, 5, 6, 7, 8, 9 as well as sortable tables and part of
 
 Rebecca: Created the front-end HTML/CSS/Bootstrap 
 
-Zilong: Handled screens 10, 11, 16b, 17, and 18, as well as the base Flask app and login/sessions specifics 
+Zilong: Handled screens 10, 11, 16b, 17, and 18, as well as the base Flask app and login/sessions specifics, and Bootstrap Table.
 
  
 
