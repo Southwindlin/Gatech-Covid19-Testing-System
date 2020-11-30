@@ -155,14 +155,51 @@ def checkForPermissions():
 @app.route('/StudentRegister',methods=['GET','POST'])
 def getStuRegistRequest():#Register as student
     if request.method == 'GET':
-        return render_template('StudentRegister.html')
+        hint = ""
+        return render_template('StudentRegister.html',hint = hint)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         #SQL command
         userName = request.form.get('Username')
-        email = request.form.get('Email')
+
+        #Validate the username and name
+        #1 username must be unique
+        sql = "select username from USER"
+        try:
+            cursor.execute(sql)
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to register"+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            names = []
+            for name in content:
+                names.append(name[0])
+
+            if userName in names:
+                hint = "Sorry this username already exist"
+                return render_template('StudentRegister.html', hint=hint)
+
+        #Validate the username and name
+        #2 combination of “First Name” and “Last Name” is unique for all users
         fName = request.form.get('FName')
         lName = request.form.get('LName')
+        sql = "select username from USER where fname = %s and lname = %s"
+        try:
+            cursor.execute(sql,(fName,lName))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to register"+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            if len(content) != 0:
+                hint = "Sorry your name is already in our database, please login"
+                return render_template('StudentRegister.html', hint=hint)
+
+
+        email = request.form.get('Email')
+
         passWord = request.form.get('Password')
         confirmPass = request.form.get('ConfirmPwd')
 
@@ -181,20 +218,56 @@ def getStuRegistRequest():#Register as student
         return "unable to register"+str(e)
     else:
         mysql.connection.commit()
-        return "You have successfully registered"
+        return redirect(url_for('login'))
 
 #--------------------------Registration Screen for employee
 @app.route('/EmployeeRegister', methods=['GET', 'POST'])
 def getEmpRegistRequest():  # Register as employee
     if request.method == 'GET':
-        return render_template('EmployeeRegister.html')
+        hint = ""
+        return render_template('EmployeeRegister.html',hint=hint)
     elif request.method == 'POST':
         cursor = mysql.connection.cursor()
         # SQL command
+
         userName = request.form.get('Username')
-        email = request.form.get('Email')
+        #Validate the username and name
+        #1 username must be unique
+        sql = "select username from USER"
+        try:
+            cursor.execute(sql)
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to register"+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            names = []
+            for name in content:
+                names.append(name[0])
+
+            if userName in names:
+                hint = "Sorry this username already exist"
+                return render_template('EmployeeRegister.html', hint=hint)
+
+        #Validate the username and name
+        #2 combination of “First Name” and “Last Name” is unique for all users
         fName = request.form.get('FName')
         lName = request.form.get('LName')
+        sql = "select username from USER where fname = %s and lname = %s"
+        try:
+            cursor.execute(sql,(fName,lName))
+        except pymysql.IntegrityError or KeyError as e:
+            return "unable to register"+str(e)
+        else:
+            mysql.connection.commit()
+            content = cursor.fetchall()
+
+            if len(content) != 0:
+                hint = "Sorry your name is already in our database, please login"
+                return render_template('EmployeeRegister.html', hint=hint)
+
+
+        email = request.form.get('Email')
         passWord = request.form.get('Password')
         confirmPass = request.form.get('ConfirmPwd')
         # see if the password match
