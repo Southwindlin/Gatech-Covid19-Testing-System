@@ -518,7 +518,7 @@ def testSignUpFilter():
 
             mysql.connection.commit()
             labels = ['Date','Time','Site Address','Test Site','Sign Up']
-
+            print("content:",content)
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
             print("testsite2: ",testsite)
@@ -530,7 +530,7 @@ def testSignUp():
     if request.method == 'GET':
         return render_template('testSignUp.html')
     elif request.method == 'POST':
-        username = request.form.get('user')
+        username = session['user']
         #test whether there exists any pending tests
         sql_test = "SELECT * FROM "
         data = eval(request.form.get('data'))

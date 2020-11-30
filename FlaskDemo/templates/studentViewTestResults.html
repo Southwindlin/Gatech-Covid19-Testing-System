@@ -100,8 +100,14 @@
 
 </div>
 </form>
-<form action="/dashboard" method="GET">
-    <input type="submit" value="Back to HomeScreen" />
 </form>
+
+<form action="/dashboard" method="GET" id="backToDashboard">
+</form>
+<form action="/studentViewTestResults" method="GET" id="Reset">
+</form>
+<a href="javascript:{}" onclick=" document.getElementById('backToDashboard').submit(); return false;"><button type="button">Back(Home)</button></a>
+<span>&nbsp&nbsp&nbsp&nbsp<a href="javascript:{}" onclick=" document.getElementById('Reset').submit(); return false;"><button type="button">Reset</button></a></span>
+
 </body>
 </html>
