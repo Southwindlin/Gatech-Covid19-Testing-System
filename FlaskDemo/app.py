@@ -752,7 +752,7 @@ def processPools(id):
         content = cursor.fetchall()
         mysql.connection.commit()
         if request.method =='GET':
-            sql = "select min(appt_date) from test where pool_id =" + id
+            sql = "select max(appt_date) from test where pool_id =" + id
             cursor.execute(sql)
             content2 = cursor.fetchall()
             mysql.connection.commit()
