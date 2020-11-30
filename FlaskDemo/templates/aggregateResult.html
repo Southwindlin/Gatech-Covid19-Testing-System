@@ -83,7 +83,11 @@
                         {% for i in content %}
                             <tr>
                                 {% for j in i %}
+                                {%if loop.index == 3%}
+                                    <td>{{ j }}%</td>
+                                {%else%}
                                     <td>{{ j }}</td>
+                                {%endif%}
                                 {% endfor %}
                             </tr>
                         {% endfor %}

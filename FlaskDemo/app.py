@@ -502,6 +502,7 @@ def testSignUpFilter():
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
         startTime = None if request.form.get('startTime') == '' else request.form.get('startTime')
         endTime = None if request.form.get('endTime') == '' else request.form.get('endTime')
+        print("data:",[username,Testing_site,startDate,endDate,startTime,endTime])
         try:
             result = cursor.callproc("test_sign_up_filter", [username,Testing_site,startDate,endDate,startTime,endTime])
         except pymysql.IntegrityError or KeyError as e:
@@ -658,7 +659,7 @@ def viewPools():
 
         cursor = mysql.connection.cursor()
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
-        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateStart')
+        endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
         status = None if request.form.get("Status") == '' else request.form.get("Status")
         labtech = None if request.form.get('LabTech') == '' else request.form.get('LabTech')
 
@@ -667,7 +668,7 @@ def viewPools():
         st = "All" if status is None else status
         lb = "ALL" if labtech is None else labtech
         filter_data = {"Status":st,"StartDate":sd,"EndDate":ed,"LabTech Name":lb}
-
+        print([startDate,endDate,labtech,status])
         try:
             cursor.callproc("view_pools",[startDate,endDate,labtech,status])
         except pymysql.IntegrityError or KeyError as e:
