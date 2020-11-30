@@ -11,12 +11,14 @@
     <title>Reassign Testing</title>
 </head>
 <body>
+<form action="/reassigntester" method = "POST">
         <!-- copy some template online just for testing -->
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>Testing Site Reassignment</h3>
+                <h6>To remove: uncheck the site | To add: select the site in the drop-down menu</h6>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -29,13 +31,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for i in content %}
                             <tr>
-                                {% for j in i %}
-                                    <td>{{ j }}</td>
-                                {% endfor %}
+                                <td>
+                                    {% for i in content %}
+                                        <input type="checkbox" id="{{ i[0] }}" name="{{ i[0] }}" value="assigned" checked="checked">
+                                        <label for="{{ i[0] }}">{{ i[0] }}</label><br>
+                                    {% endfor %}
+                                    Add a Testing Site: 
+                                    <select name="siteNameAdd" id="siteNameAdd">
+                                        {% for i in unassigned %}
+                                            <option value="{{ i }}">{{ i }}</option>
+                                        {% endfor %}
+                                        <option value = "None" selected>None</option>
+                                    </select>
+                                </td>
                             </tr>
-                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -45,26 +55,9 @@
     </div>
 
 </div>
-    <form action="/reassigntester" method = "POST">
-        <br><br><br><h2>Self-assign Testing Site</h2>
-        Add a testing site
-        <select name="siteNameAdd" id="siteNameAdd">
-            {% for i in unassigned %}
-                <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-            <option value = "None" selected>None</option>
-        </select><br><br>
-        Remove a testing site
-        <select name="siteNameRemove" id="siteNameRemove">
-            {% for i in content %}
-                {% for j in i %}
-                    <option value="{{ j }}">{{ j }}</option>
-                {% endfor %}
-            {% endfor %}
-            <option value = "None" selected>None</option>
-        </select><br><br><br>
-        <p><input type = "submit" value = "Update" /></p>
-    </form>
+
+<p><input type = "submit" value = "Update" /></p>
+</form>
 
 <p><a href="/dashboard">Back</a></p>
 </body>

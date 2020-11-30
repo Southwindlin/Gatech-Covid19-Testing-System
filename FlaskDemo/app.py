@@ -745,25 +745,30 @@ def reassigntester():
         return redirect(url_for('viewTester'))
     elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester'):
         cursor = mysql.connection.cursor()
-        if request.method == 'POST':
-            addSite = request.form.get('siteNameAdd')
-            removeSite = request.form.get('siteNameRemove')
-            if(addSite != "None"):
-                try:
-                    print(addSite)
-                    result = cursor.callproc("assign_tester",[session['user'], addSite])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "Failed to Add"
-            if(removeSite != "None"):
-                try:
-                    result = cursor.callproc("unassign_tester",[session['user'], removeSite])
-                except pymysql.IntegrityError or KeyError as e:
-                    return "Failed to Remove"
         try:
             result = cursor.callproc("tester_assigned_sites",[session['user']])
         except pymysql.IntegrityError or KeyError as e:
                 return "unable to view because " + str(e)
         else:
+            sql = "select * from tester_assigned_sites_result"
+            cursor.execute(sql)
+            mysql.connection.commit()
+            content = cursor.fetchall()
+            if request.method == 'POST':
+                addSite = request.form.get('siteNameAdd')
+                if(addSite != "None"):
+                    try:
+                        print(addSite)
+                        result2 = cursor.callproc("assign_tester",[session['user'], addSite])
+                    except pymysql.IntegrityError or KeyError as e:
+                        return "Failed to Add"
+                for entry in content:
+                    if not request.form.get(entry[0]) or request.form.get(entry[0]) != 'assigned':
+                        try:
+                           result2 = cursor.callproc("unassign_tester",[session['user'], entry[0]])
+                        except:
+                            return "Failed to Remove"
+            result = cursor.callproc("tester_assigned_sites",[session['user']])
             sql = "select * from tester_assigned_sites_result"
             cursor.execute(sql)
             mysql.connection.commit()
