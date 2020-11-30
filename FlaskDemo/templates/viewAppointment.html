@@ -66,28 +66,24 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>View Appointment</h3>
-                <h5>Current Filter:</h5>
-                <div>
-                    {%if filters|length > 1%}
-                    <p>siteName:{{filters[0]}}</p>
-                    <p>startDate:{{filters[1]}}</p>
-                    <p>endDate:{{filters[2]}}</p>
-                    <p>startTime:{{filters[3]}}</p>
-                    <p>endTime:{{filters[4]}}</p>
-                    <p>avail:{{filters[5]}}</p>
-                    {% endif %}
-
-
-                </div>
+<h3>Current Filter: </h3>
+                <p>{%for key in filter_data%}<span><text style="font-weight: bold">{{key}}:</text>{{filter_data[key]}}   </span>{%endfor%}</p>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            {% for i in labels %}
-                                <td>{{ i }}</td>
-                            {% endfor %}
+                                {% for i in labels %}
+                                {%set l = loop.index%}
+                                <form action = "/viewAppointment" method="POST" id = '{{i}}'>
+                                    <td>
+                                        <input type="hidden" name="filter_column" value = {{l}}>
+                                        <input type="hidden" name="content_filter" value = "{{content}}">
+                                        <a href="javascript:{}" onclick=" document.getElementById('{{i}}').submit(); return false;"> {{i}} </a>
+                                    </td>
+                                </form>
+                                {% endfor %}
                         </tr>
                         </thead>
                         <tbody id="viewTable">

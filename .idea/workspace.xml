@@ -20,8 +20,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Flask Web Development_ Developing Web Applications with Python ( PDFDrive.com ) 2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/EachScreen 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/EmployeeRegister 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/StudentRegister 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/adminDashboard 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/aggregateResult 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/basicDashboard 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/createAppointment 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/createPool 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/createTestSite 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/dailyresults 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/exploreTestResult 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/form 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/homeScreenStudent 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/index 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/poolResult 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/processPools 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/readme 2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/regform 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/studentView 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/studentViewTestResults 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/style 2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/testID 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/testSignUp 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/testSignUpFilter 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/testerDashboard 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/testerSelfReassign 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/tests_processed 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/viewAppointment 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/viewPools 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/Frontend/viewTester 2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/requirements 2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FlaskDemo/test_calls 2.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/createTestSite.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/createTestSite.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/viewAppointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/viewAppointment.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +87,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Yingnan" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -154,9 +188,9 @@
     <list>
       <item itemvalue="Database Script.db_init.sql" />
       <item itemvalue="Database Script.phase3_shell.sql" />
+      <item itemvalue="Database Script.test_calls.sql" />
       <item itemvalue="Flask server.Flask" />
       <item itemvalue="Python.app" />
-      <item itemvalue="Database Script.test_calls.sql" />
     </list>
     <recent_temporary>
       <list>
@@ -164,7 +198,6 @@
         <item itemvalue="Database Script.test_calls.sql" />
         <item itemvalue="Database Script.phase3_shell.sql" />
         <item itemvalue="Database Script.db_init.sql" />
-        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -328,31 +361,31 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="294" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606366377047" />
-    <state width="1878" height="219" key="GridCell.Tab.0.bottom" timestamp="1606690855346">
+    <state width="1878" height="219" key="GridCell.Tab.0.bottom" timestamp="1606697133682">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="219" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606690855346" />
+    <state width="1878" height="219" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606697133682" />
     <state width="1878" height="358" key="GridCell.Tab.0.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="208" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150826" />
-    <state width="1878" height="219" key="GridCell.Tab.0.center" timestamp="1606690855345">
+    <state width="1878" height="219" key="GridCell.Tab.0.center" timestamp="1606697133681">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="219" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606690855345" />
+    <state width="1878" height="219" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606697133681" />
     <state width="1878" height="358" key="GridCell.Tab.0.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.center/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150825" />
-    <state width="1878" height="219" key="GridCell.Tab.0.left" timestamp="1606690855344">
+    <state width="1878" height="219" key="GridCell.Tab.0.left" timestamp="1606697133680">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="219" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606690855344" />
+    <state width="1878" height="219" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606697133680" />
     <state width="1878" height="358" key="GridCell.Tab.0.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.left/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150824" />
-    <state width="1878" height="219" key="GridCell.Tab.0.right" timestamp="1606690855345">
+    <state width="1878" height="219" key="GridCell.Tab.0.right" timestamp="1606697133681">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="219" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606690855345" />
+    <state width="1878" height="219" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606697133681" />
     <state width="1878" height="358" key="GridCell.Tab.0.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="208" key="GridCell.Tab.0.right/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150825" />
@@ -441,39 +474,39 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>933</line>
+          <line>949</line>
           <option name="timeStamp" value="173" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>936</line>
+          <line>952</line>
           <option name="timeStamp" value="174" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>888</line>
+          <line>892</line>
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>886</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>1187</line>
+          <line>1205</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>1188</line>
+          <line>1206</line>
           <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
+          <line>922</line>
+          <option name="timeStamp" value="184" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606690855328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
+    <SUITE FILE_PATH="coverage/Phase_IV$app.coverage" NAME="app Coverage Results" MODIFIED="1606697133674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskDemo" />
     <SUITE FILE_PATH="coverage/Phase_IV$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1606449734062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
