@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<form action="/viewAppointment" method = "POST">
+<form action="/viewAppointment" method = "POST" id="viewForm">
     <div><label for="siteName">SiteName: (Dropdown can automatically update right now)</label>
 
     <select name="siteName" id="siteName">
@@ -53,25 +53,39 @@
 
     </label>
 
-    <p><input type = "submit" value = "view Apptment" /></p>
-        <!-- copy some template online just for testing -->
-    <div class="row">
+    <p><input type = "submit" value = "Filter Appointment" /></p>
+    <input type="submit" value="Reset" />
+
+    </form>
+
+
+    <div class="row"  >
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3>View Appointment</h3>
+<h3>Current Filter: </h3>
+                <p>{%for key in filter_data%}<span><text style="font-weight: bold">{{key}}:</text>{{filter_data[key]}}   </span>{%endfor%}</p>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            {% for i in labels %}
-                                <td>{{ i }}</td>
-                            {% endfor %}
+                                {% for i in labels %}
+                                {%set l = loop.index%}
+                                <form action = "/viewAppointment" method="POST" id = '{{i}}'>
+                                    <td>
+                                        <input type="hidden" name="filter_column" value = {{l}}>
+                                        <input type="hidden" name="content_filter" value = "{{content}}">
+                                        <a href="javascript:{}" onclick=" document.getElementById('{{i}}').submit(); return false;"> {{i}} </a>
+                                    </td>
+                                </form>
+                                {% endfor %}
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
+
                         {% for i in content %}
                             <tr>
                                 {% for j in i %}
@@ -86,6 +100,7 @@
         </div>
     </div>
 </div>
-</form>
+
+
 </body>
 </html>

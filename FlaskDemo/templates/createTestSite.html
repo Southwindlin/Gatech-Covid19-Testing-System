@@ -6,12 +6,13 @@
 </head>
 <body>
 <form action="/createTestSite" method = "POST">
-    <p>Site Name <input type = "text" name = "Site" /></p>
-    <p>Street Address <input type = "text" name = "Address" /></p>
-    <p>City <input type = "text" name = "City" /></p>
+	<p>Your last "Create Operation Status" is: {{hint}}</p>
+    <p>Site Name <input type = "text" name = "Site" required/></p>
+    <p>Street Address <input type = "text" name = "Address" required/></p>
+    <p>City <input type = "text" name = "City" required/></p>
     <p>
         <label>State:</label>
-<select name="State" id="State">
+<select name="State" id="State" required>
     <option value="">--Please Select your State-----</option>
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
@@ -68,10 +69,12 @@
 
 
     </p>
-    <p>Zip Code<input type = "text" name = "Zip" /></p>
+
+    <p>Zip Code<input type = "text" name = "Zip" size="5" required/></p>
+
     <p>
         <label>Location:</label>
-        <select name="Location">
+        <select name="Location" required>
             <option value="">--Please Select your Location-----</option>
 	        <option name="Location" value="east">east</option>
 	        <option name="Location" value="west">west</option>
@@ -79,10 +82,12 @@
     </p>
 
     <p>Site Tester:(should autimatically retrieve from the database)
-        <select name="Tester">
+        <select name="Tester" required>
 	        <option name="Tester" value="">---Please Select a Tester-------</option>
             {% for i in allTesters%}
-            <option name="Tester" value="{{i}}">{{i}}</option>
+			{% set counter = loop.index-1 %}
+			{% set userName = allUsernames[counter] %}
+            <option name="Tester" value="{{userName}}">{{i}}</option>
 
             {% endfor %}
         </select>
