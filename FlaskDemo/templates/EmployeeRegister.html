@@ -12,6 +12,7 @@
 </head>
 <body>
 <form action="/EmployeeRegister" method = "POST" >
+  {{hint}}
   <p>Username <input type = "text" name = "Username" required/></p>
   <p>Password <input type = "password" name = "Password" required id="pwd"/>   </p>
 <label id="pwdfalse" style="color: red;">The password length must be greater than 8 and less than 16</label>
