@@ -441,12 +441,7 @@ def testSignUpFilter():
             #one row code below may be not neccessary
             mysql.connection.commit()
             content = cursor.fetchall()
-            #print('content:',content)
-            # get the field name
-            sql = "SHOW FIELDS FROM test_sign_up_filter_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            #print(labels)
+
             mysql.connection.commit()
             labels = ['Date','Time','Site Address','Test Site','Sign Up']
 
@@ -503,18 +498,39 @@ def testSignUp():
 
 
 #Screen 8a:
+filter_data = {}
+reverse = False
 @app.route('/tests_processed', methods=['GET', 'POST'])
 def tests_processed():
+    if session['userPerms'] != "LabTech+Tester" and session['userPerms'] != "LabTech":
+        return "you have no permission to this screen"
+    global filter_data
+    global reverse
     username = session['user']
     if request.method == 'GET':
         return render_template('tests_processed.html',user=username)
     elif request.method == 'POST':
+        labels = ['Test ID#', 'Pool id', 'Date Tested', 'Date Processed', 'Result']
+        if request.form.get('filter_column') is not None:
+            column = eval(request.form.get('filter_column'))-1
+            stuff = eval(request.form.get('content_filter'))
+            print("column:",type(column),"stuff:",type(stuff))
+            reverse = True if reverse == False else False
+            new_content = sorted(stuff,key=lambda x:"" if x[int(column)] is None else str(x[int(column)]),reverse=reverse)
+            return render_template('tests_processed.html', labels=labels, content=new_content,user=username,
+                                   filter_data=filter_data)
         cursor = mysql.connection.cursor()
         # username = request.form.get('labtechUsername')
 
         testStatus = None if request.form.get('testStatus') == '' else request.form.get('testStatus')
         startDate = None if request.form.get('DateStart') == '' else request.form.get('DateStart')
         endDate = None if request.form.get('DateEnd') == '' else request.form.get('DateEnd')
+        ts = "All" if testStatus is None else testStatus
+        sd = "All" if startDate is None else startDate
+        ed = "All" if endDate is None else endDate
+
+        filter_data = {"Test Status":ts,"StartDate":sd,"EndDate":ed}
+
         print("test: ",[startDate,endDate,testStatus,username])
         try:
             cursor.callproc("tests_processed", [startDate,endDate,testStatus,username])
@@ -529,19 +545,12 @@ def tests_processed():
             #one row code below may be not neccessary
             mysql.connection.commit()
             content = cursor.fetchall()
-            print(content)
-            # get the field name
-            sql = "SHOW FIELDS FROM tests_processed_result"
-            cursor.execute(sql)
-            labels = cursor.fetchall()
-            print(labels)
-            mysql.connection.commit()
-            labels = ['test_id','pool_id','test_date','process_date','test_status']
 
+            print(content)
             # visualization template source:
             # https://blog.csdn.net/a19990412/article/details/84955802
 
-            return render_template('tests_processed.html', labels=labels, content=content)
+            return render_template('tests_processed.html', labels=labels, content=content,user=username,filter_data=filter_data)
 
 #Screen 9: Viewpools
 # def pending_filter(content):

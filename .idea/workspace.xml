@@ -19,10 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="">
+    <list default="true" id="ef69b92b-a93f-43ef-8939-a33f107a97b8" name="Default Changelist" comment="Update the sorting table functionality for Screen 4,5,6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlaskDemo/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/aggregateResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/testSignUpFilter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" beforeDir="false" afterPath="$PROJECT_DIR$/FlaskDemo/templates/tests_processed.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +59,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="JupyterTrust" id="5e5994ff-38dd-4390-a3ce-baed9388910d" />
   <component name="ProjectId" id="1kcWuypuWQu9D3qpMJF2SkjztaQ" />
@@ -355,34 +357,34 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="601" y="85" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1606694069634" />
-    <state width="2021" height="190" key="GridCell.Tab.0.bottom" timestamp="1606694956038">
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom" timestamp="1606700019920">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="190" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606694956038" />
+    <state width="2021" height="190" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1606700019920" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384529" />
     <state width="1878" height="358" key="GridCell.Tab.0.bottom/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
     <state width="1878" height="208" key="GridCell.Tab.0.bottom/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150826" />
-    <state width="2021" height="190" key="GridCell.Tab.0.center" timestamp="1606694956038">
+    <state width="2021" height="190" key="GridCell.Tab.0.center" timestamp="1606700019920">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="190" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606694956038" />
+    <state width="2021" height="190" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1606700019920" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384528" />
     <state width="1878" height="358" key="GridCell.Tab.0.center/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.center/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.center/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150825" />
-    <state width="2021" height="190" key="GridCell.Tab.0.left" timestamp="1606694956038">
+    <state width="2021" height="190" key="GridCell.Tab.0.left" timestamp="1606700019920">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="190" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606694956038" />
+    <state width="2021" height="190" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1606700019920" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384528" />
     <state width="1878" height="358" key="GridCell.Tab.0.left/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670564" />
     <state width="1878" height="376" key="GridCell.Tab.0.left/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440247" />
     <state width="1878" height="208" key="GridCell.Tab.0.left/186.1103.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1606631150824" />
-    <state width="2021" height="190" key="GridCell.Tab.0.right" timestamp="1606694956038">
+    <state width="2021" height="190" key="GridCell.Tab.0.right" timestamp="1606700019920">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2021" height="190" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606694956038" />
+    <state width="2021" height="190" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1606700019920" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1080.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1606681384529" />
     <state width="1878" height="358" key="GridCell.Tab.0.right/186.1103.1440.821/0.23.1920.1057@0.23.1920.1057" timestamp="1606672670565" />
     <state width="1878" height="376" key="GridCell.Tab.0.right/186.1103.1440.877/0.0.1920.1080@0.0.1920.1080" timestamp="1606337440248" />
@@ -475,72 +477,72 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>865</line>
+          <line>879</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>866</line>
+          <line>880</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>867</line>
+          <line>881</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>868</line>
+          <line>882</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>869</line>
+          <line>883</line>
           <option name="timeStamp" value="147" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>872</line>
+          <line>886</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>873</line>
+          <line>887</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>830</line>
+          <line>844</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>834</line>
+          <line>848</line>
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>819</line>
+          <line>833</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>820</line>
+          <line>834</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>821</line>
+          <line>835</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>856</line>
+          <line>870</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FlaskDemo/app.py</url>
-          <line>858</line>
+          <line>872</line>
           <option name="timeStamp" value="158" />
         </line-breakpoint>
       </breakpoints>
