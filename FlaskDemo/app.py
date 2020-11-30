@@ -911,7 +911,7 @@ def createAppointment():
             cursor.close()
             hint = "You don't have last Operation"
             return render_template('createAppointment.html', allSites=allSites, hint=hint)
-        elif 'user' in session and session['userPerms'] == 'Tester':
+        elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester') :
             cursor = mysql.connection.cursor()
             userName = session['user']
             sql = "select site from WORKING_AT where username = %s"
@@ -1001,7 +1001,7 @@ def createAppointment():
                 #Commit to the procedure call
                 mysql.connection.commit()
                 return render_template('createAppointment.html', allSites=allSites, hint ="You have successfully create an Appointment")
-        elif 'user' in session and session['userPerms'] == 'Tester':
+        elif 'user' in session and (session['userPerms'] == 'Tester' or session['userPerms'] == 'LabTech+Tester'):
             cursor = mysql.connection.cursor()
             userName = session['user']
             sql = "select site from WORKING_AT where username = %s"
