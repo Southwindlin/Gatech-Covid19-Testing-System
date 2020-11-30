@@ -612,7 +612,14 @@ def createPool():
                 return "You cannot remake an existing Pool, choose a different Pool ID"
             else:
                 pool_flag = False
-                for i in range(0,len(content)):
+                testCount = 0
+                for i in range(0,len(content)+1):
+                    test = request.form.get(str(i))
+                    if test:
+                        testCount += 1
+                if testCount < 1 or testCount > 7:
+                    return "You must select 1 - 7 tests per pool"
+                for i in range(0,len(content)+1):
                     test = request.form.get(str(i))
                     if test and not pool_flag:
                         result = cursor.callproc("create_pool",[poolID, test])
