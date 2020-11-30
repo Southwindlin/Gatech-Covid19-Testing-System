@@ -367,8 +367,7 @@ def studentView():
 
 
 
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
+
             print(content)
             return render_template('studentViewTestResults.html', labels=labels, content=content,filter_data=filter_data)
         
@@ -632,8 +631,7 @@ def tests_processed():
             content = cursor.fetchall()
 
             print(content)
-            # visualization template source:
-            # https://blog.csdn.net/a19990412/article/details/84955802
+
 
             return render_template('tests_processed.html', labels=labels, content=content,user=username,filter_data=filter_data)
 
@@ -846,8 +844,7 @@ def processPools(id):
 #             mysql.connection.commit()
 #             labels = ['Test ID#','Timeslot Date','Date Processed','Pool Status','Status']
 #
-#             #visualization template source:
-#             #https://blog.csdn.net/a19990412/article/details/84955802
+
 #
 #             return render_template('studentView.html', labels=labels, content=content)
 
@@ -1230,8 +1227,7 @@ def viewTester():
                 # get the field name
                 labels = ['Username','Name','Phone Number','Assigned Sites']
 
-                #visualization template source:
-                #https://blog.csdn.net/a19990412/article/details/84955802
+
 
                 return render_template('viewTester.html', labels=labels, content=content, unassignedSites = unassignedSites, assignedSites = assignedSites)
         else:
@@ -1466,8 +1462,7 @@ def poolMetaDate(id):
         mysql.connection.commit()
         content_two = cursor.fetchall()
 
-        #visualization template source:
-        #https://blog.csdn.net/a19990412/article/details/84955802
+
 
         return render_template('poolResult.html', labels=labels, content=content, labels_two = labels_two, content_two = content_two)
 
