@@ -987,8 +987,7 @@ def createAppointment():
         else:
             return "Sorry you don't have the access to this screen"
 
-filter_data = {}
-reverse = False
+
 #Screen 13a View Appointments
 @app.route('/viewAppointment',methods=['GET','POST'])
 def viewAppointment():
@@ -1027,20 +1026,7 @@ def viewAppointment():
             for site in content:
                 allSites.append(site[0])
 
-            #The sorting part
-            if request.form.get('filter_column') is not None:
-                # I used jinja whose index starts from 1, column indicates which column to sort
-                column = eval(request.form.get('filter_column')) - 1
-                # the content from the original
-                stuff = eval(request.form.get('content_filter'))
-                print("column:", type(column), "stuff:", type(stuff))
-                # reverse will change everytime, and reverse is a global variable.
-                reverse = True if reverse == False else False
-                # sort the target column
-                new_content = sorted(stuff, key=lambda x: "" if x[int(column)] is None else str(x[int(column)]),
-                                     reverse=reverse)
-                return render_template('viewAppointment.html',allSites=allSites, labels=labels, content=new_content,
-                                       filter_data=filter_data)
+
 
             cursor = mysql.connection.cursor()
             siteName = None if request.form.get('siteName') == '' else request.form.get('siteName')
