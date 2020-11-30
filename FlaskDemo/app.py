@@ -529,7 +529,7 @@ def testSignUp():
     if request.method == 'GET':
         return render_template('testSignUp.html')
     elif request.method == 'POST':
-        username = request.form.get('user')
+        username = session['user']
         #test whether there exists any pending tests
         sql_test = "SELECT * FROM "
         data = eval(request.form.get('data'))
