@@ -28,14 +28,14 @@ app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_PASSWORD'] = 'chy190354890'
 
 # zilong's configs, comment these out
-# # app.config['MYSQL_USER'] = 'newuser'
-# # app.config['MYSQL_PASSWORD'] = '123123123'
+app.config['MYSQL_USER'] = 'newuser'
+app.config['MYSQL_PASSWORD'] = '123123123'
 # app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # # This code assumes you've already instantiated the DB
 
 # yingnan's configs, comment these out
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'covidtest_fall2020'
 # This code assumes you've already instantiated the DB
 
@@ -894,6 +894,12 @@ def reassigntester():
             mysql.connection.commit()
             content = cursor.fetchall()
             labels = ["Current Sites for user: " + session['user']]
+            result = cursor.callproc("view_testers",[])
+            sql = 'select name from view_testers_result where username ="' + session['user'] + '"'
+            print(sql)
+            cursor.execute(sql)
+            mysql.connection.commit()
+            fullName = cursor.fetchall()[0][0]
             sql = "select site_name from site where site_name not in (select * from tester_assigned_sites_result)"
             cursor.execute(sql)
             mysql.connection.commit()
@@ -902,7 +908,7 @@ def reassigntester():
             for i in content2:
                 realcontent.append(i[0])
             cursor.close()
-            return render_template('testerSelfReassign.html', labels=labels, content=content, unassigned=realcontent)
+            return render_template('testerSelfReassign.html', labels=labels, content=content, unassigned=realcontent, fullName = fullName)
     else:
         redirect(url_for('dashboard'))
 
