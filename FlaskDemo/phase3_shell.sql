@@ -183,7 +183,7 @@ BEGIN
     where (i_housing = housing_type or i_housing is null)
     and (i_location = location or i_location is null)
     and (i_testing_site = site_name or i_testing_site is null)
-    and (i_start_date <= process_date or i_start_date is null)
+    and (i_start_date <= process_date or process_date is null or i_start_date is null)
     and (i_end_date >= process_date or i_end_date is null);
     
     INSERT INTO aggregate_results_result
@@ -201,7 +201,7 @@ BEGIN
     where (i_housing = housing_type or i_housing is null)
     and (i_location = location or i_location is null)
     and (i_testing_site = site_name or i_testing_site is null)
-    and (i_start_date <= process_date or i_start_date is null)
+    and (i_start_date <= process_date or process_date is null or i_start_date is null)
     and (i_end_date >= process_date or i_end_date is null)
 	group by test_status;
 

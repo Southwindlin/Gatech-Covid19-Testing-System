@@ -679,7 +679,7 @@ def viewPools():
         filter_data = {"Status":st,"StartDate":sd,"EndDate":ed,"LabTech Name":lb}
         print([startDate,endDate,labtech,status])
         try:
-            cursor.callproc("view_pools",[startDate,endDate,labtech,status])
+            cursor.callproc("view_pools",[startDate,endDate,status,labtech])
         except pymysql.IntegrityError or KeyError as e:
             return "unable to view because " + str(e)
         else:
@@ -1096,7 +1096,7 @@ def viewAppointment():
     global filter_data
     global reverse
     if request.method =='GET':
-        if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester'):
+        if 'user' in session and (session['userPerms'] == 'Admin' or session['userPerms'] == 'Tester' or session['userPerms'] == "LabTech+Tester"):
             cursor = mysql.connection.cursor()
             sql = "select site_name from SITE"
             cursor.execute(sql)

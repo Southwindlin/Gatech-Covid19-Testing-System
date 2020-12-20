@@ -29,7 +29,7 @@
       <label id="rolefalse" style="color: red;">Please select at least one role</label>
     </div>
 
-    <p>Phone(for test) :<input type="number" name = "Phone" id="Phone" size="10" required/> </p>
+    <p>Phone(for test) :<input type="tel" name = "Phone" id="Phone" pattern="[0-9]{10}" required/> </p>
     <label id="phonefalse" style="color: red;">Phone number is invalid</label>
   </div>
   <p><button onclick="return checkall();" type="submit"  value="Register" >Register</button></p>
@@ -72,6 +72,7 @@
             document.getElementById("emailFalse").style.visibility="visible";
             return false;
         }
+        return true;
     }
 
     function checkall(){
